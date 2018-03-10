@@ -1,0 +1,2 @@
+class Architect < ApplicationRecord
+end
