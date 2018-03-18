@@ -32,12 +32,13 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
-gem 'acts-as-taggable-on', '~> 4.0'
-
+#
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+
+gem 'acts-as-taggable-on', '~> 4.0'
 gem 'devise'
+gem 'rails_admin', '~> 1.3'
 
 
 group :development, :test do
