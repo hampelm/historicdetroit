@@ -1,24 +1,21 @@
-# README
+# Historic Detroit Rails App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+We're rebuilding historicdetroit.org with Rails
 
-Things you may want to cover:
+## Install
 
-* Ruby version
+```
+bundle install
+```
 
-* System dependencies
+## Develop
 
-* Configuration
+```
+rails s
+```
 
-* Database creation
+## Use
 
-* Database initialization
+### Admin
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+`/admin` for Rails Admin
