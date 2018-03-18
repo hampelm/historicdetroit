@@ -1,3 +1,5 @@
+require 'redcarpet'
+
 # == Schema Information
 #
 # Table name: buildings
@@ -20,5 +22,17 @@
 #
 
 class Building < ApplicationRecord
+  before_save :format
+  validates :name, presence: true
+  
+  private
 
+  def format
+    markdown = Redcarpet::Markdown.new(
+      Redcarpet::Render::HTML,
+      autolink: true,
+      space_after_headers: true
+    )
+    self.description_formatted = markdown.render(description)
+  end
 end
