@@ -46,6 +46,7 @@ RailsAdmin.config do |config|
       field :year_opened
       field :year_closed
       field :year_demolished
+      field :architects
       field :created_at
       field :updated_at
     end
@@ -61,6 +62,8 @@ RailsAdmin.config do |config|
       field :year_opened
       field :year_closed
       field :year_demolished
+      field :architects
+
       field :created_at
       field :updated_at
     end

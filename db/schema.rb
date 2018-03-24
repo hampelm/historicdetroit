@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_24_150553) do
+ActiveRecord::Schema.define(version: 2018_03_24_170033) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2018_03_24_150553) do
     t.string "death"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "building_id"
   end
 
   create_table "architects_buildings", id: false, force: :cascade do |t|
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(version: 2018_03_24_150553) do
     t.datetime "updated_at", null: false
     t.integer "architect_id"
     t.text "description_formatted"
+    t.index [nil], name: "index_building_id"
   end
 
   create_table "buildings_posts", id: false, force: :cascade do |t|
@@ -82,6 +84,23 @@ ActiveRecord::Schema.define(version: 2018_03_24_150553) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
+  create_table "galleries", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "title"
+    t.text "caption"
+    t.string "byline"
+    t.integer "gallery_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gallery_id"], name: "index_photos_on_gallery_id"
   end
 
   create_table "posts", force: :cascade do |t|
