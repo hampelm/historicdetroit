@@ -11,6 +11,7 @@
 
 class Gallery < ApplicationRecord
   extend FriendlyId
-  has_many :photos
   friendly_id :title, use: :slugged
+
+  has_many :photos
 end
