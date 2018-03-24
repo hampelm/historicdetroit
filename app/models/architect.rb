@@ -12,7 +12,9 @@
 #  death           :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  building_id     :integer
 #
 
 class Architect < ApplicationRecord
+  has_and_belongs_to_many :buildings, :join_table => :building_architects
 end

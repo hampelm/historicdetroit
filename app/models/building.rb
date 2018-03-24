@@ -23,7 +23,7 @@ require 'redcarpet'
 
 class Building < ApplicationRecord
   extend FriendlyId
-
+  has_and_belongs_to_many :architects, :join_table => :building_architects
   before_save :format
   validates :name, presence: true
   friendly_id :name, use: :slugged
