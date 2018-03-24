@@ -90,6 +90,8 @@ GEM
     ffi (1.9.23)
     font-awesome-rails (4.7.0.3)
       railties (>= 3.2, < 5.2)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     haml (5.0.4)
@@ -261,6 +263,7 @@ DEPENDENCIES
   capybara (~> 2.15)
   chromedriver-helper
   devise
+  friendly_id (~> 5.1.0)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   puma (~> 3.11)

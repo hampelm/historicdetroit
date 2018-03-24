@@ -22,9 +22,12 @@ require 'redcarpet'
 #
 
 class Building < ApplicationRecord
+  extend FriendlyId
+
   before_save :format
   validates :name, presence: true
-  
+  friendly_id :name, use: :slugged
+
   private
 
   def format

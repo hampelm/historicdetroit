@@ -36,9 +36,18 @@ RailsAdmin.config do |config|
     end
 
     create do
-      configure :description_formatted do
-        hide
-      end
+      field :name
+      field :also_known_as
+      field :byline
+      field :description, :simple_mde
+      field :address
+      field :status
+      field :style
+      field :year_opened
+      field :year_closed
+      field :year_demolished
+      field :created_at
+      field :updated_at
     end
 
     edit do
@@ -54,7 +63,6 @@ RailsAdmin.config do |config|
       field :year_demolished
       field :created_at
       field :updated_at
-      field :architect_id
     end
   end
 end

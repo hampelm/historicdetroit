@@ -6,6 +6,7 @@ ruby '2.4.1'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
+gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 gem 'jbuilder', '~> 2.5'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.0.rc1'
