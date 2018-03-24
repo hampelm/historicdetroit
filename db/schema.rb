@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 2018_03_24_150553) do
     t.string "death"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "building_id"
   end
 
   create_table "architects_buildings", id: false, force: :cascade do |t|
@@ -66,7 +65,6 @@ ActiveRecord::Schema.define(version: 2018_03_24_150553) do
     t.datetime "updated_at", null: false
     t.integer "architect_id"
     t.text "description_formatted"
-    t.index [nil], name: "index_building_id"
   end
 
   create_table "buildings_posts", id: false, force: :cascade do |t|
