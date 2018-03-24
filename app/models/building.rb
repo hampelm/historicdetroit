@@ -1,4 +1,4 @@
-require 'redcarpet'
+require 'redcarpet' # Markdown
 
 # == Schema Information
 #
