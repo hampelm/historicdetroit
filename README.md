@@ -17,6 +17,12 @@ bundle install
 rails s
 ```
 
+### Notes
+
+```
+rails g migration CreateJoinTable table1 table2
+```
+
 ## Use
 
 ### Admin
