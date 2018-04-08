@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'galleries/index'
+  get 'galleries/show'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'home/index'
   devise_for :users
@@ -9,6 +11,6 @@ Rails.application.routes.draw do
   get '/architect/:slug', to: redirect('/architects/%{slug}')
   resources :buildings
   get '/building/:slug', to: redirect('/buildings/%{slug}')
-  resources :photos
+  resources :galleries
   resources :posts
 end
