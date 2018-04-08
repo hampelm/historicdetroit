@@ -20,5 +20,9 @@ class Architect < ApplicationRecord
   friendly_id :name, use: :slugged
 
   has_one_attached :photo
-  has_and_belongs_to_many :buildings, :join_table => :building_architects
+  has_and_belongs_to_many :buildings, :join_table => :architects_buildings
+
+  def title
+    name
+  end
 end

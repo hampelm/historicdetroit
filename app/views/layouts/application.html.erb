@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Historic</title>
+    <title>Historic Detroit</title>
     <%= csrf_meta_tags %>
+
+    <script type="text/javascript" src="https://use.typekit.com/coz2mai.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <header>
 
-    <%= yield %>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="/buildings">Places</a></li>
+        <li><a href="#">Homes</a></li>
+        <li><a href="#">Architects</a></li>
+        <li><a href="#">Photos</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+    <section class="main">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </section>
   </body>
 </html>

@@ -14,13 +14,14 @@ gem 'rails_admin', '~> 1.3'
 gem 'redcarpet'
 gem 'sass-rails', '~> 5.0'
 gem 'simplemde-rails'
+gem 'slim-rails'
 gem 'sqlite3'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
-  gem 'coveralls', require: false
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'coveralls', require: false
 end
 
 group :development do

@@ -1,0 +1,36 @@
+article
+  h2 =@building.title
+
+  section
+    = @building.byline
+    == @building.description_formatted
+
+  aside
+    - if @building.address?
+      =@building.address
+
+    - if @building.also_known_as?
+      h3 AKA
+      =@building.also_known_as
+
+    - if @building.status?
+      h3 Status
+      =@building.status
+
+    - if @building.year_opened?
+      h3 Opened
+      =@building.year_opened
+
+    - if @building.year_closed?
+      h3 Closed
+      =@building.year_closed
+
+    - if @building.year_demolished?
+      h3 Demolished
+      =@building.year_demolished
+
+    - if @building.architects
+      h3 Architects
+      - for architect in @building.architects
+        h2 #{link_to(architect.title, polymorphic_path(architect))}
+

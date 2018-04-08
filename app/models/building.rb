@@ -24,11 +24,19 @@ require 'redcarpet' # Markdown
 class Building < ApplicationRecord
   extend FriendlyId
   has_one_attached :photo
-  has_and_belongs_to_many :architects, :join_table => :building_architects
-  has_and_belongs_to_many :posts, :join_table => :building_posts
+  has_and_belongs_to_many :architects, join_table: :architects_buildings
+  has_and_belongs_to_many :posts, join_table: :building_posts
   before_save :format
   validates :name, presence: true
   friendly_id :name, use: :slugged
+
+  def title
+    name
+  end
+
+  def status_enum
+    [[nil], ['Open'], ['Closed'], ['Demolished'], ['Under renovation']]
+  end
 
   private
 
