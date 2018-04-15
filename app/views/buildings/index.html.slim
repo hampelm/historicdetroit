@@ -1,6 +1,8 @@
-h2 Buildings, Places and Landmarks
+section.content
+  h1 Buildings, Places and Landmarks
 
-- for building in @buildings
-  .col-md-4.col-sm-6
-    .building
-      =render 'shared/polaroid', :model => building
+  section.main
+    - for building in @buildings
+      .col-md-4.col-sm-6
+        .building
+          =render 'shared/polaroid', :model => building

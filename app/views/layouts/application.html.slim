@@ -1,0 +1,55 @@
+doctype html
+html prefix="og: http://ogp.me/ns#"
+  head
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    - if content_for?(:title)
+      title
+        = yield(:title)
+        |  | Historic Detroit
+      meta property="og:title" content="#{content_for(:title)} | Historic Detroit"
+    - else
+      title
+        | Historic Detroit
+      meta property="og:title" content="Historic Detroit"
+
+
+    - if content_for?(:og)
+      = yield(:og)
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    <script type="text/javascript" src="https://use.typekit.com/coz2mai.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    = csrf_meta_tags
+
+  body
+    header
+      h1 Historic Detroit
+
+    nav
+      ul
+        li
+          a[href="/buildings"] Places
+        li
+          a[href="/homes"] Homes
+        li
+          a[href="/architects"] Architects
+        li
+          a[href="/galleries"] Photos
+        li
+          a[href="/shop"] Shop
+        li
+          a[href="/about"] About
+
+    main
+      p.notice
+        == notice
+      p.alert
+        == alert
+
+      == yield
+
+    footer
+      p &copy; 2018 Historic Detroit
+
