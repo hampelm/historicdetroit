@@ -17,6 +17,12 @@ bundle install
 rails s
 ```
 
+### Test
+
+```
+rake
+```
+
 ### Notes
 
 ```
