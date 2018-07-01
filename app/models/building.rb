@@ -23,13 +23,14 @@ require 'redcarpet' # Markdown
 
 class Building < ApplicationRecord
   extend FriendlyId
+  friendly_id :name, use: :slugged
+
   has_one_attached :photo
   has_and_belongs_to_many :architects, join_table: :architects_buildings
   has_and_belongs_to_many :posts, join_table: :building_posts
   has_and_belongs_to_many :galleries, join_table: :gallery_posts
   before_save :format
   validates :name, presence: true
-  friendly_id :name, use: :slugged
 
   def title
     name
@@ -37,9 +38,7 @@ class Building < ApplicationRecord
 
   # Needed to get Rails Admin to set the slug
   def slug=(value)
-    if value.present?
-      write_attribute(:slug, value)
-    end
+    write_attribute(:slug, value) if value.present?
   end
 
   def status_enum

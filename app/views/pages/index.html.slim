@@ -1,0 +1,12 @@
+section.content
+  h1 =@page.title
+
+  .page
+    article
+      == @page.body_formatted
+
+    aside
+      ul.pages
+        - for page in @pages
+          li #{link_to(page.title, polymorphic_path(page))}
+

@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   resources :buildings
   get '/building/:slug', to: redirect('/buildings/%{slug}')
   resources :galleries
+  resources :pages, path: '/about'
   resources :posts
 end
