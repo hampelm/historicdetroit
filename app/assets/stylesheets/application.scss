@@ -5,6 +5,7 @@ $link: #647279;
 $text: #222;
 $emphasis: #874a66;
 $gray: #999;
+$gray-blend: #797664;
 $ltgray: #ddd;
 
 $shadow: 0 0 15px $difference;
@@ -16,12 +17,14 @@ $md: 1.6em;
 $reg: 16px;
 
 $sans: "news-gothic-std", Helvetica, sans-serif;
+$serif: "Georgia", serif;
 
 *,
 html,
 body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -37,6 +40,7 @@ body {
 
 a {
   text-decoration: none;
+  color: $link;
 }
 
 h1,
@@ -59,6 +63,13 @@ main {
   width: 960px;
   margin: 0px auto;
   padding: 20px 0;
+
+  > h1 {
+    margin-bottom: 0;
+  }
+  .byline {
+    font-size: $reg;
+  }
 }
 
 footer {
@@ -77,26 +88,73 @@ h2 {
   color: $emphasis;
 }
 
+// Bar containing the article text and sidebar
+.page {
+  display: flex;
+  flex-direction: row;
+}
+
 article {
   background: #fff;
   padding: 20px;
   margin: 20px 0;
   box-shadow: $shadow;
   font-family: $sans;
+  flex: 4;
+
+  h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
 
   .date {
     color: $gray;
     margin-bottom: 1em;
   }
+
+  p {
+    font-family: $serif;
+    margin-bottom: 1em;
+  }
+}
+
+aside {
+  flex: 2;
+  padding: 30px;
+
+  h3 {
+    font-size: 16px;
+    margin-top: 1em;
+    color: $gray-blend;
+  }
+
+  ul li {
+    list-style: none;
+  }
+}
+
+// Polaroid styles
+
+.polaroids {
+  .polaroid:nth-child(1n + 0) {
+    margin-left: 0;
+    width: calc(25% - 10px);
+  }
+  .polaroid:nth-child(4n + 0) {
+    margin-right: 0;
+    width: calc(25% - 10px);
+  }
 }
 
 .polaroid {
-  flex: 1;
+  display: inline-block;
+  width: calc(25% - 20px);
   background: #fff;
-  border: $border-gray;
-  padding: 10px;
+  border: #eee;
+  border-radius: 4px;
+  padding: 5px;
   font-family: $sans;
-
+  margin: 10px;
   h2 {
     color: $link;
     font-size: 1em;

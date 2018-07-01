@@ -1,5 +1,7 @@
-h2 Architects
+section.content
 
-- for architect in @architects
-  .architect
-    =render 'shared/polaroid', :model => architect
+  h1 Architects
+
+  section.main.polaroids.architects
+    - for architect in @architects
+      =render 'shared/polaroid', :model => architect
