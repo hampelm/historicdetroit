@@ -37,6 +37,7 @@ RailsAdmin.config do |config|
 
     create do
       field :name
+      field :slug
       field :also_known_as
       field :byline
       field :description, :simple_mde
@@ -53,6 +54,7 @@ RailsAdmin.config do |config|
 
     edit do
       field :name
+      field :slug
       field :also_known_as
       field :byline
       field :description, :simple_mde

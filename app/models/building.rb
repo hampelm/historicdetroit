@@ -35,6 +35,13 @@ class Building < ApplicationRecord
     name
   end
 
+  # Needed to get Rails Admin to set the slug
+  def slug=(value)
+    if value.present?
+      write_attribute(:slug, value)
+    end
+  end
+
   def status_enum
     [[nil], ['Open'], ['Closed'], ['Demolished'], ['Under renovation']]
   end

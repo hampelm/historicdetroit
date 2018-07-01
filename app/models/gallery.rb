@@ -14,4 +14,11 @@ class Gallery < ApplicationRecord
   friendly_id :title, use: :slugged
 
   has_many :photos
+
+  # Needed to get Rails Admin to set the slug
+  def slug=(value)
+    if value.present?
+      write_attribute(:slug, value)
+    end
+  end
 end

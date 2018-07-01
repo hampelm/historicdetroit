@@ -20,9 +20,16 @@ class Architect < ApplicationRecord
   friendly_id :name, use: :slugged
 
   has_one_attached :photo
-  has_and_belongs_to_many :buildings, :join_table => :architects_buildings
+  has_and_belongs_to_many :buildings, join_table: :architects_buildings
 
   def title
     name
+  end
+
+  # Needed to get Rails Admin to set the slug
+  def slug=(value)
+    if value.present?
+      write_attribute(:slug, value)
+    end
   end
 end
