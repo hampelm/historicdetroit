@@ -92,6 +92,10 @@ h2 {
 .page {
   display: flex;
   flex-direction: row;
+
+  .articles {
+    flex: 4;
+  }
 }
 
 article {
@@ -100,7 +104,6 @@ article {
   margin: 20px 0;
   box-shadow: $shadow;
   font-family: $sans;
-  flex: 4;
 
   h3 {
     margin-top: 1.5em;

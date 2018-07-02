@@ -17,6 +17,7 @@
 #  updated_at            :datetime         not null
 #  architect_id          :integer
 #  description_formatted :text
+#  slug                  :string
 #
 
 require 'test_helper'

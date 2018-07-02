@@ -4,8 +4,9 @@ section.main
     h2.byline = @building.byline
 
     .page
-      article
-        == @building.description_formatted
+      .articles
+        article
+          == @building.description_formatted
 
       aside
         - if @building.address?

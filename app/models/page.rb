@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: pages
+#
+#  id             :integer          not null, primary key
+#  title          :string
+#  slug           :string
+#  body           :text
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  body_formatted :text
+#
+
 require 'redcarpet' # Markdown
 
 class Page < ApplicationRecord

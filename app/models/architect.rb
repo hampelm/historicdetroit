@@ -12,7 +12,7 @@
 #  death           :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  building_id     :integer
+#  slug            :string
 #
 
 class Architect < ApplicationRecord

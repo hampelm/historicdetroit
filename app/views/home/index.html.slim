@@ -1,11 +1,15 @@
-section.content
-  h1 Welcome to Historic Detroit
+section.main
+  section.content
+    h1 Welcome to Historic Detroit
 
-  section.main
-    article
-      h2 Post title
-      p.date Sep. 23, 2017
-      p Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt quos velit odio, totam perspiciatis eaque aut nobis consectetur cupiditate eius aliquid aperiam exercitationem quasi nam fuga at minima quod error!
+    .page
+      .articles
+        - for post in @posts
+          article
+            h2 =post.title
+            p.date =post.created_at
 
-  section.sidebar
-    p Sidebar here
+            == post.body_formatted
+
+      aside
+        p Sidebar here

@@ -1,5 +1,4 @@
 require 'redcarpet' # Markdown
-
 # == Schema Information
 #
 # Table name: buildings
@@ -19,6 +18,7 @@ require 'redcarpet' # Markdown
 #  updated_at            :datetime         not null
 #  architect_id          :integer
 #  description_formatted :text
+#  slug                  :string
 #
 
 class Building < ApplicationRecord
