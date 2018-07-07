@@ -23,6 +23,10 @@ rails s
 rake
 ```
 
+## Deploy
+
+You'll need to make sure the Google Cloud Storage key in is set in `storage.yml`
+
 ### Notes
 
 ```

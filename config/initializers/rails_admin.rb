@@ -12,6 +12,17 @@ RailsAdmin.config do |config|
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
 
+  config.included_models = [
+    'ActsAsTaggableOn::Tag', # Because this isn't in models/, we have to list all
+    'Architect',
+    'Building',
+    'Gallery',
+    'Page',
+    'Photo',
+    'Post',
+    'User'
+  ]
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
@@ -41,6 +52,7 @@ RailsAdmin.config do |config|
       field :also_known_as
       field :byline
       field :description, :simple_mde
+      field :photo
       field :address
       field :status
       field :style
@@ -58,6 +70,7 @@ RailsAdmin.config do |config|
       field :also_known_as
       field :byline
       field :description, :simple_mde
+      field :photo
       field :address
       field :status
       field :style
@@ -70,4 +83,18 @@ RailsAdmin.config do |config|
       field :updated_at
     end
   end
+
+  config.model Gallery do
+    list do
+      sort_by :updated_at
+      field :title
+      field :updated_at
+    end
+
+    edit do
+      include_all_fields
+      exclude_fields :base_tags
+    end
+  end
+
 end

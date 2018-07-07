@@ -16,6 +16,8 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+.sass_cache
+.sass_cache/*
 
 # Ignore uploaded files in development
 /storage/*
