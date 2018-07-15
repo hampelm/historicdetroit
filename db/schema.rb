@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_07_135732) do
+ActiveRecord::Schema.define(version: 2018_07_15_143315) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 2018_07_07_135732) do
     t.integer "architect_id"
     t.text "description_formatted"
     t.string "slug"
+    t.decimal "lat"
+    t.decimal "lng"
   end
 
   create_table "buildings_galleries", id: false, force: :cascade do |t|

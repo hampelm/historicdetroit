@@ -19,6 +19,8 @@ require 'redcarpet' # Markdown
 #  architect_id          :integer
 #  description_formatted :text
 #  slug                  :string
+#  lat                   :decimal(, )
+#  lng                   :decimal(, )
 #
 
 class Building < ApplicationRecord

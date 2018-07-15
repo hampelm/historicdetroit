@@ -18,6 +18,8 @@
 #  architect_id          :integer
 #  description_formatted :text
 #  slug                  :string
+#  lat                   :decimal(, )
+#  lng                   :decimal(, )
 #
 
 require 'test_helper'
