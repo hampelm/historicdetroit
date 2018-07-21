@@ -30,7 +30,7 @@ class Building < ApplicationRecord
   has_one_attached :photo
   has_and_belongs_to_many :architects, join_table: :architects_buildings
   has_and_belongs_to_many :posts, join_table: :building_posts
-  has_and_belongs_to_many :galleries, join_table: :gallery_posts
+  has_many :galleries
   before_save :format
   validates :name, presence: true
 

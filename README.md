@@ -27,6 +27,16 @@ rake
 
 You'll need to make sure the Google Cloud Storage key in is set in `storage.yml`
 
+### Import order
+
+```
+rake import:architects[""]
+```
+
+- Architects
+- Buildings (uses Architects)
+- Galleries (uses Buildings)
+
 ### Notes
 
 ```
