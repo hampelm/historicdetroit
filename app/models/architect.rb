@@ -19,6 +19,8 @@ class Architect < ApplicationRecord # :nodoc:
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  default_scope { order(last_name_first: :asc) }
+
   has_one_attached :photo
   has_and_belongs_to_many :buildings, join_table: :architects_buildings
 

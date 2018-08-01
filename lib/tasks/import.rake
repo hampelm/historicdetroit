@@ -17,7 +17,7 @@ namespace :import do
       puts "Importing #{slug}"
 
       architect = Architect.new(
-        name: b.css('architect').text,
+        name: b.css('name').text,
         slug: slug,
         last_name_first: b.css('last-name-first').text,
         description: b.xpath("//description[@mode='unformatted']").first.text,
@@ -52,7 +52,7 @@ namespace :import do
 
     # Then loop over all of them
     (1..total_pages).each do |page_num|
-      doc = Nokogiri::XML(open(base_path + page_num))
+      doc = Nokogiri::XML(open(base_path + page_num.to_s))
       doc.css('data buildings-export entry').each do |b|
         slug = b.css('building-name').attribute('handle').to_s
         exists = Building.exists?(slug: slug)

@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2018_07_21_144701) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -47,8 +50,8 @@ ActiveRecord::Schema.define(version: 2018_07_21_144701) do
   end
 
   create_table "architects_buildings", id: false, force: :cascade do |t|
-    t.integer "building_id", null: false
-    t.integer "architect_id", null: false
+    t.bigint "building_id", null: false
+    t.bigint "architect_id", null: false
   end
 
   create_table "buildings", force: :cascade do |t|
@@ -72,13 +75,13 @@ ActiveRecord::Schema.define(version: 2018_07_21_144701) do
   end
 
   create_table "buildings_galleries", id: false, force: :cascade do |t|
-    t.integer "gallery_id", null: false
-    t.integer "building_id", null: false
+    t.bigint "gallery_id", null: false
+    t.bigint "building_id", null: false
   end
 
   create_table "buildings_posts", id: false, force: :cascade do |t|
-    t.integer "building_id", null: false
-    t.integer "post_id", null: false
+    t.bigint "building_id", null: false
+    t.bigint "post_id", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -115,7 +118,7 @@ ActiveRecord::Schema.define(version: 2018_07_21_144701) do
     t.string "title"
     t.text "caption"
     t.string "byline"
-    t.integer "gallery_id"
+    t.bigint "gallery_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["gallery_id"], name: "index_photos_on_gallery_id"
@@ -130,7 +133,7 @@ ActiveRecord::Schema.define(version: 2018_07_21_144701) do
     t.text "body_formatted"
   end
 
-  create_table "taggings", force: :cascade do |t|
+  create_table "taggings", id: :serial, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
     t.integer "taggable_id"
@@ -149,7 +152,7 @@ ActiveRecord::Schema.define(version: 2018_07_21_144701) do
     t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
   end
 
-  create_table "tags", force: :cascade do |t|
+  create_table "tags", id: :serial, force: :cascade do |t|
     t.string "name"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
@@ -172,4 +175,5 @@ ActiveRecord::Schema.define(version: 2018_07_21_144701) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "photos", "galleries"
 end
