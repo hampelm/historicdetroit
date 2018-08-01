@@ -11,6 +11,11 @@ We're rebuilding historicdetroit.org with Rails
 bundle install
 ```
 
+## Configure
+
+Optional Skylight performance monitoring: set the `SKYLIGHT_AUTHENTICATION`
+environment variable.
+
 ## Develop
 
 ```

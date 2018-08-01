@@ -16,6 +16,7 @@ gem 'rails_admin', git: 'git://github.com/sferik/rails_admin.git', branch: 'mast
 gem 'redcarpet'
 gem 'sass-rails', '~> 5.0'
 gem 'simplemde-rails'
+gem "skylight"
 gem 'slim-rails'
 gem 'sqlite3'
 gem 'turbolinks', '~> 5'
