@@ -23,13 +23,34 @@ class Architect < ApplicationRecord # :nodoc:
 
   has_one_attached :photo
   has_and_belongs_to_many :buildings, join_table: :architects_buildings
+  before_save :format
+  validates :name, presence: true
 
   def title
     name
   end
 
+  def photo?
+    photo.attached?
+  end
+
+  def thumbnail
+    photo.andand.variant(combine_options: {thumbnail: '100x100^', gravity: 'center', extent: '100x100'})
+  end
+
   # Needed to get Rails Admin to set the slug
   def slug=(value)
     write_attribute(:slug, value) if value.present?
+  end
+
+  private
+
+  def format
+    markdown = Redcarpet::Markdown.new(
+      Redcarpet::Render::HTML,
+      autolink: true,
+      space_after_headers: true
+    )
+    self.description_formatted = markdown.render(description)
   end
 end
