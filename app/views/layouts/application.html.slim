@@ -16,8 +16,8 @@ html prefix="og: http://ogp.me/ns#"
     - if content_for?(:og)
       = yield(:og)
 
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
     <script type="text/javascript" src="https://use.typekit.com/coz2mai.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
@@ -53,3 +53,8 @@ html prefix="og: http://ogp.me/ns#"
     footer
       p &copy; 2018 Historic Detroit
 
+
+javascript:
+  var myLazyLoad = new LazyLoad({
+    elements_selector: ".lazy"
+  });

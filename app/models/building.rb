@@ -49,6 +49,10 @@ class Building < ApplicationRecord
     [[nil], ['Open'], ['Closed'], ['Demolished'], ['Under renovation']]
   end
 
+  def polaroid
+    photo.variant(combine_options: {thumbnail: "218x200^", gravity: "center", extent: "218x200"})
+  end
+
   private
 
   def format
