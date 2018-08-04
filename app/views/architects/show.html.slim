@@ -1,1 +1,13 @@
-h2 =@architect.name
+section.main
+  section.content
+    h1 =@architect.headline
+    h2.byline = @architect.byline
+
+    .page
+      .articles
+        article
+          == @architect.description_formatted
+
+      aside
+        - if @architect.photo.attached?
+          == image_tag @architect.sidebar_photo

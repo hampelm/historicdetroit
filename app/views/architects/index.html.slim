@@ -2,6 +2,18 @@ section.content
 
   h1 Architects
 
-  section.main.polaroids.architects
+  table
+    thead
+      tr
+        th colspan=2 Architect
+        th Birth
+        th Death
+    tbody
     - for architect in @architects
-      =render 'shared/polaroid', :model => architect
+      tr
+        td.photo
+          - if architect.photo?
+            = image_tag architect.thumbnail,  height: 50, width: 50
+        td =link_to(architect.title, architect)
+        td =architect.birth
+        td =architect.death

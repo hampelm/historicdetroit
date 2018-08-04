@@ -20,7 +20,7 @@ namespace :import do
         name: b.css('name').text,
         slug: slug,
         last_name_first: b.css('last-name-first').text,
-        description: b.xpath("description[@mode='unformatted']").first.text
+        description: b.xpath("description[@mode='unformatted']").first.andand.text || ''
       )
 
       architect.byline = b.css('byline').text unless b.css('byline').empty?
@@ -65,7 +65,7 @@ namespace :import do
           slug: slug,
           also_known_as: b.css('also-known-as').text,
           byline: b.css('byline').text,
-          description: b.xpath("description[@mode='unformatted']").first.text,
+          description: b.xpath("description[@mode='unformatted']").first.andand.text || '',
           address: b.css('address').text,
           style: b.css('style').text,
           status: b.css('status item').text,
