@@ -1,4 +1,7 @@
 .polaroid
   .polaroid-details
+    = image_tag model.photo.variant(combine_options: {thumbnail: "218x200^", gravity: "center", extent: "218x200"})
     h2 #{link_to(model.title, polymorphic_path(model))}
+
+
 
