@@ -8,6 +8,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  slug        :string
+#  building_id :integer
 #
 
 class Gallery < ApplicationRecord

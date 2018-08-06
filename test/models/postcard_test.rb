@@ -1,19 +1,20 @@
 # == Schema Information
 #
-# Table name: galleries
+# Table name: postcards
 #
 #  id          :integer          not null, primary key
 #  title       :string
-#  description :text
+#  caption     :text
+#  byline      :string
+#  subject     :string
+#  building_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  slug        :string
-#  building_id :integer
 #
 
 require 'test_helper'
 
-class GalleryTest < ActiveSupport::TestCase
+class PostcardTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

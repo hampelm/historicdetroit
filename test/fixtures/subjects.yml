@@ -1,20 +1,20 @@
 # == Schema Information
 #
-# Table name: galleries
+# Table name: subjects
 #
 #  id          :integer          not null, primary key
 #  title       :string
 #  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  slug        :string
-#  building_id :integer
 #
 
-require 'test_helper'
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-class GalleryTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-end
+one:
+  title: MyString
+  description: MyText
+
+two:
+  title: MyString
+  description: MyText

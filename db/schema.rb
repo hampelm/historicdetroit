@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_04_155249) do
+ActiveRecord::Schema.define(version: 2018_08_05_142218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,11 @@ ActiveRecord::Schema.define(version: 2018_08_04_155249) do
     t.bigint "building_id", null: false
   end
 
+  create_table "buildings_postcards", id: false, force: :cascade do |t|
+    t.bigint "postcard_id", null: false
+    t.bigint "building_id", null: false
+  end
+
   create_table "buildings_posts", id: false, force: :cascade do |t|
     t.bigint "building_id", null: false
     t.bigint "post_id", null: false
@@ -125,6 +130,23 @@ ActiveRecord::Schema.define(version: 2018_08_04_155249) do
     t.index ["gallery_id"], name: "index_photos_on_gallery_id"
   end
 
+  create_table "postcards", force: :cascade do |t|
+    t.string "title"
+    t.text "caption"
+    t.string "byline"
+    t.string "subject"
+    t.bigint "building_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["building_id"], name: "index_postcards_on_building_id"
+  end
+
+  create_table "postcards_subjects", id: false, force: :cascade do |t|
+    t.bigint "postcard_id", null: false
+    t.bigint "subject_id", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -132,6 +154,13 @@ ActiveRecord::Schema.define(version: 2018_08_04_155249) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.text "body_formatted"
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -177,4 +206,5 @@ ActiveRecord::Schema.define(version: 2018_08_04_155249) do
   end
 
   add_foreign_key "photos", "galleries"
+  add_foreign_key "postcards", "buildings"
 end

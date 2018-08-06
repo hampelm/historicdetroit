@@ -1,20 +1,13 @@
 # == Schema Information
 #
-# Table name: galleries
+# Table name: subjects
 #
 #  id          :integer          not null, primary key
 #  title       :string
 #  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  slug        :string
-#  building_id :integer
 #
 
-require 'test_helper'
-
-class GalleryTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+class Subject < ApplicationRecord
 end

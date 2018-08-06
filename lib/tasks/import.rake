@@ -145,4 +145,65 @@ namespace :import do
       end
     end
   end
+
+
+  desc 'Import postcards'
+  task :postcards, [:base_path] => :environment do |task, args|
+    base_path = args[:base_path]
+
+    # First, figure out how many pages we have.
+    doc = Nokogiri::XML(open(base_path + '1'))
+    total_pages = doc.css('pagination').attribute('total-pages').to_s.to_i
+
+    # Then loop over all of them
+    (1..total_pages).each do |page_num|
+      doc = Nokogiri::XML(open(base_path + page_num.to_s))
+      doc.css('data postcards-export entry').each do |b|
+
+        slug = b.css('title').attribute('handle').to_s
+        exists = Postcard.exists?(slug: slug)
+        puts "Skipping #{slug}" if exists
+        next if exists
+        puts "Importing #{slug}"
+
+        postcard = Postcard.new(
+          title: b.css('title').text,
+          slug: slug
+        )
+
+        # TODO -- start up here.
+        # need to attach multiple buildings
+
+        # Attach the building
+        buildings = b.css('buildings item')
+        buildings.each do |building|
+          building_slug = building.attribute('handle').to_s
+          building = Building.friendly.find(building_slug)
+          poscard.building = building
+        end
+
+        # Set the timestamps
+        ActiveRecord::Base.record_timestamps = false
+        postcard.created_at = Time.iso8601(b.css('system-date created').attribute('iso').to_s)
+        postcard.updated_at = Time.iso8601(b.css('system-date modified').attribute('iso').to_s)
+        postcard.save
+
+        # Attach the photos
+        ActiveRecord::Base.record_timestamps = true
+        b.css('images image').each do |image|
+          filename = image.css('filename').text.to_s
+          puts "-- image #{filename}"
+          image_file = open(image_base + filename)
+          photo = Photo.new(
+            caption: image.css('caption').text,
+            byline: image.css('byline').text,
+            gallery: gallery
+          )
+          photo.save
+          photo.photo.attach(io: image_file, filename: filename)
+        end
+      end
+    end
+  end
+
 end
