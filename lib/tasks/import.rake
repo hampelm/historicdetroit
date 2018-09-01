@@ -60,12 +60,18 @@ namespace :import do
         next if exists
         puts "Importing #{slug}"
 
+        description = b.xpath("description[@mode='unformatted']").first.andand.text || ''
+
+        # Ensure markdown headers have spacing.
+        # Eg ###Foo becomes ### Foo
+        description.gsub!(/^(#*)(\w)/, '\1 \2')
+
         building = Building.new(
           name: b.css('building-name').text,
           slug: slug,
           also_known_as: b.css('also-known-as').text,
           byline: b.css('byline').text,
-          description: b.xpath("description[@mode='unformatted']").first.andand.text || '',
+          description: description,
           address: b.css('address').text,
           style: b.css('style').text,
           status: b.css('status item').text,
