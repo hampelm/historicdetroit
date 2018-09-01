@@ -14,14 +14,14 @@ development:
   encoding: unicode
   database: historicdetroit
   pool: 5
-  username: matth
+  username: historic
 
 test:
   adapter: postgresql
   encoding: unicode
   database: historicdetroit_test
   pool: 5
-  username: matth
+  username: historic
 
 production:
   <<: *default

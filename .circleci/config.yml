@@ -11,8 +11,8 @@ jobs: # a collection of steps
           RAILS_ENV: test
       - image: circleci/postgres:10
         environment: # environment variables for database
-          POSTGRES_USER: circleci-demo-ruby
-          POSTGRES_DB: historicdetroit
+          POSTGRES_USER: historic
+          POSTGRES_DB: historicdetroit_test
           POSTGRES_PASSWORD: ""
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
