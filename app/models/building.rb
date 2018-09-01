@@ -53,6 +53,10 @@ class Building < ApplicationRecord
     photo.andand.variant(combine_options: {thumbnail: '218x200^', gravity: 'center', extent: '218x200'})
   end
 
+  def sidebar_photo
+    photo.andand.variant(combine_options: {thumbnail: 'x300^', gravity: 'center', extent: '300'})
+  end
+
   private
 
   def format
