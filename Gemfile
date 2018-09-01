@@ -7,9 +7,8 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'andand'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
-gem 'faker'
-gem 'factory_bot'
 gem 'factory_bot_rails'
+gem 'faker'
 gem 'friendly_id', '~> 5.1.0'
 gem 'image_processing', '~> 1.2'
 gem 'jbuilder', '~> 2.5'
@@ -30,16 +29,17 @@ gem 'flamegraph'
 gem 'rack-mini-profiler', require: false
 gem 'stackprof'
 
-
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'coveralls', require: false
+  gem 'rspec-rails'
 end
 
 group :development do
   gem 'annotate'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
+  gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
 end

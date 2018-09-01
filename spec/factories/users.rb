@@ -16,10 +16,15 @@
 #  description_formatted :text
 #
 
-require 'test_helper'
+FactoryBot.define do
+  factory :user do
+    email { Faker::Internet.email }
 
-class ArchitectTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+    password { 'password' }
+    password_confirmation { 'password' }
+
+    trait :admin do
+      admin { true }
+    end
+  end
 end

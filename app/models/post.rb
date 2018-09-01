@@ -10,6 +10,7 @@ require 'redcarpet' # Markdown
 #  updated_at     :datetime         not null
 #  slug           :string
 #  body_formatted :text
+#  date           :date
 #
 
 class Post < ApplicationRecord
