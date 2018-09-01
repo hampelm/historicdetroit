@@ -46,14 +46,17 @@ jobs: # a collection of steps
           name: Database setup
           command: bundle exec rake db:create db:schema:load --trace
 
-      - run:
-          name: Run rspec in parallel
-          command: |
-            bundle exec rake --profile 10 \
-                              --format RspecJunitFormatter \
-                              --out test_results/rspec.xml \
-                              --format progress \
-                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      # Precompile Assets
+      - run: bin/rails assets:precompile
+      # Create place to store test results
+      - run: mkdir ~/rspec
+      # Run the tests
+      - run: bundle exec rspec --format documentation --format RspecJunitFormatter -o ~/rspec/rspec.xml
+      - store_test_results:
+          path: ~/rspec
+      - store_artifacts:
+          path: tmp/screenshots
+          destination: screenshots
 
       # Save test results for timing analysis
       - store_test_results:
