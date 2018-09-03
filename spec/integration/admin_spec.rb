@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.feature 'Admin', type: :feature do
   before(:all) do
