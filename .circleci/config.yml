@@ -51,7 +51,7 @@ jobs: # a collection of steps
       # Create place to store test results
       - run: mkdir ~/rspec
       # Run the tests
-      - run: bundle exec rake --format documentation --format RspecJunitFormatter -o ~/rspec/rspec.xml
+      - run: bundle exec rspec --format documentation --format RspecJunitFormatter -o ~/rspec/rspec.xml
       - store_test_results:
           path: ~/rspec
       - store_artifacts:
