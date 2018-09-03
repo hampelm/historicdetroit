@@ -17,12 +17,12 @@
 #
 
 FactoryBot.define do
-  factory :architect do
-    first = Faker::Name.first_name
-    last = Faker::Name.last_name
+  first = Faker::Name.first_name
+  last = Faker::Name.last_name
 
+  factory :architect do
     name { first + ' '  + last }
-    byline { FFaker::Name.name }
+    byline { Faker::Name.name }
     last_name_first { last + ', ' + first }
     firm { Faker::Company.name }
     description { Faker::Markdown.sandwich(5) }

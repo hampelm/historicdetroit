@@ -2,6 +2,7 @@ require 'capybara/rspec'
 require 'coveralls'
 require 'capybara/rspec'
 require 'factory_bot'
+require 'faker'
 
 Coveralls.wear!
 
@@ -23,9 +24,6 @@ Coveralls.wear!
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
-
-  FactoryBot.definition_file_paths << File.join(File.dirname(__FILE__), 'factories')
-  FactoryBot.find_definitions
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
