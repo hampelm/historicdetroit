@@ -14,4 +14,5 @@
 class Photo < ApplicationRecord
   has_one_attached :photo
   belongs_to :gallery, optional: true
+  acts_as_list scope: :gallery
 end

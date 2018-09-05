@@ -18,7 +18,7 @@ class Gallery < ApplicationRecord
   acts_as_taggable
   attr_accessor :tag_list
 
-  has_many :photos
+  has_many :photos, -> { order(position: :asc) }
   belongs_to :building, optional: true
 
   # Needed to get Rails Admin to set the slug

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby File.read(File.join(File.dirname(__FILE__), '.ruby-version')).strip
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem 'acts_as_list'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'andand'
 gem 'bootsnap', '>= 1.1.0', require: false
