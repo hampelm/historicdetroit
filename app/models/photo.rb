@@ -13,5 +13,5 @@
 
 class Photo < ApplicationRecord
   has_one_attached :photo
-  belongs_to :gallery
+  belongs_to :gallery, optional: true
 end

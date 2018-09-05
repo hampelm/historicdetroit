@@ -23,7 +23,7 @@ class Architect < ApplicationRecord # :nodoc:
   default_scope { order(last_name_first: :asc) }
 
   has_one_attached :photo
-  has_and_belongs_to_many :buildings, join_table: :architects_buildings
+  has_and_belongs_to_many :buildings, join_table: :architects_buildings, optional: true
   before_save :format
   validates :name, presence: true
 

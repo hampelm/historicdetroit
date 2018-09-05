@@ -96,6 +96,9 @@ RailsAdmin.config do |config|
     edit do
       include_all_fields
       exclude_fields :base_tags
+      field :photos do
+        orderable true
+      end
     end
   end
 

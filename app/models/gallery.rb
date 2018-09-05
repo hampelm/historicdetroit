@@ -19,7 +19,7 @@ class Gallery < ApplicationRecord
   attr_accessor :tag_list
 
   has_many :photos
-  belongs_to :building
+  belongs_to :building, optional: true
 
   # Needed to get Rails Admin to set the slug
   def slug=(value)
