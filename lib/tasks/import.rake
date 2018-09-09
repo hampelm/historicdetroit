@@ -3,8 +3,8 @@ require 'open-uri'
 image_base = 'http://www.historicdetroit.org/workspace/images/'
 
 namespace :import do
-  desc "Import archtects (run first)"
-  task :architects, [:base_path] => :environment do |task, args|
+  desc 'Import archtects (run first)'
+  task :architects, [:base_path] => :environment do |_, args|
     base_path = args[:base_path]
 
     # Then loop over all of them
@@ -77,7 +77,7 @@ namespace :import do
           status: b.css('status item').text,
           year_opened: b.css('year-opened').text,
           year_closed: b.css('year-closed').text,
-          year_demolished: b.css('year-demolished').text,
+          year_demolished: b.css('year-demolished').text
         )
 
         unless b.css('location').empty?
@@ -87,9 +87,8 @@ namespace :import do
 
         building.save
 
-        next if b.css('image').empty?
-
         # Get the image(s)
+        next if b.css('image').empty?
         filename = b.css('image filename').text.to_s
         image = open(image_base + filename)
         building.photo.attach(io: image, filename: filename)
@@ -97,9 +96,8 @@ namespace :import do
     end
   end
 
-
   desc 'Import galleries'
-  task :galleries, [:base_path] => :environment do |task, args|
+  task :galleries, [:base_path] => :environment do |_, args|
     base_path = args[:base_path]
 
     # First, figure out how many pages we have.
@@ -153,8 +151,40 @@ namespace :import do
   end
 
 
+  desc 'Import subjects'
+  task :subjects, [:base_path] => :environment do |task, args|
+    base_path = args[:base_path]
+
+    doc = Nokogiri::XML(open(base_path))
+    doc.css('data subjects-export entry').each do |b|
+      slug = b.css('subject').attribute('handle').to_s
+      exists = Subject.exists?(slug: slug)
+      puts "Skipping #{slug}" if exists
+      next if exists
+      puts "Importing #{slug}"
+
+      subject = Subject.new(
+        title: b.css('subject').text,
+        slug: slug
+      )
+
+      # Set the timestamps
+      ActiveRecord::Base.record_timestamps = false
+      subject.created_at = Time.iso8601(b.css('system-date created').attribute('iso').to_s)
+      subject.updated_at = Time.iso8601(b.css('system-date modified').attribute('iso').to_s)
+      subject.save
+
+      # Get the image(s)
+      ActiveRecord::Base.record_timestamps = true
+      next if b.css('image').empty?
+      filename = b.css('image filename').text.to_s
+      image = open(image_base + '/subjects/' + filename)
+      subject.photo.attach(io: image, filename: filename)
+    end
+  end
+
   desc 'Import postcards'
-  task :postcards, [:base_path] => :environment do |task, args|
+  task :postcards, [:base_path] => :environment do |_, args|
     base_path = args[:base_path]
 
     # First, figure out how many pages we have.
@@ -211,5 +241,4 @@ namespace :import do
       end
     end
   end
-
 end

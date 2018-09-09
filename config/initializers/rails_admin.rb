@@ -22,6 +22,7 @@ RailsAdmin.config do |config|
     'Page',
     'Photo',
     'Post',
+    'Subject',
     'User'
   ]
 
@@ -62,6 +63,8 @@ RailsAdmin.config do |config|
       field :year_closed
       field :year_demolished
       field :architects
+      field :subjects
+
       field :created_at
       field :updated_at
     end
@@ -80,6 +83,7 @@ RailsAdmin.config do |config|
       field :year_closed
       field :year_demolished
       field :architects
+      field :subjects
 
       field :created_at
       field :updated_at
