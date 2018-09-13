@@ -26,9 +26,9 @@ FactoryBot.define do
   factory :building do
     name { Faker::Company.name }
     also_known_as { Faker::Company.name }
-    byline { FFaker::Name.name }
+    byline { Faker::Name.name }
     description { Faker::Markdown.sandwich(5) }
-    address { Faker::Address.address }
+    address { Faker::Address.street_address }
     status { 'Demolished' }
     style { 'Art Deco' }
     year_opened { Faker::Date.birthday(45, 65) }

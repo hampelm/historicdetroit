@@ -1,7 +1,8 @@
 .polaroid
   .polaroid-details
-    =link_to polymorphic_path(model) do
-      img data-src=url_for(model.polaroid) height=200 width=218 class='lazy'
+    - if model.polaroid
+      =link_to polymorphic_path(model) do
+        img data-src=url_for(model.polaroid) height=200 width=218 class='lazy'
     h2 #{link_to(model.title, polymorphic_path(model))}
 
 

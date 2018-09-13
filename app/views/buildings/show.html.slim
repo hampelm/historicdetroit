@@ -20,6 +20,10 @@ section.main
           h3 AKA
           =@building.also_known_as
 
+        - if @building.style?
+          h3 Style
+          =@building.style
+
         - if @building.status?
           h3 Status
           =@building.status

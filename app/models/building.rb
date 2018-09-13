@@ -51,11 +51,11 @@ class Building < ApplicationRecord
   end
 
   def polaroid
-    photo.andand.variant(combine_options: {thumbnail: '218x200^', gravity: 'center', extent: '218x200'})
+    photo.andand.variant(combine_options: {thumbnail: '218x200^', gravity: 'center', extent: '218x200'}) if photo.attachment
   end
 
   def sidebar_photo
-    photo.andand.variant(combine_options: {thumbnail: 'x300^', gravity: 'center', extent: '300'})
+    photo.andand.variant(combine_options: {thumbnail: 'x300^', gravity: 'center', extent: '300'}) if photo.attachment
   end
 
   private
