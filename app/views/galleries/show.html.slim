@@ -1,2 +1,14 @@
-h1 Galleries#show
-p Find me in app/views/galleries/show.html.slim
+section.main
+  section.content
+    h1 =@gallery.title
+
+    .page
+      .photos
+        - for photo in @gallery.photos
+          .photo
+            picture
+              source srcset=url_for(photo.full) media="(min-width: 501px)"
+              source srcset=url_for(photo.mobile) media="(max-width: 501px)"
+              img data-src=url_for(photo.full) class='lazy' width="100%"
+            p.caption =photo.caption
+            p.byline =photo.byline

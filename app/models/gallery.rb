@@ -21,6 +21,10 @@ class Gallery < ApplicationRecord
   has_many :photos, -> { order(position: :asc) }
   belongs_to :building, optional: true
 
+  def polaroid
+    self.photos.first.andand.polaroid
+  end
+
   # Needed to get Rails Admin to set the slug
   def slug=(value)
     write_attribute(:slug, value) if value.present?

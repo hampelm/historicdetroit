@@ -22,6 +22,7 @@ RailsAdmin.config do |config|
     'Page',
     'Photo',
     'Post',
+    'Postcard',
     'Subject',
     'User'
   ]

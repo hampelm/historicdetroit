@@ -134,7 +134,7 @@ namespace :import do
 
         # Attach the photos
         ActiveRecord::Base.record_timestamps = true
-        b.css('images image').each do |image|
+        b.css('images item').each do |image|
           filename = image.css('filename').text.to_s
           puts "-- image #{filename}"
           image_file = open(image_base + filename)

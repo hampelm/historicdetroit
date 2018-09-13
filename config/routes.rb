@@ -14,4 +14,8 @@ Rails.application.routes.draw do
   resources :galleries
   resources :pages, path: '/about'
   resources :posts
+
+  get '/postcards', to: 'postcards#index'
+  get '/postcards/:subject', to: 'postcards#subject'
+  get '/postcards/:subject/:id', to: 'postcards#show'
 end

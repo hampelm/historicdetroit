@@ -1,2 +1,8 @@
-h1 Galleries#index
-p Find me in app/views/galleries/index.html.slim
+
+section.content
+  h1 Galleries
+
+  section.main.polaroids
+    - for gallery in @galleries
+      =render 'shared/polaroid', :model => gallery
+
