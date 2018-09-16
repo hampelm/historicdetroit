@@ -1,0 +1,7 @@
+section.content
+  h1 Postcards for #{@subject.title}
+
+  section.main.polaroids
+    - for postcard in @postcards
+      =render 'shared/polaroid', :model => postcard
+

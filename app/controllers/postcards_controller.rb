@@ -5,12 +5,11 @@ class PostcardsController < ApplicationController
 
   def subject
     @subject = Subject.friendly.find(params[:subject])
-    @postcards = Postcard.where(subject: @subject)
+    @postcards = @subject.postcards
   end
 
   def show
-    @subject = Subject.friendly.find(params[:subjec=])
+    @subject = Subject.friendly.find(params[:subject])
     @postcard = Postcard.find(params[:id])
   end
-
 end

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :pages, path: '/about'
   resources :posts
 
-  get '/postcards', to: 'postcards#index'
-  get '/postcards/:subject', to: 'postcards#subject'
-  get '/postcards/:subject/:id', to: 'postcards#show'
+  get '/postcards', action: :index, controller: 'postcards'
+  get '/postcards/:subject', action: :subject, controller: 'postcards'
+  get '/postcards/:subject/:id/', action: :show, controller: 'postcards'
 end

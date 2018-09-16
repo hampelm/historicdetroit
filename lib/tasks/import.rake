@@ -214,8 +214,16 @@ namespace :import do
         buildings = b.css('buildings item')
         buildings.each do |building|
           building_slug = building.attribute('handle').to_s
+          puts "-- finding building #{building_slug}"
           building = Building.friendly.find(building_slug)
-          poscard.building = building
+          postcard.buildings << building
+        end
+
+        subjects = b.css('subjects item')
+        subjects.each do |subject|
+          subject_slug = subject.attribute('handle').to_s
+          puts "-- finding subject #{subject_slug}"
+          postcard.subjects << Subject.friendly.find(subject_slug)
         end
 
         # Set the timestamps
@@ -224,20 +232,24 @@ namespace :import do
         postcard.updated_at = Time.iso8601(b.css('system-date modified').attribute('iso').to_s)
         postcard.save
 
-        # Attach the photos
         ActiveRecord::Base.record_timestamps = true
-        b.css('images image').each do |image|
+        b.css('front').each do |image|
           filename = image.css('filename').text.to_s
           puts "-- image #{filename}"
-          image_file = open(image_base + filename)
-          photo = Photo.new(
-            caption: image.css('caption').text,
-            byline: image.css('byline').text,
-            gallery: gallery
-          )
-          photo.save
-          photo.photo.attach(io: image_file, filename: filename)
+          image_file = open(image_base + 'postcards/' + filename)
+          postcard.front.attach(io: image_file, filename: filename)
         end
+
+        b.css('back').each do |image|
+          filename = image.css('filename').text.to_s
+          puts "-- image #{filename}"
+          image_file = open(image_base + 'postcards/' + filename)
+          photo.save
+          postcard.back.attach(io: image_file, filename: filename)
+        end
+        ActiveRecord::Base.record_timestamps = false
+        postcard.save
+
       end
     end
   end
