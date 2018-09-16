@@ -2,6 +2,13 @@ section.content
   h1 Postcards for #{@subject.title}
 
   section.main.polaroids
-    - for postcard in @postcards
-      =render 'shared/polaroid', :model => postcard
+    - for model in @postcards
+      .polaroid
+        .polaroid-details
+          - if model.polaroid
+            =link_to postcard_path_url(@subject, model) do
+              img data-src=url_for(model.polaroid) height=200 width=218 class='lazy'
+          h2 #{link_to(model.title, postcard_path_url(@subject, model))}
+
+
 

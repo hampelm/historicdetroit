@@ -23,4 +23,29 @@ class Postcard < ApplicationRecord
   def polaroid
     front.andand.variant(combine_options: {thumbnail: '218x200^', gravity: 'center', extent: '218x200'}) if front.attachment
   end
+
+  def full(photo)
+    photo.andand.variant(combine_options: {gravity: 'center', extent: '1200x'}) if photo.attachment
+  end
+
+  def mobile(photo)
+    # http://www.imagemagick.org/script/command-line-processing.php#geometry
+    photo.andand.variant(combine_options: {gravity: 'center', extent: '600x'}) if photo.attachment
+  end
+
+  def front_full
+    full(front)
+  end
+
+  def front_mobile
+    mobile(front)
+  end
+
+  def back_full
+    full(back)
+  end
+
+  def back_mobile
+    mobile(front)
+  end
 end
