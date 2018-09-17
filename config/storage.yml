@@ -17,7 +17,7 @@ local:
 # Remember not to checkin your GCS keyfile to a repository
 google:
   service: GCS
-  project: <%= ENV['GC_PROJECT_ID'] %>
+  project: <%= ENV['GC_PROJECT'] %>
   credentials:
     type: "service_account"
     project_id: <%= ENV['GC_PROJECT_ID'] %>
