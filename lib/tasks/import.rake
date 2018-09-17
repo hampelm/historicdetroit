@@ -85,6 +85,12 @@ namespace :import do
           building.lng = b.css('location').attribute('longitude')
         end
 
+        b.css('architect item').each do |architect|
+          architect_slug = architect.attribute('handle').to_s
+          arch = Architect.friendly.find(architect_slug)
+          building.architects << arch if arch
+        end
+
         building.save
 
         # Get the image(s)
@@ -203,6 +209,7 @@ namespace :import do
         puts "Importing #{slug}"
 
         postcard = Postcard.new(
+          id: b.attribute('id').to_s.to_i,
           title: b.css('title').text,
           slug: slug
         )
@@ -215,8 +222,12 @@ namespace :import do
         buildings.each do |building|
           building_slug = building.attribute('handle').to_s
           puts "-- finding building #{building_slug}"
-          building = Building.friendly.find(building_slug)
-          postcard.buildings << building
+          begin
+            building = Building.friendly.find(building_slug)
+            postcard.buildings << building if building
+          rescue
+            puts "#{building_slug} not found!"
+          end
         end
 
         subjects = b.css('subjects item')

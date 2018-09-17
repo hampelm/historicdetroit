@@ -1,5 +1,6 @@
 section.content
-  h1 Postcards for #{@subject.title}
+  h1 Postcards of #{@subject.title}
+  p =link_to('All subjects', '/postcards')
 
   section.main.polaroids
     - for model in @postcards

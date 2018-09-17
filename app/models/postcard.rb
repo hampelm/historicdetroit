@@ -14,23 +14,17 @@
 #
 
 class Postcard < ApplicationRecord
+  include ImageHelper
+
   has_and_belongs_to_many :buildings, join_table: :buildings_postcards
   has_and_belongs_to_many :subjects, join_table: :postcards_subjects
 
   has_one_attached :front
   has_one_attached :back
 
-  def polaroid
-    front.andand.variant(combine_options: {thumbnail: '218x200^', gravity: 'center', extent: '218x200'}) if front.attachment
-  end
-
-  def full(photo)
-    photo.andand.variant(combine_options: {gravity: 'center', extent: '1200x'}) if photo.attachment
-  end
-
-  def mobile(photo)
-    # http://www.imagemagick.org/script/command-line-processing.php#geometry
-    photo.andand.variant(combine_options: {gravity: 'center', extent: '600x'}) if photo.attachment
+  def photo
+    return front if front
+    back
   end
 
   def front_full

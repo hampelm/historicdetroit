@@ -9,6 +9,7 @@ section.main
             picture
               source srcset=url_for(photo.full) media="(min-width: 501px)"
               source srcset=url_for(photo.mobile) media="(max-width: 501px)"
-              img data-src=url_for(photo.full) class='lazy' width="100%"
+              img data-src=url_for(photo.full) class='lazy'
+
             p.caption =photo.caption
             p.byline =photo.byline

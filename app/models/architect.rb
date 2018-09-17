@@ -17,6 +17,7 @@
 #
 
 class Architect < ApplicationRecord # :nodoc:
+  include ImageHelper
   extend FriendlyId
   friendly_id :name, use: :slugged
 
@@ -34,18 +35,6 @@ class Architect < ApplicationRecord # :nodoc:
   def headline
     return "#{name} (#{birth} - #{death})" if birth
     name
-  end
-
-  def photo?
-    photo.attached?
-  end
-
-  def thumbnail
-    photo.andand.variant(combine_options: {thumbnail: '100x100^', gravity: 'center', extent: '100x100', quality: 60 })
-  end
-
-  def sidebar_photo
-    photo.andand.variant(combine_options: {thumbnail: 'x300^', gravity: 'center', extent: '300'})
   end
 
   # Needed to get Rails Admin to set the slug

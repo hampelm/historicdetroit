@@ -40,7 +40,7 @@ section.main
           h3 Demolished
           =@building.year_demolished
 
-        - if @building.architects
+        - if @building.architects.exists?
           h3 Architects
           ul.architects
             - for architect in @building.architects

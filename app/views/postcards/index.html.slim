@@ -1,3 +1,12 @@
-- for subject in @subjects
-  h1 =link_to(subject.title, "/postcards/#{subject.slug}")
-  p = subject.title
+section.content
+  h1 Postcards
+
+  section.main.polaroids
+    - for model in @subjects
+      - if model.postcards.exists?
+        .polaroid
+          .polaroid-details
+            - if model.polaroid
+              =link_to "/postcards/#{model.slug}" do
+                img data-src=url_for(model.polaroid) height=200 width=218 class='lazy'
+            h2 #{link_to(model.title, "/postcards/#{model.slug}")}

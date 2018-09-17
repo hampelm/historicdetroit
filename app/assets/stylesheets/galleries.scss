@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.photos {
+  width: 100%;
+}
+
 .photo {
   margin-bottom: 3.5em;
 
@@ -9,13 +13,24 @@
     font-size: 18px;
     margin-top: 0.1em;
     margin-bottom: 0.1em;
+    margin-left: 10px;
   }
 
   .byline {
-    color: #6d6622
+    color: #6d6622;
+    margin-left: 10px;
+
   }
 
-  img {
-    border: 10px solid #fff
+  picture {
+    display: block;
+    background: #fff;
+    text-align: center;
+    border: 10px solid #fff;
+    margin-bottom: 12px;
+
+    img {
+      max-width: 100%;
+    }
   }
 }
