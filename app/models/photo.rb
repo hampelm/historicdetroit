@@ -10,11 +10,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
 class Photo < ApplicationRecord
+  mount_uploader :photo, ImageUploader
   include ImageHelper
 
-  has_one_attached :photo
   belongs_to :gallery, optional: true
   acts_as_list scope: :gallery
 end

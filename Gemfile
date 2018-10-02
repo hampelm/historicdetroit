@@ -6,6 +6,8 @@ gem 'acts_as_list'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'andand'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem "fog-google", '1.7.1'
+gem 'carrierwave'
 gem 'devise'
 gem 'factory_bot_rails'
 gem 'faker'
@@ -22,7 +24,7 @@ gem 'simplemde-rails'
 gem 'skylight'
 gem 'slim-rails'
 gem 'uglifier', '>= 1.3.0'
-
+# secret_key_base
 # Profiling
 gem 'flamegraph'
 gem 'rack-mini-profiler', require: false

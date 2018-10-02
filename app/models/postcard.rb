@@ -14,13 +14,13 @@
 #
 
 class Postcard < ApplicationRecord
+  mount_uploader :front, ImageUploader
+  mount_uploader :back, ImageUploader
+
   include ImageHelper
 
   has_and_belongs_to_many :buildings, join_table: :buildings_postcards
   has_and_belongs_to_many :subjects, join_table: :postcards_subjects
-
-  has_one_attached :front
-  has_one_attached :back
 
   def photo
     return front if front

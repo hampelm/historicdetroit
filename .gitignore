@@ -34,3 +34,5 @@
 
 #
 config/initializers/development.rb
+
+secrets.yml

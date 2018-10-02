@@ -30,15 +30,13 @@ namespace :import do
       ActiveRecord::Base.record_timestamps = false
       architect.created_at = Time.iso8601(b.css('system-date created').attribute('iso').to_s)
       architect.updated_at = Time.iso8601(b.css('system-date modified').attribute('iso').to_s)
+
+      unless b.css('image').empty?
+        filename = b.css('image filename').text.to_s
+        architect.remote_photo_url = image_base + filename
+      end
+
       architect.save
-
-      next if b.css('image').empty?
-
-      # Get the image(s)
-      ActiveRecord::Base.record_timestamps = true
-      filename = b.css('image filename').text.to_s
-      image = open(image_base + filename)
-      architect.photo.attach(io: image, filename: filename)
     end
   end
 
@@ -91,13 +89,13 @@ namespace :import do
           building.architects << arch if arch
         end
 
-        building.save
-
         # Get the image(s)
-        next if b.css('image').empty?
-        filename = b.css('image filename').text.to_s
-        image = open(image_base + filename)
-        building.photo.attach(io: image, filename: filename)
+        unless if b.css('image').empty?
+          filename = b.css('image filename').text.to_s
+          building.remote_photo_url = image_base + filename
+        end
+
+        building.save
       end
     end
   end
@@ -143,11 +141,11 @@ namespace :import do
         b.css('images item').each do |image|
           filename = image.css('filename').text.to_s
           puts "-- image #{filename}"
-          image_file = open(image_base + filename)
           photo = Photo.new(
             caption: image.css('caption').text,
             byline: image.css('byline').text,
-            gallery: gallery
+            gallery: gallery,
+            remote_photo_url: image_base + filename
           )
           photo.save
           photo.photo.attach(io: image_file, filename: filename)
@@ -178,14 +176,14 @@ namespace :import do
       ActiveRecord::Base.record_timestamps = false
       subject.created_at = Time.iso8601(b.css('system-date created').attribute('iso').to_s)
       subject.updated_at = Time.iso8601(b.css('system-date modified').attribute('iso').to_s)
-      subject.save
 
       # Get the image(s)
-      ActiveRecord::Base.record_timestamps = true
-      next if b.css('image').empty?
-      filename = b.css('image filename').text.to_s
-      image = open(image_base + '/subjects/' + filename)
-      subject.photo.attach(io: image, filename: filename)
+      unless if b.css('image').empty?
+        filename = b.css('image filename').text.to_s
+        subject.remote_photo_url = image_base + filename
+      end
+
+      subject.save
     end
   end
 
@@ -241,26 +239,22 @@ namespace :import do
         ActiveRecord::Base.record_timestamps = false
         postcard.created_at = Time.iso8601(b.css('system-date created').attribute('iso').to_s)
         postcard.updated_at = Time.iso8601(b.css('system-date modified').attribute('iso').to_s)
-        postcard.save
 
-        ActiveRecord::Base.record_timestamps = true
         b.css('front').each do |image|
           filename = image.css('filename').text.to_s
           puts "-- image #{filename}"
           image_file = open(image_base + 'postcards/' + filename)
-          postcard.front.attach(io: image_file, filename: filename)
+          postcard.remote_front_url = image_file
         end
 
         b.css('back').each do |image|
           filename = image.css('filename').text.to_s
           puts "-- image #{filename}"
           image_file = open(image_base + 'postcards/' + filename)
-          photo.save
-          postcard.back.attach(io: image_file, filename: filename)
+          postcard.remote_back_url = image_file
         end
-        ActiveRecord::Base.record_timestamps = false
-        postcard.save
 
+        postcard.save
       end
     end
   end

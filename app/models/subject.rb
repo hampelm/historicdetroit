@@ -10,6 +10,7 @@
 #
 
 class Subject < ApplicationRecord
+  mount_uploader :photo, ImageUploader
   include ImageHelper
 
   extend FriendlyId
@@ -17,9 +18,6 @@ class Subject < ApplicationRecord
 
   has_and_belongs_to_many :postcards, join_table: :postcards_subjects
   has_and_belongs_to_many :buildings, join_table: :building_subjects
-
-  has_one_attached :photo
-
 
   # Needed to get Rails Admin to set the slug
   def slug=(value)
