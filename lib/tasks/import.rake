@@ -90,7 +90,7 @@ namespace :import do
         end
 
         # Get the image(s)
-        unless if b.css('image').empty?
+        unless b.css('image').empty?
           filename = b.css('image filename').text.to_s
           building.remote_photo_url = image_base + filename
         end
@@ -138,6 +138,7 @@ namespace :import do
 
         # Attach the photos
         ActiveRecord::Base.record_timestamps = true
+
         b.css('images item').each do |image|
           filename = image.css('filename').text.to_s
           puts "-- image #{filename}"
@@ -148,7 +149,7 @@ namespace :import do
             remote_photo_url: image_base + filename
           )
           photo.save
-          photo.photo.attach(io: image_file, filename: filename)
+          gallery.photos << photo if photo
         end
       end
     end
@@ -178,7 +179,7 @@ namespace :import do
       subject.updated_at = Time.iso8601(b.css('system-date modified').attribute('iso').to_s)
 
       # Get the image(s)
-      unless if b.css('image').empty?
+      unless b.css('image').empty?
         filename = b.css('image filename').text.to_s
         subject.remote_photo_url = image_base + filename
       end
@@ -243,15 +244,13 @@ namespace :import do
         b.css('front').each do |image|
           filename = image.css('filename').text.to_s
           puts "-- image #{filename}"
-          image_file = open(image_base + 'postcards/' + filename)
-          postcard.remote_front_url = image_file
+          postcard.remote_front_url = image_base + 'postcards/' + filename
         end
 
         b.css('back').each do |image|
           filename = image.css('filename').text.to_s
           puts "-- image #{filename}"
-          image_file = open(image_base + 'postcards/' + filename)
-          postcard.remote_back_url = image_file
+          postcard.remote_back_url = image_base + 'postcards/' + filename
         end
 
         postcard.save
