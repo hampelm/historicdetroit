@@ -19,7 +19,6 @@
 
 class Architect < ApplicationRecord # :nodoc:
   mount_uploader :photo, ImageUploader
-  include ImageHelper
 
   extend FriendlyId
   friendly_id :name, use: :slugged

@@ -9,5 +9,5 @@ section.main
           == @architect.description_formatted
 
       aside
-        - if @architect.photo.attached?
-          == image_tag @architect.sidebar_photo
+        - if @architect.photo?
+          == image_tag @architect.photo.sidebar.url

@@ -13,7 +13,7 @@ section.content
       tr
         td.photo
           - if architect.photo?
-            = image_tag architect.thumbnail,  height: 50, width: 50
+            = image_tag architect.photo.thumbnail.url,  height: 50, width: 50
         td =link_to(architect.title, architect)
         td =architect.birth
         td =architect.death
