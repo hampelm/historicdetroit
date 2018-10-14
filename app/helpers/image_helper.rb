@@ -11,15 +11,15 @@ module ImageHelper
   end
 
   def polaroid
-    photo.andand.variant(combine_options: {thumbnail: '218x200^', gravity: 'center', extent: '218x200'}) if photo.attachment
+    img # photo.andand.variant(combine_options: {thumbnail: '218x200^', gravity: 'center', extent: '218x200'}) if photo.attachment
   end
 
   def full(img = photo)
-    img.andand.variant(combine_options: {gravity: 'center', size: '1200x>'}) if img.attachment
+    img # img.andand.variant(combine_options: {gravity: 'center', size: '1200x>'}) if img
   end
 
   def mobile(img = photo)
-    img.andand.variant(combine_options: {gravity: 'center', size: '600x>'}) if img.attachment
+    img.andand.variant(combine_options: {gravity: 'center', size: '600x>'}) if img
   end
 
   def sidebar_photo

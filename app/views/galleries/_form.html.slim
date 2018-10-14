@@ -1,0 +1,42 @@
+= form_for @gallery do |f|
+
+  = f.label :title
+  = f.text_field :title
+
+  = f.label :building_id
+  = f.collection_select(:building_id, @buildings, :id, :name, prompt: true)
+
+  h3 Photos
+  .photos.sortable
+    = f.fields_for :photos do |photo|
+      = render 'photo_fields', f: photo
+    .links
+      = link_to_add_association 'add photo', f, :photos
+
+  = f.submit
+
+
+javascript:
+
+
+  $(document).ready(function() {
+
+    function reorder() {
+      $('.photo-fields').each(function(idx) {
+        console.log("xxx", idx)
+        var $elt = $(this)
+        $('.position-input', $elt).val(idx)
+      })
+    }
+
+    $(".sortable").sortable({
+      stop: function(event, ui) {
+        reorder();
+      }
+    });
+
+    $('.photos')
+      .on('cocoon:after-insert', function() {
+        reorder();
+      })
+  });

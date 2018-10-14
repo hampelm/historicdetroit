@@ -14,6 +14,7 @@
 #  updated_at            :datetime         not null
 #  slug                  :string
 #  description_formatted :text
+#  photo                 :string
 #
 
 class Architect < ApplicationRecord # :nodoc:

@@ -21,6 +21,7 @@ require 'redcarpet' # Markdown
 #  slug                  :string
 #  lat                   :decimal(, )
 #  lng                   :decimal(, )
+#  photo                 :string
 #
 
 class Building < ApplicationRecord

@@ -1,0 +1,16 @@
+.nested-fields.photo-fields
+  = f.label :title
+  = f.text_field :title
+
+  = f.label :caption
+  = f.text_area :caption
+
+  = f.label :byline
+  = f.text_field :byline
+
+  = f.label :position
+  = f.text_field :position, class: 'position-input'
+
+  = f.label :photo
+  = f.file_field :photo
+  = link_to_remove_association 'remove photo', f

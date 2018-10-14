@@ -2,14 +2,21 @@ section.main
   section.content
     h1 =@gallery.title
 
+    h2 =link_to(@gallery.building.name, @gallery.building)
+
     .page
       .photos
         - for photo in @gallery.photos
           .photo
             picture
-              source srcset=url_for(photo.full) media="(min-width: 501px)"
-              source srcset=url_for(photo.mobile) media="(max-width: 501px)"
-              img data-src=url_for(photo.full) class='lazy'
+              source srcset=photo.photo.url media="(min-width: 501px)"
+              source srcset=photo.photo.url media="(max-width: 501px)"
+              img data-src=photo.photo.url class='lazy'
 
             p.caption =photo.caption
             p.byline =photo.byline
+
+javascript:
+  var myLazyLoad = new LazyLoad({
+    elements_selector: ".lazy"
+  });

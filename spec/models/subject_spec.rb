@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: subjects
+#
+#  id          :integer          not null, primary key
+#  title       :string
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  slug        :string
+#  photo       :string
+#
+
 require 'rails_helper'
 
 RSpec.describe Subject, type: :model do

@@ -20,6 +20,7 @@
 #  slug                  :string
 #  lat                   :decimal(, )
 #  lng                   :decimal(, )
+#  photo                 :string
 #
 
 FactoryBot.define do

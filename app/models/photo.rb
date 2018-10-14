@@ -9,7 +9,10 @@
 #  gallery_id :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  position   :integer
+#  photo      :string
 #
+
 class Photo < ApplicationRecord
   mount_uploader :photo, ImageUploader
   include ImageHelper

@@ -11,6 +11,8 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  slug        :string
+#  front       :string
+#  back        :string
 #
 
 class Postcard < ApplicationRecord
