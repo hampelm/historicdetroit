@@ -7,7 +7,7 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'andand'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'cocoon', '~> 1.2.11'
-gem "fog-google", '1.7.1'
+gem "fog-google", '~> 1.8'
 gem 'carrierwave'
 gem 'devise'
 gem 'factory_bot_rails'
