@@ -23,8 +23,12 @@ class Gallery < ApplicationRecord
 
   belongs_to :building, optional: true
 
-  def polaroid
-    self.photos.first.andand.polaroid
+  def photo?
+    self.photos.first.andand.photo?
+  end
+
+  def photo
+    self.photos.first.andand.photo
   end
 
   # Needed to get Rails Admin to set the slug
