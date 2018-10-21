@@ -34,7 +34,7 @@ class Building < ApplicationRecord
 
   has_and_belongs_to_many :architects, join_table: :architects_buildings
   has_and_belongs_to_many :posts, join_table: :building_posts
-  has_and_belongs_to_many :subjects, join_table: :building_subjects
+  has_and_belongs_to_many :subjects, join_table: :buildings_subjects
   has_and_belongs_to_many :postcards, join_table: :buildings_postcards
   has_many :galleries
   before_save :format
