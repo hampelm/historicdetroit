@@ -7,9 +7,28 @@ section.main
         - for post in @posts
           article
             h2 =post.title
-            p.date =post.created_at
+            p.date =post.date_formatted
+
+            == image_tag post.photo.url,style: 'width:100%;'
 
             == post.body_formatted
 
       aside
-        p Sidebar here
+        .sidebarbox
+          = link_to('/shop')
+            = image_tag "postcards-book.jpg"
+            h2 The Historic Detroit Shop
+            p Preorder Greetings from Detroit: Historic Postcards of the Motor City today!
+
+        .sidebarbox.postcards
+          = link_to('/postcards')
+            = image_tag "greetings.jpg"
+            p View our archive of
+            h2 Vintage Detroit postcards
+
+        .sidebarbox
+          h2 You can help tell Detroit's history
+          p
+            | We'd love to share your photos and memories.
+            | <a href='/about/how-to-contribute'>Click here for more info.</a>
+

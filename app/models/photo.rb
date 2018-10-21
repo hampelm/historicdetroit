@@ -15,7 +15,6 @@
 
 class Photo < ApplicationRecord
   mount_uploader :photo, ImageUploader
-  include ImageHelper
 
   belongs_to :gallery, optional: true
   acts_as_list scope: :gallery

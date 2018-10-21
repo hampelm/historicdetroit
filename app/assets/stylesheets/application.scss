@@ -132,7 +132,9 @@ article {
 
 aside {
   flex: 2;
-  padding: 30px;
+  padding: 20px 0 0 25px;
+  width: 324px;
+  text-align: center;
 
   h3 {
     font-size: 16px;
@@ -142,6 +144,36 @@ aside {
 
   ul li {
     list-style: none;
+  }
+
+  .sidebarbox {
+    color: $gray-blend;
+    border: 1px solid $difference;
+    box-shadow: inset 0 0 15px $difference;
+    margin-bottom: 1em;
+    padding: 20px;
+    background: #fff;
+    font-size: 0.9em;
+    line-height: 1.3em;
+
+    img {
+      width: 100%;
+    }
+
+    h2 {
+      margin: 0.5em 0 0.5em 0;
+      font-size: 1.5em;
+      color: $gray-blend;
+    }
+
+    &.postcards {
+      text-align: center;
+
+      h2 {
+        text-transform: uppercase;
+        font-size: 1.2em;
+      }
+    }
   }
 }
 
