@@ -134,7 +134,10 @@ aside {
   flex: 2;
   padding: 20px 0 0 25px;
   width: 324px;
-  text-align: center;
+
+  &.home {
+    text-align: center;
+  }
 
   h3 {
     font-size: 16px;
@@ -199,6 +202,7 @@ aside {
   padding: 5px;
   font-family: $sans;
   margin: 10px;
+  min-height: 100px; // TODO--tweak?
   position: relative;
   h2 {
     color: $link;

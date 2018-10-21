@@ -9,9 +9,8 @@ section.main
           == @building.description_formatted
 
       aside
-        - if @building.photo.attached?
-
-          == image_tag @building.sidebar_photo
+        - if @building.photo?
+          == image_tag @building.photo.sidebar.url
 
         - if @building.address?
           =@building.address
