@@ -9,6 +9,7 @@
 #  updated_at  :datetime         not null
 #  slug        :string
 #  building_id :integer
+#  published   :boolean
 #
 
 class Gallery < ApplicationRecord
