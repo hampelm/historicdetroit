@@ -23,6 +23,14 @@ test:
   pool: 5
   username: historic
 
+staging:
+  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  database: historicdetroit
+  pool: 5
+  username: historic
+
 production:
   <<: *default
   adapter: postgresql
