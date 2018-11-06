@@ -85,6 +85,7 @@ namespace :import do
 
         b.css('architect item').each do |architect|
           architect_slug = architect.attribute('handle').to_s
+          architect_slug.sub! '-amp', ''
           arch = Architect.friendly.find(architect_slug)
           building.architects << arch if arch
         end
