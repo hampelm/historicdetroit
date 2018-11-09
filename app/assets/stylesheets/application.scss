@@ -8,6 +8,9 @@ $gray: #999;
 $gray-blend: #797664;
 $ltgray: #ddd;
 
+$header: rgb(37, 35, 28);
+$header2: rgb(74, 71, 62);
+
 $shadow: 0 0 15px $difference;
 $border: 1px solid $difference;
 $border-gray: 1px solid $ltgray;
@@ -60,7 +63,7 @@ main {
 }
 
 .content {
-  width: 960px;
+  max-width: 960px;
   margin: 0px auto;
   padding: 20px 0;
 
@@ -180,46 +183,6 @@ aside {
   }
 }
 
-// Polaroid styles
-
-.polaroids {
-  .polaroid:nth-child(1n + 0) {
-    margin-left: 0;
-    width: calc(25% - 10px);
-  }
-  .polaroid:nth-child(4n + 0) {
-    margin-right: 0;
-    width: calc(25% - 10px);
-  }
-}
-
-.polaroid {
-  display: inline-block;
-  width: calc(25% - 20px);
-  background: #fff;
-  border: #eee;
-  border-radius: 4px;
-  padding: 5px;
-  font-family: $sans;
-  margin: 10px;
-  min-height: 100px; // TODO--tweak?
-  position: relative;
-  h2 {
-    color: $link;
-    font-size: 1em;
-    position: absolute;
-    bottom: 8px;
-    padding: 2px;
-    background: #fff;
-    width: calc(100% - 10px);
-
-    a {
-      color: $link;
-      border-bottom: 1px dotted $link;
-    }
-  }
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -239,6 +202,16 @@ table {
   }
 }
 
+.screenreader-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+@import "polaroids";
 @import "architects";
 @import "buildings";
 @import "galleries";

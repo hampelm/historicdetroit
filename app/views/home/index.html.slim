@@ -1,15 +1,16 @@
 section.main
   section.content
-    h1 Welcome to Historic Detroit
-
     .page
       .articles
+        h1 Welcome to Historic Detroit
+
         - for post in @posts
           article
             h2 =post.title
             p.date =post.date_formatted
 
-            == image_tag post.photo.url,style: 'width:100%;'
+            - if post.photo.url
+              == image_tag post.photo.url, style: 'width:100%;'
 
             == post.body_formatted
 
@@ -29,6 +30,5 @@ section.main
         .sidebarbox
           h2 You can help tell Detroit's history
           p
-            | We'd love to share your photos and memories.
-            | <a href='/about/how-to-contribute'>Click here for more info.</a>
+            | We'd love to share your photos and memories. <a href='/about/how-to-contribute'>Click here for more info.</a>
 

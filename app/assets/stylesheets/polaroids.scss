@@ -1,0 +1,69 @@
+// Polaroid styles
+
+.polaroids {
+  img {
+    height: 200px;
+    width: 218px;
+  }
+  .polaroid:nth-child(1n + 0) {
+    margin-left: 0;
+    width: calc(25% - 10px);
+  }
+  .polaroid:nth-child(4n + 0) {
+    margin-right: 0;
+    width: calc(25% - 10px);
+  }
+}
+
+@media only screen and (max-width:700px) {
+  .polaroids {
+    img {
+      height: auto;
+      width: auto;
+    }
+    .polaroid,
+    .polaroid:nth-child(1n + 0),
+    .polaroid:nth-child(4n + 0) {
+      overflow: hidden;
+      width: 50%;
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 0px;
+      margin-top: 0;
+    }
+    .polaroid-details {
+      overflow: hidden;
+    }
+  }
+
+}
+
+
+.polaroid {
+  display: inline-block;
+  width: calc(25% - 20px);
+  background: #fff;
+  border: #eee;
+  border-radius: 4px;
+  padding: 5px;
+  font-family: $sans;
+  margin: 10px;
+  min-height: 100px; // TODO--tweak?
+  position: relative;
+  h2 {
+    color: $link;
+    font-size: 0.9em;
+    font-weight: 700;
+    line-height: 1.5;
+    position: absolute;
+    bottom: 6px;
+    padding: 6px 2px 2px 2px;
+    background: #fff;
+    width: calc(100% - 10px);
+
+    a {
+      color: $link;
+      border-bottom: 1px dotted $link;
+    }
+  }
+}

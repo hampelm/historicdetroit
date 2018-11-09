@@ -53,3 +53,9 @@ rails g migration CreateJoinTable table1 table2
 ### Admin
 
 `/admin` for Rails Admin
+
+### Regenerate thumbnails
+
+```
+Photo.all.each { |i| i.image.recreate_versions! }
+```

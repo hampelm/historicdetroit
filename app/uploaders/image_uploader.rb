@@ -30,7 +30,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :sidebar do
-    resize_to_fill(100, 100, combine_options: {thumbnail: 'x300^', gravity: 'center', extent: '300'})
+    resize_to_fill(300, 300, combine_options: {thumbnail: 'x300^', gravity: 'center', extent: '300'})
   end
 
 
