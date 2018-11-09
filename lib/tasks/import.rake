@@ -50,7 +50,9 @@ namespace :import do
 
     # Then loop over all of them
     (1..total_pages).each do |page_num|
-      doc = Nokogiri::XML(open(base_path + page_num.to_s))
+      url = base_path + page_num.to_s
+      puts url
+      doc = Nokogiri::XML(open(url))
       doc.css('data buildings-export entry').each do |b|
         slug = b.css('building-name').attribute('handle').to_s
         exists = Building.exists?(slug: slug)
@@ -83,9 +85,20 @@ namespace :import do
           building.lng = b.css('location').attribute('longitude')
         end
 
+        architect_fixes = {
+          'h-h-richardson' => 'hh-richardson',
+          'v-j-waier' => 'vj-waier',
+          'l-p-rowe' => 'lp-rowe',
+          'cyrus-l-w-eidlitz' => 'cyrus-lw-eidlitz',
+          'a-h-gould-and-amp-son' => 'ah-gould-and-son',
+          'a-h-gould-and-son' => 'ah-gould-and-son',
+          'william-e-n-hunter' => 'william-en-hunter'
+        }
         b.css('architect item').each do |architect|
           architect_slug = architect.attribute('handle').to_s
           architect_slug.sub! '-amp', ''
+          architect_slug = architect_fixes[architect_slug] || architect_slug
+          puts "Trying #{architect_slug}"
           arch = Architect.friendly.find(architect_slug)
           building.architects << arch if arch
         end
