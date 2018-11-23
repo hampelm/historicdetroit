@@ -2,7 +2,8 @@ section.main
   section.content
     h1 =@gallery.title
 
-    h2 =link_to(@gallery.building.name, @gallery.building)
+    - unless @gallery.building.nil?
+      h2 =link_to(@gallery.building.name, @gallery.building)
 
     .page
       .photos

@@ -15,7 +15,6 @@
 class Gallery < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
-
   acts_as_taggable
   attr_accessor :tag_list
 
@@ -23,6 +22,8 @@ class Gallery < ApplicationRecord
   accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
 
   belongs_to :building, optional: true
+
+  validates :title, presence: true
 
   def photo?
     self.photos.first.andand.photo?

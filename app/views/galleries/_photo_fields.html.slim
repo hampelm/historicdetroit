@@ -1,16 +1,25 @@
 .nested-fields.photo-fields
-  = f.label :title
-  = f.text_field :title
+  div.meta
+    div
+      = f.label :title
+      = f.text_field :title
+    div
+      = f.label :byline
+      = f.text_field :byline
 
-  = f.label :caption
-  = f.text_area :caption
+  .meta
+    div
+      = f.label :photo
+      = f.file_field :photo
 
-  = f.label :byline
-  = f.text_field :byline
+    div
+      = f.label :position
+      = f.text_field :position, class: 'position-input'
 
-  = f.label :position
-  = f.text_field :position, class: 'position-input'
+  div
+    = f.label :caption
+    = f.text_area :caption, row: 5
 
-  = f.label :photo
-  = f.file_field :photo
-  = link_to_remove_association 'remove photo', f
+    = link_to_remove_association 'remove photo', f
+
+

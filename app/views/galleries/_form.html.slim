@@ -1,19 +1,25 @@
 = form_for @gallery do |f|
+  div.gallery-form
 
-  = f.label :title
-  = f.text_field :title
+    div
+      = f.label :title, "Title (#{@gallery.errors[:title][0]})"
 
-  = f.label :building_id
-  = f.collection_select(:building_id, @buildings, :id, :name, prompt: true)
+    div
+      = f.text_field :title
 
-  h3 Photos
-  .photos.sortable
-    = f.fields_for :photos do |photo|
-      = render 'photo_fields', f: photo
-    .links
-      = link_to_add_association 'add photo', f, :photos
+    div
+      = f.label :building_id
+    div
+      = f.collection_select(:building_id, @buildings, :id, :name, prompt: true)
 
-  = f.submit
+    h3 Photos
+    .photos.sortable
+      = f.fields_for :photos do |photo|
+        = render 'photo_fields', f: photo
+      .links
+        = link_to_add_association 'add photo', f, :photos
+
+    = f.submit
 
 
 javascript:

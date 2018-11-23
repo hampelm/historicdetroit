@@ -24,8 +24,21 @@ class GalleriesController < ApplicationController
 
   end
 
+  def edit
+    @gallery = Gallery.friendly.find(params[:id])
+    @buildings = Building.select(:id, :name).all
+  end
+
   def update
     @gallery = Gallery.friendly.find(params[:id])
+    @buildings = Building.select(:id, :name).all
+
+    @gallery.update_attributes(gallery_params)
+    if @gallery.save
+      redirect_to @gallery
+    else
+      render 'edit'
+    end
   end
 
   private

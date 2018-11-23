@@ -35,3 +35,53 @@
     }
   }
 }
+
+.gallery-form {
+  h3 {
+    margin-top: 1em;
+  }
+
+  label {
+    display: block;
+  }
+
+  input,
+  texarea {
+    font-size: $reg;
+    display: block;
+    margin-bottom: 1em;
+    width: 90%;
+  }
+
+  .photos.sortable {
+    border: 1px solid $difference;
+    padding: 5px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  .photo-fields {
+    cursor: grab;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid $difference;
+
+    &.ui-sortable-helper {
+      cursor: grabbing;
+    }
+
+    .meta {
+      display: flex;
+      div {
+        flex: 1
+      }
+    }
+
+    textarea {
+      width: 100%;
+    }
+
+
+  }
+
+}
