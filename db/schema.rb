@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_21_143511) do
+ActiveRecord::Schema.define(version: 2018_12_15_155935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2018_10_21_143511) do
     t.decimal "lat"
     t.decimal "lng"
     t.string "photo"
+    t.string "year_built"
   end
 
   create_table "buildings_galleries", id: false, force: :cascade do |t|

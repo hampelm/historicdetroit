@@ -2,6 +2,19 @@ require 'open-uri'
 
 image_base = 'http://www.historicdetroit.org/workspace/images/'
 
+architect_fixes = {
+  'e-r-dunlap' => 'er-dunlap',
+  'h-h-richardson' => 'hh-richardson',
+  'h-j-maxwell-grylls' => 'hj-maxwell-grylls',
+  'j-h-gustav-steffens' => 'jh-gustav-steffens',
+  'v-j-waier' => 'vj-waier',
+  'l-p-rowe' => 'lp-rowe',
+  'cyrus-l-w-eidlitz' => 'cyrus-lw-eidlitz',
+  'a-h-gould-and-amp-son' => 'ah-gould-and-son',
+  'a-h-gould-and-son' => 'ah-gould-and-son',
+  'william-e-n-hunter' => 'william-en-hunter'
+}
+
 namespace :import do
   desc 'Import archtects (run first)'
   task :architects, [:base_path] => :environment do |_, args|
@@ -85,20 +98,11 @@ namespace :import do
           building.lng = b.css('location').attribute('longitude')
         end
 
-        architect_fixes = {
-          'h-h-richardson' => 'hh-richardson',
-          'v-j-waier' => 'vj-waier',
-          'l-p-rowe' => 'lp-rowe',
-          'cyrus-l-w-eidlitz' => 'cyrus-lw-eidlitz',
-          'a-h-gould-and-amp-son' => 'ah-gould-and-son',
-          'a-h-gould-and-son' => 'ah-gould-and-son',
-          'william-e-n-hunter' => 'william-en-hunter'
-        }
         b.css('architect item').each do |architect|
           architect_slug = architect.attribute('handle').to_s
           architect_slug.sub! '-amp', ''
           architect_slug = architect_fixes[architect_slug] || architect_slug
-          puts "Trying #{architect_slug}"
+          puts "Trying architect #{architect_slug}"
           arch = Architect.friendly.find(architect_slug)
           building.architects << arch if arch
         end
@@ -109,7 +113,80 @@ namespace :import do
           building.remote_photo_url = image_base + filename
         end
 
-        building.save
+        saved = building.save
+        puts building.errors.full_messages unless saved
+        exit(1) unless saved
+      end
+    end
+  end
+
+  desc 'Import homes (run third)'
+  task :homes, [:base_path] => :environment do |task, args|
+    base_path = args[:base_path]
+
+    # Manually add a Homes subject
+    subject = Subject.find_or_create_by(
+      title: 'Homes',
+      slug: 'homes'
+    )
+
+    # First, figure out how many pages we have.
+    doc = Nokogiri::XML(open(base_path + '1'))
+    total_pages = doc.css('pagination').attribute('total-pages').to_s.to_i
+
+    # Then loop over all of them
+    (1..total_pages).each do |page_num|
+      url = base_path + page_num.to_s
+      puts url
+      doc = Nokogiri::XML(open(url))
+      doc.css('data homes-export entry').each do |b|
+        slug = b.css('name').attribute('handle').to_s
+        exists = Building.exists?(slug: slug)
+        puts "Skipping #{slug}" if exists
+        next if exists
+        puts "Importing #{slug}"
+
+        description = b.xpath("description[@mode='unformatted']").first.andand.text || ''
+
+        # Ensure markdown headers have spacing.
+        # Eg ###Foo becomes ### Foo
+        description.gsub!(/^(#*)(\w)/, '\1 \2')
+
+        building = Building.new(
+          name: b.css('name').text,
+          slug: slug,
+          byline: b.css('byline').text,
+          description: description,
+          address: b.css('address').text,
+          status: b.css('status item').text,
+          year_built: b.css('year-built').text,
+          year_demolished: b.css('year-demolished').text
+        )
+
+        unless b.css('location').empty?
+          building.lat = b.css('location').attribute('latitude')
+          building.lng = b.css('location').attribute('longitude')
+        end
+
+        b.css('architect item').each do |architect|
+          architect_slug = architect.attribute('handle').to_s
+          architect_slug.sub! '-amp', ''
+          architect_slug = architect_fixes[architect_slug] || architect_slug
+          puts "Trying architect #{architect_slug}"
+          arch = Architect.friendly.find(architect_slug)
+          building.architects << arch if arch
+        end
+
+        # Get the image(s)
+        unless b.css('image').empty?
+          filename = b.css('image filename').text.to_s
+          building.remote_photo_url = image_base + 'homes/' + filename
+        end
+
+        building.subjects = [subject] # Mark this as a home
+        saved = building.save
+        puts building.errors.full_messages unless saved
+        exit(1) unless saved
       end
     end
   end
