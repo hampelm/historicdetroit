@@ -13,7 +13,6 @@
 
 class Subject < ApplicationRecord
   mount_uploader :photo, ImageUploader
-  include ImageHelper
 
   extend FriendlyId
   friendly_id :title, use: :slugged

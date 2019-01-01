@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :architects
+  resources :homes
   get '/architect/:slug', to: redirect('/architects/%{slug}')
   resources :buildings
   get '/building/:slug', to: redirect('/buildings/%{slug}')

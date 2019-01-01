@@ -141,9 +141,9 @@ namespace :import do
       doc = Nokogiri::XML(open(url))
       doc.css('data homes-export entry').each do |b|
         slug = b.css('name').attribute('handle').to_s
-        exists = Building.exists?(slug: slug)
-        puts "Skipping #{slug}" if exists
-        next if exists
+        building = Building.find_by(slug: slug) || Building.new
+        # puts "Skipping #{slug}" if exists
+        # next if exists
         puts "Importing #{slug}"
 
         description = b.xpath("description[@mode='unformatted']").first.andand.text || ''
@@ -152,7 +152,7 @@ namespace :import do
         # Eg ###Foo becomes ### Foo
         description.gsub!(/^(#*)(\w)/, '\1 \2')
 
-        building = Building.new(
+        building.assign_attributes({
           name: b.css('name').text,
           slug: slug,
           byline: b.css('byline').text,
@@ -161,7 +161,7 @@ namespace :import do
           status: b.css('status item').text,
           year_built: b.css('year-built').text,
           year_demolished: b.css('year-demolished').text
-        )
+        })
 
         unless b.css('location').empty?
           building.lat = b.css('location').attribute('latitude')
@@ -183,7 +183,15 @@ namespace :import do
           building.remote_photo_url = image_base + 'homes/' + filename
         end
 
-        building.subjects = [subject] # Mark this as a home
+        # Set the subjects
+        building.subjects << subject # Mark this as a home
+        subjects = b.css('subjects item')
+        subjects.each do |subject|
+          subject_slug = subject.attribute('handle').to_s
+          puts "-- finding subject #{subject_slug}"
+          building.subjects << Subject.friendly.find(subject_slug)
+        end
+
         saved = building.save
         puts building.errors.full_messages unless saved
         exit(1) unless saved
@@ -254,15 +262,13 @@ namespace :import do
     doc = Nokogiri::XML(open(base_path))
     doc.css('data subjects-export entry').each do |b|
       slug = b.css('subject').attribute('handle').to_s
-      exists = Subject.exists?(slug: slug)
-      puts "Skipping #{slug}" if exists
-      next if exists
       puts "Importing #{slug}"
+      subject = Subject.find_by(slug: slug) || Subject.new
 
-      subject = Subject.new(
+      subject.assign_attributes({
         title: b.css('subject').text,
         slug: slug
-      )
+      })
 
       # Set the timestamps
       ActiveRecord::Base.record_timestamps = false
@@ -272,7 +278,7 @@ namespace :import do
       # Get the image(s)
       unless b.css('image').empty?
         filename = b.css('image filename').text.to_s
-        subject.remote_photo_url = image_base + filename
+        subject.remote_photo_url = image_base + 'subjects/' + filename
       end
 
       subject.save
