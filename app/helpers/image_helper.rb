@@ -10,7 +10,7 @@ module ImageHelper
     photo.andand.variant(combine_options: {thumbnail: '100x100^', gravity: 'center', extent: '100x100', quality: 60 })
   end
 
-  def polaroid
+  def polaroid(img = photo)
     img # photo.andand.variant(combine_options: {thumbnail: '218x200^', gravity: 'center', extent: '218x200'}) if photo.attachment
   end
 
