@@ -11,3 +11,11 @@ section.main
       aside
         - if @architect.photo?
           == image_tag @architect.photo.sidebar.url
+
+        - unless @buildings.empty?
+
+          h4 Buildings
+          ul
+          - for building in @buildings
+            li
+              = link_to(building.title, building)
