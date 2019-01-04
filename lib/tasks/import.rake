@@ -106,6 +106,7 @@ namespace :import do
           arch = Architect.friendly.find(architect_slug)
           building.architects << arch if arch
         end
+        building.architects = building.architects.distinct
 
         # Get the image(s)
         unless b.css('image').empty?
@@ -176,6 +177,7 @@ namespace :import do
           arch = Architect.friendly.find(architect_slug)
           building.architects << arch if arch
         end
+        building.architects = building.architects.distinct
 
         # Get the image(s)
         unless b.css('image').empty?
@@ -191,6 +193,7 @@ namespace :import do
           puts "-- finding subject #{subject_slug}"
           building.subjects << Subject.friendly.find(subject_slug)
         end
+        building.subjects = building.subjects.distinct
 
         saved = building.save
         puts building.errors.full_messages unless saved
