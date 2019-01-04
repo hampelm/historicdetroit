@@ -1,4 +1,7 @@
+require 'open-uri'
 require 'redcarpet' # Markdown
+require 'uri'
+
 # == Schema Information
 #
 # Table name: buildings
@@ -32,9 +35,9 @@ class Building < ApplicationRecord
 
   default_scope { order(name: :asc) }
 
-  has_and_belongs_to_many :architects, join_table: :architects_buildings
+  has_and_belongs_to_many :architects, join_table: :architects_buildings, uniq: true
   has_and_belongs_to_many :posts, join_table: :building_posts
-  has_and_belongs_to_many :subjects, join_table: :buildings_subjects
+  has_and_belongs_to_many :subjects, join_table: :buildings_subjects, uniq: true
   has_and_belongs_to_many :postcards, join_table: :buildings_postcards
   has_many :galleries
   before_save :format
@@ -42,6 +45,21 @@ class Building < ApplicationRecord
 
   def title
     name
+  end
+
+  def location?
+    !(lat.zero? && lng.zero?)
+  end
+
+  def geocode
+    mapbox = Rails.configuration.general['mapbox']
+    path = "https://api.mapbox.com/geocoding/v5/mapbox.places/#{URI.encode(address)}.json?limit=2&access_token=#{mapbox}"
+    results = JSON.load(open(path))
+  end
+
+  def latlng
+    geocode unless location?
+    "#{lat},#{lng}"
   end
 
   # Needed to get Rails Admin to set the slug

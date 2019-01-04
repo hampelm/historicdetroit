@@ -1,0 +1,11 @@
+default: &default
+  mapbox: pk.eyJ1IjoibWF0dGgiLCJhIjoiY2pxaWI0azRmMHVsdDN5bDJrYnpjdGo2dSJ9.FDKb_aKILLXV4uJCi6Zyug
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
