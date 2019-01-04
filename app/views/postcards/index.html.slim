@@ -6,7 +6,10 @@ section.content
       - if model.postcards.exists?
         .polaroid
           .polaroid-details
-            - if model.polaroid
+            - if model.photo.file
               =link_to "/postcards/#{model.slug}" do
-                img data-src=url_for(model.polaroid) height=200 width=218 class='lazy'
+                img data-src=url_for(model.photo.polaroid.url) height=200 width=218 class='lazy'
             h2 #{link_to(model.title, "/postcards/#{model.slug}")}
+
+
+
