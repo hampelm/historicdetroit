@@ -1,0 +1,12 @@
+section.content
+  h1 #{@subject.title}
+  p =link_to('All homes', '/homes')
+
+  section.main.polaroids
+    - for home in @homes
+      =render 'shared/polaroid', :model => home
+
+javascript:
+  var myLazyLoad = new LazyLoad({
+    elements_selector: ".lazy"
+  });

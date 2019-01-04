@@ -1,4 +1,6 @@
-section.main.polaroids
+section.main.content.polaroids
+  h1 Historic Detroit Homes
+
   - for subject in @subjects
     .polaroid
       .polaroid-details
@@ -7,38 +9,3 @@ section.main.polaroids
             img data-src=subject.photo.polaroid.url class='lazy'
         h2 #{link_to(subject.title, "/homes/#{subject.slug}")}
 
-
-
-section.content
-  h1 Homes
-
-  section.main.search
-    input type="text" value="" id="building-search" placeholder="Find a place"
-
-  section.main.polaroids
-    - for building in @buildings
-      =render 'shared/polaroid', :model => building
-
-javascript:
-  document.addEventListener('DOMContentLoaded',function(){
-    var container = document.querySelector("section.polaroids");
-    function search(event) {
-      results = container.querySelectorAll(".polaroid");
-      results.forEach(function(elt) {
-        if (elt.textContent.toLowerCase().indexOf(event.target.value) > -1) {
-          elt.classList.add('fadeIn');
-          elt.classList.remove('fadeOut');
-        } else {
-          elt.classList.add('fadeOut');
-          elt.classList.remove('fadeIn');
-        }
-      })
-    }
-
-    var searchBar = document.querySelector('#building-search').oninput = search
-  });
-
-javascript:
-  var myLazyLoad = new LazyLoad({
-    elements_selector: ".lazy"
-  });

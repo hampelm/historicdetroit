@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :architects
-  resources :homes
   get '/architect/:slug', to: redirect('/architects/%{slug}')
   resources :buildings
   get '/building/:slug', to: redirect('/buildings/%{slug}')
@@ -16,7 +15,13 @@ Rails.application.routes.draw do
   resources :pages, path: '/about'
   resources :posts
 
+  # Postcards are nested by subject
   get '/postcards', action: :index, controller: 'postcards'
   get '/postcards/:subject', action: :subject, controller: 'postcards'
   get '/postcards/:subject/:id/', action: :show, controller: 'postcards', as: 'postcard_path'
+
+  # We have some legacy paths for homes
+  get '/homes', action: :index, controller: 'homes'
+  get '/homes/:subject', action: :subject, controller: 'homes'
+  get '/home/:id', to: redirect('/buildings/%{id}', status: 302)
 end
