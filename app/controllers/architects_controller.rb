@@ -5,6 +5,6 @@ class ArchitectsController < ApplicationController
 
   def show
     @architect = Architect.friendly.find(params[:id])
-    @buildings = @architect.buildings
+    @buildings = @architect.buildings.distinct
   end
 end
