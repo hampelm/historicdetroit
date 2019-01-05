@@ -11,7 +11,7 @@ class HomesController < ApplicationController
     # Get only homes that match this subject
     @subject = Subject.friendly.find(params[:subject])
     @homes_subject = Subject.friendly.find('homes')
-    @homes = @subject.buildings #.where(subjects: [@homes_subject])
+    @homes = @subject.buildings.distinct #.where(subjects: [@homes_subject])
   end
 
   # `show` is handled by the BuildingsController
