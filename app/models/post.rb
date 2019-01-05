@@ -20,6 +20,8 @@ class Post < ApplicationRecord
   before_save :format
   mount_uploader :photo, ImageUploader
 
+  has_and_belongs_to_many :buildings, join_table: :buildings_posts
+
   default_scope {
     where('date <= ?', Time.now).order(date: :desc)
   }

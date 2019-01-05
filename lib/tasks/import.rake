@@ -357,4 +357,45 @@ namespace :import do
       end
     end
   end
+
+  desc 'Import posts'
+  task :posts, [:base_path] => :environment do |task, args|
+    base_path = args[:base_path]
+
+    doc = Nokogiri::XML(open(base_path))
+    doc.css('data post-export entry').each do |b|
+      post = Post.new
+      title = b.css('title').text
+      post.assign_attributes({
+        title: title,
+        body: b.xpath("body[@mode='unformatted']").first.andand.text || ''
+      })
+
+      puts "Adding #{title}"
+
+      # Find associated buildings
+      b.css('buildings item').each do |building|
+        building_slug = building.attribute('handle').to_s
+        building_slug.sub! '-amp', ''
+        puts "-- Trying to find associated building #{building_slug}"
+        bldg = Building.friendly.find(building_slug)
+        post.buildings << bldg if bldg
+      end
+      post.buildings = post.buildings.distinct
+
+      # Set the timestamps
+      ActiveRecord::Base.record_timestamps = false
+      post.date = Time.iso8601(b.css('date-posted').attribute('iso').to_s)
+      post.created_at = Time.iso8601(b.css('system-date created').attribute('iso').to_s)
+      post.updated_at = Time.iso8601(b.css('system-date modified').attribute('iso').to_s)
+
+      # Get the image(s)
+      unless b.css('image').empty?
+        filename = b.css('image filename').text.to_s
+        post.remote_photo_url = image_base + 'posts/' + filename
+      end
+
+      post.save
+    end
+  end
 end

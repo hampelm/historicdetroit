@@ -36,7 +36,7 @@ class Building < ApplicationRecord
   default_scope { order(name: :asc) }
 
   has_and_belongs_to_many :architects, join_table: :architects_buildings, uniq: true
-  has_and_belongs_to_many :posts, join_table: :building_posts
+  has_and_belongs_to_many :posts, join_table: :buildings_posts
   has_and_belongs_to_many :subjects, join_table: :buildings_subjects, uniq: true
   has_and_belongs_to_many :postcards, join_table: :buildings_postcards
   has_many :galleries
