@@ -43,6 +43,46 @@ RailsAdmin.config do |config|
     # history_show
   end
 
+  config.model 'Architect' do
+    list do
+      configure :description_formatted do
+        hide
+      end
+    end
+
+    create do
+      field :name
+      field :last_name_first
+      field :slug
+      field :byline
+      field :firm
+      field :photo
+      field :description, :simple_mde
+      field :birth
+      field :death
+      field :description_formatted
+
+      field :created_at
+      field :updated_at
+    end
+
+    edit do
+      field :name
+      field :last_name_first
+      field :slug
+      field :byline
+      field :firm
+      field :photo
+      field :description, :simple_mde
+      field :birth
+      field :death
+      field :description_formatted
+
+      field :created_at
+      field :updated_at
+    end
+  end
+
   config.model 'Building' do
     list do
       configure :description_formatted do
@@ -90,6 +130,7 @@ RailsAdmin.config do |config|
       field :updated_at
     end
   end
+
 
   config.model Gallery do
     list do
