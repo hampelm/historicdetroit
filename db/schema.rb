@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_15_155935) do
+ActiveRecord::Schema.define(version: 2019_01_12_140620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,13 +146,11 @@ ActiveRecord::Schema.define(version: 2018_12_15_155935) do
     t.text "caption"
     t.string "byline"
     t.string "subject"
-    t.bigint "building_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
     t.string "front"
     t.string "back"
-    t.index ["building_id"], name: "index_postcards_on_building_id"
   end
 
   create_table "postcards_subjects", id: false, force: :cascade do |t|
@@ -224,5 +222,4 @@ ActiveRecord::Schema.define(version: 2018_12_15_155935) do
   end
 
   add_foreign_key "photos", "galleries"
-  add_foreign_key "postcards", "buildings"
 end
