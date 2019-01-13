@@ -2,6 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.dropzone {
+  height: 100px;
+  background: #fff;
+  border: 4px dashed $difference;
+  margin: 1em 0px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  h4 {
+    flex: 1;
+  }
+}
+
+
 .photos {
   width: 100%;
   margin-top: 2em;

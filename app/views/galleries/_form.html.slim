@@ -12,12 +12,17 @@
     div
       = f.collection_select(:building_id, @buildings, :id, :name, prompt: true)
 
+
     h3 Photos
+
+    .dropzone
+      h4 Drop photos here
+
     .photos.sortable
       = f.fields_for :photos do |photo|
         = render 'photo_fields', f: photo
       .links
-        = link_to_add_association 'add photo', f, :photos
+        = link_to_add_association 'add photo', f, :photos, { class: 'btn'}
 
     = f.submit
 

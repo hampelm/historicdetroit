@@ -1,5 +1,6 @@
+$base-hue: 57;
 $background: #f9f8ec;
-$difference: #edebc5;
+$difference: hsla(57, 53%, 85%, 1);
 $light: #fff;
 $link: #647279;
 $text: #222;
@@ -7,6 +8,7 @@ $emphasis: #874a66;
 $gray: #999;
 $gray-blend: #797664;
 $ltgray: #ddd;
+
 
 $header: rgb(37, 35, 28);
 $header2: rgb(74, 71, 62);
@@ -46,6 +48,16 @@ a {
   color: $link;
 }
 
+.btn,
+a.btn {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 5px 16px;
+  background: hsl($base-hue, 40, 30);
+  color: #fff;
+  font-family: $sans;
+}
+
 h1,
 h2,
 h3,
@@ -53,7 +65,7 @@ h4,
 h5,
 h6 {
   color: #222222;
-  font-family: "news-gothic-std", Helvetica, sans-serif;
+  font-family: $sans;
   font-weight: normal;
 }
 
