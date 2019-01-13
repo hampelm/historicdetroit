@@ -22,15 +22,16 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :full do
-    resize_to_fill(100, 100, combine_options: {gravity: 'center', size: '1200x>'})
+    #variant(combine_options: {gravity: 'center', size: '1200x>'})
+    resize_to_fit(1200, 1200)#, combine_options: {gravity: 'center', size: '1200x>'})
   end
 
   version :mobile do
-    resize_to_fill(100, 100, combine_options: {gravity: 'center', size: '600x>'})
+    resize_to_fit(600, 600)#, combine_options: {gravity: 'center', size: '600x>'})
   end
 
   version :sidebar do
-    resize_to_fill(300, 300, combine_options: {thumbnail: 'x300^', gravity: 'center', extent: '300'})
+    resize_to_fit(600, 1200)#, combine_options: {thumbnail: 'x600^', gravity: 'center', extent: '600'})
   end
 
 

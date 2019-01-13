@@ -6,12 +6,12 @@ section.main
     .page
       .photos
         .photo
-          - if @postcard.front.attachment
+          - if @postcard.front?
             picture
               source srcset=url_for(@postcard.front_full) media="(min-width: 501px)"
               source srcset=url_for(@postcard.front_mobile) media="(max-width: 501px)"
               img data-src=url_for(@postcard.front_full) class='lazy' width="100%"
-          - if @postcard.back.attachment
+          - if @postcard.back?
             picture
               source srcset=url_for(@postcard.back_full) media="(min-width: 501px)"
               source srcset=url_for(@postcard.back_mobile) media="(max-width: 501px)"

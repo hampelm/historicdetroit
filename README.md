@@ -57,5 +57,6 @@ rails g migration CreateJoinTable table1 table2
 ### Regenerate thumbnails
 
 ```
-Photo.all.each { |i| i.image.recreate_versions! }
+Photo.all.each { |i|   i.photo.recreate_versions!(:thumb) if i.photo?  }
+Photo.all.each { |i|   i.photo.recreate_versions! if i.phto?  }
 ```

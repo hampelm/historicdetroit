@@ -30,18 +30,18 @@ class Postcard < ApplicationRecord
   end
 
   def front_full
-    full(front)
+    front.full.url
   end
 
   def front_mobile
-    mobile(front)
+    front.mobile.url
   end
 
   def back_full
-    full(back)
+    back.full.url
   end
 
   def back_mobile
-    mobile(front)
+    back.mobile.url
   end
 end
