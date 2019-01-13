@@ -18,6 +18,8 @@ class Gallery < ApplicationRecord
   acts_as_taggable
   attr_accessor :tag_list
 
+  default_scope { order(title: :asc) }
+
   has_many :photos, -> { order(position: :asc) }, inverse_of: :gallery
   accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
 
