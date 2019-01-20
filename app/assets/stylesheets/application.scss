@@ -212,6 +212,35 @@ table {
     padding: 5px 0;
     border-bottom: 1px solid #b5b498;
   }
+
+  tr td:first-child {
+    padding-right: 10px;
+  }
+}
+
+@media only screen and (max-width:700px) {
+  .content {
+    h1 {
+      padding: 10px;
+    }
+  }
+
+  .page {
+    display: flex;
+    flex-direction: column-reverse;
+
+  }
+
+  // Add some padding to tables on mobile so content doesn't run together
+  table {
+    tr th:first-child,
+    tr td:first-child {
+      padding-left: 10px;
+    }
+    tr td:last-child {
+      padding-right: 10px;
+    }
+  }
 }
 
 .screenreader-only {

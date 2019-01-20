@@ -63,3 +63,15 @@ nav {
     }
   }
 }
+
+@media only screen and (max-width:700px) {
+
+  header {
+    a {
+      background-position: center bottom;
+      height: 150px;
+    }
+  }
+
+
+}
