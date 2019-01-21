@@ -1,7 +1,7 @@
 .polaroid
-  .polaroid-details
-    - if model.photo?
-      =link_to polymorphic_path(model) do
-        img data-src=model.photo.polaroid.url class='lazy'
-    h2 #{link_to(model.title, polymorphic_path(model))}
-
+  - if model.photo?
+    a.lazy href=polymorphic_path(model) data-bg="url(#{model.photo.polaroid.url})"
+      h2 #{model.title}
+  -else
+    a href=polymorphic_path(model)
+      h2 #{model.title}

@@ -20,6 +20,10 @@ class Subject < ApplicationRecord
   has_and_belongs_to_many :postcards, join_table: :postcards_subjects
   has_and_belongs_to_many :buildings, join_table: :buildings_subjects
 
+  def photo?
+    photo.file
+  end
+
   # Needed to get Rails Admin to set the slug
   def slug=(value)
     write_attribute(:slug, value) if value.present?

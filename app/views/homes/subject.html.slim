@@ -1,12 +1,9 @@
 section.content
   h1 #{@subject.title}
-  p =link_to('All homes', '/homes')
+  h2 =link_to('Back to all homes', '/homes')
 
   section.main.polaroids
     - for home in @homes
       =render 'shared/polaroid', :model => home
 
-javascript:
-  var myLazyLoad = new LazyLoad({
-    elements_selector: ".lazy"
-  });
+=render 'shared/lazy'

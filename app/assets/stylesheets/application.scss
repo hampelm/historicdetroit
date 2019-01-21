@@ -2,7 +2,7 @@ $base-hue: 57;
 $background: #f9f8ec;
 $difference: hsla(57, 53%, 85%, 1);
 $light: #fff;
-$link: #647279;
+$link: hsla(200,30,43,1); //#647279;
 $text: #222;
 $emphasis: #874a66;
 $gray: #999;
@@ -158,6 +158,9 @@ aside {
     font-size: 16px;
     margin-top: 1em;
     color: $gray-blend;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
   }
 
   ul li {

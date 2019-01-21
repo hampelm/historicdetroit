@@ -1,11 +1,14 @@
-section.main.content.polaroids
+section.main.content
   h1 Historic Detroit Houses
 
-  - for subject in @subjects
-    .polaroid
-      .polaroid-details
-        - if subject.photo.file
-          =link_to "/homes/#{subject.slug}" do
-            img data-src=subject.photo.polaroid.url class='lazy'
-        h2 #{link_to(subject.title, "/homes/#{subject.slug}")}
+  .polaroids
+    - for subject in @subjects
+      .polaroid
+        - if subject.photo?
+          a.lazy href="/homes/#{subject.slug}" data-bg="url(#{subject.photo.polaroid.url})"
+            h2 #{subject.title}
+        -else
+          a href="/homes/#{subject.slug}"
+            h2 #{subject.title}
 
+=render 'shared/lazy'
