@@ -265,6 +265,11 @@ namespace :import do
     doc = Nokogiri::XML(open(base_path))
     doc.css('data subjects-export entry').each do |b|
       slug = b.css('subject').attribute('handle').to_s
+
+      exists = Subject.exists?(slug: slug)
+      puts "Skipping #{slug}" if exists
+      next if exists
+
       puts "Importing #{slug}"
       subject = Subject.find_by(slug: slug) || Subject.new
 
