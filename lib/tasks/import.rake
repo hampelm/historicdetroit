@@ -216,13 +216,14 @@ namespace :import do
       doc.css('data gallery-export entry').each do |b|
         slug = b.css('name').attribute('handle').to_s
 
-        gallery = Gallery.find(slug: slug)
+        gallery = Gallery.where(slug: slug).first
         unless gallery.nil?
           puts "Gallery #{slug} exists, checking count"
           num_photos = b.css('images item').count
           next if num_photos <= gallery.photos.count
           puts "Bad import for #{slug}, deleting and starting again"
-          Gallery.destroy
+          gallery.photos.each { |photo| photo.destroy }
+          gallery.destroy
         end
 
         puts "Importing #{slug}"
