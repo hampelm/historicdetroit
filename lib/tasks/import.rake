@@ -222,7 +222,12 @@ namespace :import do
           num_photos = b.css('images item').count
           next if num_photos <= gallery.photos.count
           puts "Bad import for #{slug}, deleting and starting again"
-          gallery.photos.each { |photo| photo.destroy }
+          gallery.photos.each do |photo|
+            puts "Removing photo... #{photo.id}"
+            photo.destroy
+          end
+
+          puts 'Removing gallery'
           gallery.destroy
         end
 
