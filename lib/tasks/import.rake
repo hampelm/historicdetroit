@@ -215,9 +215,17 @@ namespace :import do
       doc = Nokogiri::XML(open(base_path + page_num.to_s))
       doc.css('data gallery-export entry').each do |b|
         slug = b.css('name').attribute('handle').to_s
-        exists = Gallery.exists?(slug: slug)
-        puts "Skipping #{slug}" if exists
-        next if exists
+
+        gallery = Gallery.friendly.find(slug: slug)
+        unless gallery.nil?
+          puts "Gallery #{slug} exists, checking count"
+          num_photos = b.css('images item').count
+          next if num_photos > gallery.photos.count
+          puts "Bad import for #{slug}, deleting and starting again"
+          Gallery.delete
+        end
+
+
         puts "Importing #{slug}"
 
         gallery = Gallery.new(
