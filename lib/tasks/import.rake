@@ -229,6 +229,7 @@ namespace :import do
 
           puts 'Removing gallery'
           gallery.destroy
+          puts 'Removed gallery'
         end
 
         puts "Importing #{slug}"
