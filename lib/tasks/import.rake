@@ -15,9 +15,14 @@ architect_fixes = {
   'william-e-n-hunter' => 'william-en-hunter'
 }
 
-building_fixes = {
-  'u-s-mortgage-bond-building' => 'us-mortgage-bond-building'
-}
+def fix_building(slug)
+  building_fixes = {
+    'u-s-mortgage-bond-building' => 'us-mortgage-bond-building'
+  }
+
+  slug = building_fixes[slug] || slug
+  slug.gsub('-amp', '')
+end
 
 namespace :import do
   desc 'Import archtects (run first)'
@@ -246,7 +251,7 @@ namespace :import do
         # Attach the building
         unless b.css('building item').empty?
           building_slug = b.css('building item')[0].attribute('handle').to_s
-          building_slug = building_fixes[building_slug] || building_slug
+          building_slug = fix_building(slug)
           building = Building.friendly.find(building_slug)
           gallery.building = building
         end
