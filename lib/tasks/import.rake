@@ -251,7 +251,7 @@ namespace :import do
         # Attach the building
         unless b.css('building item').empty?
           building_slug = b.css('building item')[0].attribute('handle').to_s
-          building_slug = fix_building(slug)
+          building_slug = fix_building(building_slug)
           building = Building.friendly.find(building_slug)
           gallery.building = building
         end
