@@ -60,3 +60,7 @@ rails g migration CreateJoinTable table1 table2
 Photo.all.each { |i|   i.photo.recreate_versions!(:thumb) if i.photo?  }
 Photo.all.each { |i|   i.photo.recreate_versions! if i.phto?  }
 ```
+
+### Maps
+
+https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/geojson(%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B-73.99%2C40.7%5D%7D)/-73.99,40.70,12/500x300?access_token=
