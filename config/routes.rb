@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get '/homes', action: :index, controller: 'homes'
   get '/homes/:subject', action: :subject, controller: 'homes'
   get '/home/:id', to: redirect('/buildings/%{id}', status: 302)
-  get '/houses', action: :index, controller: 'homes'
-  get '/houses/:subject', action: :subject, controller: 'homes'
+  get '/houses', to: redirect('/homes', status: 302)
+  get '/houses/:subject', to: redirect('/homes/%{subject}', status: 302)
   get '/houses/:id', to: redirect('/buildings/%{id}', status: 302)
 end
