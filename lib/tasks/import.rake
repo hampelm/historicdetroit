@@ -151,9 +151,13 @@ namespace :import do
       doc = Nokogiri::XML(open(url))
       doc.css('data homes-export entry').each do |b|
         slug = b.css('name').attribute('handle').to_s
+
+        exists = Building.exists?(slug: slug)
+        puts "Skipping home #{slug}" if exists
+        next if exists
+
+
         building = Building.find_by(slug: slug) || Building.new
-        # puts "Skipping #{slug}" if exists
-        # next if exists
         puts "Importing #{slug}"
 
         description = b.xpath("description[@mode='unformatted']").first.andand.text || ''
