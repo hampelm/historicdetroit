@@ -15,6 +15,11 @@ section.main
         - if @building.address?
           =@building.address
 
+        - if @building.lat?
+          .map.sidebarbox
+            img src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/geojson(%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B#{@building.lat}%2C#{@building.lng}%5D%7D)/#{@building.lat},#{@building.lng},9/300x175@2X?access_token=pk.eyJ1IjoibWF0dGgiLCJhIjoiY2pxaWI0azRmMHVsdDN5bDJrYnpjdGo2dSJ9.FDKb_aKILLXV4uJCi6Zyug"
+            img src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/geojson(%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B#{@building.lat}%2C#{@building.lng}%5D%7D)/#{@building.lat},#{@building.lng},14/300x175@2X?access_token=pk.eyJ1IjoibWF0dGgiLCJhIjoiY2pxaWI0azRmMHVsdDN5bDJrYnpjdGo2dSJ9.FDKb_aKILLXV4uJCi6Zyug"
+
         - if @building.also_known_as?
           h3 AKA
           =@building.also_known_as
