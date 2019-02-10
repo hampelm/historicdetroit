@@ -43,6 +43,14 @@ class Building < ApplicationRecord
   before_save :format
   validates :name, presence: true
 
+  def self.without_homes
+    # TODO -- this is probably pretty slow
+    subject = Subject.find_by(slug: 'homes')
+    buildings = Building.all
+    return buildings unless subject
+    buildings.reject { |b| b.subjects.include? subject }
+  end
+
   def title
     name
   end

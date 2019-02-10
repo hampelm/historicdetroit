@@ -50,6 +50,11 @@ section.main
             - for architect in @building.architects.distinct
               li #{link_to(architect.title, polymorphic_path(architect))}
 
-        // - if @building.location?
-        //  img class='lazy' width="100%"  src="https://api.mapbox.com/styles/v1/mapbox/streets-v10/static/url-https%3A%2F%2Fwww.mapbox.com%2Fimg%2Frocket.png(#{@building.latlng})/#{@building.latlng},15/320x180@2x/?access_token=#{Rails.configuration.general['mapbox']}"
-
+        - if @building.galleries.exists?
+          h3 Galleries
+          .galleries
+            - for gallery in @building.galleries
+              h4 #{link_to(gallery.title, polymorphic_path(gallery))}
+              - if gallery.photo?
+                a{href=url_for(gallery)}
+                  == image_tag gallery.photo.sidebar_slim.url

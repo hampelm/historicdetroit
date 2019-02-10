@@ -34,6 +34,10 @@ class ImageUploader < CarrierWave::Uploader::Base
     resize_to_fit(600, 1200)#, combine_options: {thumbnail: 'x600^', gravity: 'center', extent: '600'})
   end
 
+  version :sidebar_slim do
+    resize_to_fit(125, 600)#, combine_options: {thumbnail: 'x600^', gravity: 'center', extent: '600'})
+  end
+
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
