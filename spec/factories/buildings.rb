@@ -32,6 +32,7 @@ FactoryBot.define do
     address { Faker::Address.street_address }
     status { 'Demolished' }
     style { 'Art Deco' }
+    primary_type { :building }
     year_opened { Faker::Date.birthday(45, 65) }
     year_closed { Faker::Date.birthday(18, 44) }
     year_demolished { Faker::Date.birthday(18, 44) }
