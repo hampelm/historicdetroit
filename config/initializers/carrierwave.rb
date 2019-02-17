@@ -13,6 +13,10 @@ if Rails.env.development?
   CarrierWave.configure do |config|
     config.storage = :file
   end
+elsif Rails.env.test?
+  CarrierWave.configure do |config|
+    config.storage = :file
+  end
 else
   CarrierWave.configure do |config|
     config.storage = :fog
