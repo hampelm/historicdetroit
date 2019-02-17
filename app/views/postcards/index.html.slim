@@ -2,14 +2,11 @@ section.content
   h1 Postcards
 
   section.main.polaroids
-    - for model in @subjects
-      - if model.postcards.exists?
+    - for subject in @subjects
+      - if subject.postcards.exists?
         .polaroid
-          .polaroid-details
-            - if model.photo.file
-              =link_to "/postcards/#{model.slug}" do
-                img data-src=url_for(model.photo.polaroid.url) height=200 width=218 class='lazy'
-            h2 #{link_to(model.title, "/postcards/#{model.slug}")}
+          a.lazy href="/postcards/#{subject.slug}" style="background-image: url(#{url_for(subject.photo.polaroid.url)})"
+            h2 #{subject.title}
 
 
 

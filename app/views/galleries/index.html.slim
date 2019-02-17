@@ -5,7 +5,4 @@ section.content
     - for gallery in @galleries
       =render 'shared/polaroid', :model => gallery
 
-javascript:
-  var myLazyLoad = new LazyLoad({
-    elements_selector: ".lazy"
-  });
+=render 'shared/lazy'

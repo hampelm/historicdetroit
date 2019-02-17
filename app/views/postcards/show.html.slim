@@ -1,7 +1,6 @@
 section.main
   section.content
-    h1 =link_to(@subject.title, "/postcards/#{@subject.slug}")
-    h2 =@postcard.title
+    h1 =@postcard.title
 
     .page
       .photos
@@ -19,3 +18,13 @@ section.main
 
           p.caption =@postcard.caption
           p.byline =@postcard.byline
+
+
+        h2. More postcards of:
+        .polaroids
+          - for subject in @subjects
+            - if subject.postcards.exists?
+              .polaroid
+                a.lazy href="/postcards/#{subject.slug}" style="background-image: url(#{url_for(subject.photo.polaroid.url)})"
+                  h2 #{subject.title}
+

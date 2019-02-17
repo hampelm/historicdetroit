@@ -205,8 +205,8 @@ namespace :import do
           building.subjects << Subject.friendly.find(subject_slug)
         end
         building.subjects = building.subjects.distinct
-        puts 'Saving with subjects'
-        puts building.subjects
+        # puts 'Saving with subjects'
+        # puts building.subjects
 
         saved = building.save
         puts building.errors.full_messages unless saved
@@ -335,10 +335,11 @@ namespace :import do
       doc.css('data postcards-export entry').each do |b|
 
         slug = b.css('title').attribute('handle').to_s
-        exists = Postcard.exists?(slug: slug)
-        puts "Skipping #{slug}" if exists
+        previous_id = b.attribute('id').to_s
+        exists = Postcard.exists?(id: previous_id)
+        puts "Skipping #{slug} #{previous_id}" if exists
         next if exists
-        puts "Importing #{slug}"
+        puts "Importing #{slug} #{previous_id}"
 
         postcard = Postcard.new(
           id: b.attribute('id').to_s.to_i,
@@ -353,12 +354,14 @@ namespace :import do
         buildings = b.css('buildings item')
         buildings.each do |building|
           building_slug = building.attribute('handle').to_s
+          building_slug = fix_building(building_slug)
           puts "-- finding building #{building_slug}"
           begin
             building = Building.friendly.find(building_slug)
             postcard.buildings << building if building
           rescue
             puts "#{building_slug} not found!"
+            exit(1)
           end
         end
 
@@ -368,6 +371,7 @@ namespace :import do
           puts "-- finding subject #{subject_slug}"
           postcard.subjects << Subject.friendly.find(subject_slug)
         end
+        postcard.subjects = postcard.subjects.distinct
 
         # Set the timestamps
         ActiveRecord::Base.record_timestamps = false

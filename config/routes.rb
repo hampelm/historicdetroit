@@ -15,10 +15,10 @@ Rails.application.routes.draw do
   resources :pages, path: '/about'
   resources :posts
 
-  # Postcards are nested by subject
+  # Postcards
   get '/postcards', action: :index, controller: 'postcards'
   get '/postcards/:subject', action: :subject, controller: 'postcards'
-  get '/postcards/:subject/:id/', action: :show, controller: 'postcards', as: 'postcard_path'
+  get '/postcards/:slug/:id/', action: :show, controller: 'postcards', as: 'postcard_path'
 
   # We have some legacy paths for homes
   get '/homes', action: :index, controller: 'homes'

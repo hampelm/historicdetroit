@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_17_135333) do
+ActiveRecord::Schema.define(version: 2019_02_17_143759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 2019_02_17_135333) do
     t.string "slug"
     t.string "front"
     t.string "back"
+    t.decimal "previous_id"
   end
 
   create_table "postcards_subjects", id: false, force: :cascade do |t|

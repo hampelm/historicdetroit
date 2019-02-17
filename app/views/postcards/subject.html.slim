@@ -5,11 +5,9 @@ section.content
   section.main.polaroids
     - for model in @postcards
       .polaroid
-        .polaroid-details
-          - if model.photo.file
-            =link_to postcard_path_url(@subject, model) do
-              img data-src=url_for(model.photo.polaroid.url) height=200 width=218 class='lazy'
-          h2 #{link_to(model.title, postcard_path_url(@subject, model))}
+        a.lazy href="#{postcard_path_url(model.slug, model)}" style="background-image: url(#{url_for(model.photo.polaroid.url)})"
+          h2 #{model.title}
 
+=render 'shared/lazy'
 
 

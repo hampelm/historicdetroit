@@ -44,14 +44,7 @@ class Building < ApplicationRecord
   validates :name, presence: true
 
   enum primary_type: [ :building, :home, :monument, :steamer ]
-
-  def self.without_homes
-    # TODO -- this is probably pretty slow
-    subject = Subject.find_by(slug: 'homes')
-    buildings = Building.all
-    return buildings unless subject
-    buildings.reject { |b| b.subjects.include? subject }
-  end
+  scope :without_homes, -> { where.not(primary_type: :home) }
 
   def title
     name

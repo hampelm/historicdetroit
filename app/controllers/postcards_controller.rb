@@ -9,7 +9,7 @@ class PostcardsController < ApplicationController
   end
 
   def show
-    @subject = Subject.friendly.find(params[:subject])
     @postcard = Postcard.find(params[:id])
+    @subjects = @postcard.subjects
   end
 end
