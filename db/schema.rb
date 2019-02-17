@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_12_140620) do
+ActiveRecord::Schema.define(version: 2019_02_17_135333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_01_12_140620) do
     t.decimal "lng"
     t.string "photo"
     t.string "year_built"
+    t.integer "primary_type"
   end
 
   create_table "buildings_galleries", id: false, force: :cascade do |t|

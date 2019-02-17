@@ -43,6 +43,8 @@ class Building < ApplicationRecord
   before_save :format
   validates :name, presence: true
 
+  enum primary_type: [ :building, :home, :monument, :steamer ]
+
   def self.without_homes
     # TODO -- this is probably pretty slow
     subject = Subject.find_by(slug: 'homes')

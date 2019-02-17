@@ -96,6 +96,7 @@ namespace :import do
           description: description,
           address: b.css('address').text,
           style: b.css('style').text,
+          primary_type: :building,
           status: b.css('status item').text,
           year_opened: b.css('year-opened').text,
           year_closed: b.css('year-closed').text,
@@ -135,7 +136,7 @@ namespace :import do
     base_path = args[:base_path]
 
     # Manually add a Homes subject
-    subject = Subject.find_or_create_by(
+    main_subject = Subject.find_or_create_by(
       title: 'Homes',
       slug: 'homes'
     )
@@ -152,13 +153,8 @@ namespace :import do
       doc.css('data homes-export entry').each do |b|
         slug = b.css('name').attribute('handle').to_s
 
-        exists = Building.exists?(slug: slug)
-        puts "Skipping home #{slug}" if exists
-        next if exists
-
-
         building = Building.find_by(slug: slug) || Building.new
-        puts "Importing #{slug}"
+        puts "(re)Importing #{slug}"
 
         description = b.xpath("description[@mode='unformatted']").first.andand.text || ''
 
@@ -173,6 +169,7 @@ namespace :import do
           description: description,
           address: b.css('address').text,
           status: b.css('status item').text,
+          primary_type: :home,
           year_built: b.css('year-built').text,
           year_demolished: b.css('year-demolished').text
         })
@@ -199,7 +196,8 @@ namespace :import do
         end
 
         # Set the subjects
-        building.subjects << subject # Mark this as a home
+        building.subjects = []
+        building.subjects << main_subject # Mark this as a home
         subjects = b.css('subjects item')
         subjects.each do |subject|
           subject_slug = subject.attribute('handle').to_s
@@ -207,6 +205,9 @@ namespace :import do
           building.subjects << Subject.friendly.find(subject_slug)
         end
         building.subjects = building.subjects.distinct
+        puts 'Saving with subjects'
+        puts building.subjects
+        byebug
 
         saved = building.save
         puts building.errors.full_messages unless saved

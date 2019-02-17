@@ -95,6 +95,7 @@ RailsAdmin.config do |config|
       field :slug
       field :also_known_as
       field :byline
+      field :primary_type
       field :description, :simple_mde
       field :photo
       field :address
@@ -115,6 +116,7 @@ RailsAdmin.config do |config|
       field :slug
       field :also_known_as
       field :byline
+      field :primary_type
       field :description, :simple_mde
       field :photo
       field :address
