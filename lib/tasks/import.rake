@@ -207,7 +207,6 @@ namespace :import do
         building.subjects = building.subjects.distinct
         puts 'Saving with subjects'
         puts building.subjects
-        byebug
 
         saved = building.save
         puts building.errors.full_messages unless saved
