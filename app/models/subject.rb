@@ -20,6 +20,8 @@ class Subject < ApplicationRecord
   has_and_belongs_to_many :postcards, join_table: :postcards_subjects
   has_and_belongs_to_many :buildings, join_table: :buildings_subjects
 
+  default_scope { order(title: :asc) }
+
   def photo?
     photo.file
   end
