@@ -1,0 +1,15 @@
+- content_for :title, "#{@building.title} Postcards"
+
+section.content
+  h1 Postcards of #{@building.title}
+  h2 =link_to('All subjects', '/postcards')
+
+  section.main.polaroids
+    - for model in @postcards
+      .polaroid
+        a.lazy href="#{postcard_path_url(model.slug, model)}" style="background-image: url(#{url_for(model.photo.polaroid.url)})"
+          h2 #{model.title}
+
+=render 'shared/lazy'
+
+

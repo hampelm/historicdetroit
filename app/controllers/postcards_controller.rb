@@ -8,6 +8,11 @@ class PostcardsController < ApplicationController
     @postcards = @subject.postcards
   end
 
+  def building
+    @building = Building.friendly.find(params[:slug])
+    @postcards = @building.postcards
+  end
+
   def show
     @postcard = Postcard.find(params[:id])
     @subjects = @postcard.subjects

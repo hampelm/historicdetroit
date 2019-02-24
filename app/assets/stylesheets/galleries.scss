@@ -19,10 +19,21 @@
 .photos {
   width: 100%;
   margin-top: 2em;
+
+  h2 {
+    text-align: center;
+  }
 }
 
 .photo {
   margin-bottom: 3.5em;
+
+  h1 {
+    background: white;
+    text-align: center;
+    margin-bottom: 0;
+    padding: 0.5rem 0 0rem;
+  }
 
   .caption {
     font-size: 18px;
@@ -94,6 +105,16 @@
     textarea {
       width: 100%;
     }
+  }
+}
+
+// "More about this building" links
+.building-info {
+  margin: 2rem 0;
+  text-align: center;
+  ul {
+    list-style: none;
+    li { display: inline-block; }
   }
 }
 

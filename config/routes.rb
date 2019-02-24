@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   # Postcards
   get '/postcards', action: :index, controller: 'postcards'
+  get '/buildings/:slug/postcards', action: :building, controller: 'postcards'
   get '/postcards/:subject', action: :subject, controller: 'postcards'
   get '/postcards/:slug/:id/', action: :show, controller: 'postcards', as: 'postcard_path'
 

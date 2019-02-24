@@ -2,14 +2,16 @@
 
 section.main
   section.content
-    h1 =@postcard.title
+    h1 =link_to('Postcards', postcards_path)
 
     - if admin?
-      h3.edit =link_to('Edit', "/admin/postcard/#{@postcard.id}/edit")
 
     .page
       .photos
         .photo
+          h1
+            =@postcard.title
+
           - if @postcard.front?
             picture
               source srcset=url_for(@postcard.front_full) media="(min-width: 501px)"
@@ -24,12 +26,27 @@ section.main
           p.caption =@postcard.caption
           p.byline =@postcard.byline
 
+        - if @postcard.buildings.exists?
+          .building-info
+            h2. More about:
+            .polaroids
+              - for building in @postcard.buildings.distinct
+                .polaroid
+                  a href="/buildings/#{building.slug}" style="background-image: url(#{url_for(building.photo.polaroid.url)})"
+                    h2 #{building.title}
 
         h2. More postcards of:
         .polaroids
+          - for building in @postcard.buildings.distinct
+            .polaroid
+              a.lazy href="/buildings/#{building.slug}/postcards" style="background-image: url(#{url_for(building.postcards.first.photo.polaroid.url)})"
+                h2 #{building.name}
           - for subject in @subjects
             - if subject.postcards.exists?
               .polaroid
                 a.lazy href="/postcards/#{subject.slug}" style="background-image: url(#{url_for(subject.photo.polaroid.url)})"
                   h2 #{subject.title}
 
+        - if admin?
+          center
+            small =link_to('Edit', "/admin/postcard/#{@postcard.id}/edit")

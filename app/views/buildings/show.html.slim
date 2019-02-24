@@ -63,3 +63,9 @@ section.main
               - if gallery.photo?
                 a{href=url_for(gallery)}
                   == image_tag gallery.photo.sidebar_slim.url
+
+        - if @building.postcards.exists?
+          h3 Postcards
+          .galleries
+            a{href="/buildings/#{@building.slug}/postcards"}
+              == image_tag  @building.postcards.first.photo.sidebar_slim.url
