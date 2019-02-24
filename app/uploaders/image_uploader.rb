@@ -35,7 +35,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :sidebar_slim do
-    resize_to_fit(125, 600)#, combine_options: {thumbnail: 'x600^', gravity: 'center', extent: '600'})
+    resize_to_fill(600, 250) #, combine_options: { thumbnail: '600x250^', gravity: 'center' })
   end
 
 

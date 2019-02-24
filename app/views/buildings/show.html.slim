@@ -5,15 +5,15 @@ section.main
     h1 =@building.title
     h2.byline = @building.byline
 
-    - if admin?
-      h3.edit =link_to('Edit', "/admin/building/#{@building.id}/edit")
-
     .page
       .articles
         article
           == @building.description_formatted
 
       aside
+        - if admin?
+          h3.edit =link_to('Edit', "/admin/building/#{@building.id}/edit")
+
         - if @building.photo?
           == image_tag @building.photo.sidebar.url
 
@@ -56,16 +56,18 @@ section.main
               li #{link_to(architect.title, polymorphic_path(architect))}
 
         - if @building.galleries.exists?
-          h3 Galleries
+          h3.standout Galleries
           .galleries
             - for gallery in @building.galleries
-              h4 #{link_to(gallery.title, polymorphic_path(gallery))}
-              - if gallery.photo?
-                a{href=url_for(gallery)}
-                  == image_tag gallery.photo.sidebar_slim.url
+              .gallery
+                h4 #{link_to(gallery.title, polymorphic_path(gallery))}
+                - if gallery.photo?
+                  a{href=url_for(gallery)}
+                    == image_tag gallery.photo.sidebar_slim.url
 
         - if @building.postcards.exists?
-          h3 Postcards
+          h3.standout Postcards
           .galleries
-            a{href="/buildings/#{@building.slug}/postcards"}
-              == image_tag  @building.postcards.first.photo.sidebar_slim.url
+            .gallery
+              a{href="/buildings/#{@building.slug}/postcards"}
+                == image_tag  @building.postcards.first.photo.sidebar_slim.url
