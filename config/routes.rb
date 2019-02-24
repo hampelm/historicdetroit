@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   resources :galleries
   get 'galleries/index'
   get 'galleries/show'
+
+  # We have some special pages
   resources :pages, path: '/about'
+  get '/shop', to: redirect('/about/shop', status: 302)
+
   resources :posts
 
   # Postcards
