@@ -133,7 +133,6 @@ RailsAdmin.config do |config|
     end
   end
 
-
   config.model Gallery do
     list do
       sort_by :updated_at
@@ -150,4 +149,23 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model Page do
+    list do
+      sort_by :updated_at
+      field :title
+      field :updated_at
+    end
+
+    create do
+      field :name
+      field :slug
+      field :body, :simple_mde
+    end
+
+    edit do
+      field :name
+      field :slug
+      field :body, :simple_mde
+    end
+  end
 end
