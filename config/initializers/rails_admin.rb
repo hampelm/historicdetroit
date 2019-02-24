@@ -157,13 +157,13 @@ RailsAdmin.config do |config|
     end
 
     create do
-      field :name
+      field :title
       field :slug
       field :body, :simple_mde
     end
 
     edit do
-      field :name
+      field :title
       field :slug
       field :body, :simple_mde
     end
