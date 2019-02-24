@@ -15,6 +15,10 @@ javascript:
     var container = document.querySelector("section.polaroids");
     function search(event) {
       results = container.querySelectorAll(".polaroid");
+
+      // Trigger a scroll event so lazyload works on search
+      window.scrollTo(window.scrollX, window.scrollY);
+
       results.forEach(function(elt) {
         if (elt.textContent.toLowerCase().indexOf(event.target.value) > -1) {
           elt.classList.add('fadeIn');
