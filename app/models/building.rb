@@ -28,6 +28,10 @@ require 'uri'
 #
 
 class Building < ApplicationRecord
+  include PgSearch
+
+  pg_search_scope :search_for, against: %i(name description year_opened year_closed year_demolished byline also_known_as)
+
   mount_uploader :photo, ImageUploader
 
   extend FriendlyId
