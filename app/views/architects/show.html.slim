@@ -3,6 +3,9 @@ section.main
     h1 =@architect.headline
     h2.byline = @architect.byline
 
+    - if admin?
+      h3.edit =link_to('Edit', "/admin/architect/#{@architect.id}/edit")
+
     .page
       .articles
         article

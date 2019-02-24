@@ -7,6 +7,9 @@ section.main
     - unless @gallery.building.nil?
       h2 =link_to(@gallery.building.name, @gallery.building)
 
+    - if admin?
+      h3.edit =link_to('Edit', edit_gallery_path(@gallery))
+
     .page
       .photos
         - for photo in @gallery.photos

@@ -4,6 +4,9 @@ section.main
   section.content
     h1 =@postcard.title
 
+    - if admin?
+      h3.edit =link_to('Edit', "/admin/postcard/#{@postcard.id}/edit")
+
     .page
       .photos
         .photo
