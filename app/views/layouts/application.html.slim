@@ -12,6 +12,7 @@ html prefix="og: http://ogp.me/ns#"
         | Historic Detroit
       meta property="og:title" content="Historic Detroit"
 
+      = favicon_link_tag asset_path('favicon.gif')
 
     - if content_for?(:og)
       = yield(:og)
