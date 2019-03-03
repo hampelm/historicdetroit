@@ -11,6 +11,9 @@
     div
       = f.label :photo
       = f.file_field :photo
+      - if f.object && f.object.photo?
+        img src="#{f.object.photo.url(:thumbnail)}"
+
 
     div
       = f.label :position

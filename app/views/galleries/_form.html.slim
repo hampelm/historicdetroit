@@ -15,7 +15,7 @@
 
     h3 Photos
 
-    .dropzone
+    .dropzone#dropzone.hide
       h4 Drop photos here
 
     .photos.sortable
@@ -28,10 +28,7 @@
 
 
 javascript:
-
-
   $(document).ready(function() {
-
     function reorder() {
       $('.photo-fields').each(function(idx) {
         console.log("xxx", idx)
@@ -50,4 +47,23 @@ javascript:
       .on('cocoon:after-insert', function() {
         reorder();
       })
+
+
+    // Set up drag and drop
+    // https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
+    var dropArea = document.getElementById('dropzone');
+
+    var dragEnter = function() {
+      dropArea.classList.add('active')
+    }
+
+    var dragLeave = function() {
+      dropArea.classList.remove('active')
+    }
+
+
+    dropArea.addEventListener('dragenter', dragEnter, false)
+    dropArea.addEventListener('dragleave', dragLeave, false)
+    dropArea.addEventListener('drop', drop, false)
+
   });
