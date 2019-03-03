@@ -15,7 +15,8 @@ section.main
           h3.edit =link_to('Edit', "/admin/building/#{@building.id}/edit")
 
         - if @building.photo?
-          == image_tag @building.photo.sidebar.url
+          .sidebarbox
+            == image_tag @building.photo.sidebar.url
 
         - if @building.address?
           =@building.address
@@ -59,7 +60,7 @@ section.main
           h3.standout Galleries
           .galleries
             - for gallery in @building.galleries
-              .gallery
+              .gallery.sidebarbox
                 h4 #{link_to(gallery.title, polymorphic_path(gallery))}
                 - if gallery.photo?
                   a{href=url_for(gallery)}
@@ -68,6 +69,6 @@ section.main
         - if @building.postcards.exists?
           h3.standout Postcards
           .galleries
-            .gallery
+            .gallery.sidebarbox
               a{href="/buildings/#{@building.slug}/postcards"}
                 == image_tag  @building.postcards.first.photo.sidebar_slim.url

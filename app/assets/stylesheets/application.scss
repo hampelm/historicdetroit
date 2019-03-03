@@ -153,6 +153,10 @@ article {
     font-family: $serif;
     margin-bottom: 1em;
   }
+
+  a {
+    border-bottom: 1px dotted $link;
+  }
 }
 
 aside {
@@ -177,6 +181,10 @@ aside {
 
   ul li {
     list-style: none;
+
+    a {
+      border-bottom: 1px dotted $link;
+    }
   }
 
   img {
@@ -220,7 +228,6 @@ aside {
   }
 
   .map {
-    border: 4px solid $difference;
     margin-bottom: 1em;
     margin-top: 1em;
 
