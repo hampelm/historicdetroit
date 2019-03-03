@@ -18,6 +18,9 @@ javascript:
 
       // Trigger a scroll event so lazyload works on search
       window.scrollTo(window.scrollX, window.scrollY);
+      if (CustomEvent) {
+        window.dispatchEvent(new CustomEvent('scroll'));
+      }
 
       results.forEach(function(elt) {
         if (elt.textContent.toLowerCase().indexOf(event.target.value) > -1) {

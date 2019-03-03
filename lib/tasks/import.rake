@@ -229,7 +229,10 @@ namespace :import do
       doc.css('data gallery-export entry').each do |b|
         slug = b.css('name').attribute('handle').to_s
 
+        # Try to find the gallery
         gallery = Gallery.where(slug: slug).first
+
+        # If we already have a gallery
         unless gallery.nil?
           puts "Gallery #{slug} exists, checking count"
           num_photos = b.css('images item').count
