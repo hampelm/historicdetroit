@@ -7,8 +7,11 @@ Rails.application.routes.draw do
 
   resources :architects
   get '/architect/:slug', to: redirect('/architects/%{slug}')
+
   resources :buildings
   get '/building/:slug', to: redirect('/buildings/%{slug}')
+  get '/map', action: :map, controller: 'buildings'
+
   resources :galleries
   get 'galleries/index'
   get 'galleries/show'

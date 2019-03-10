@@ -38,6 +38,8 @@ class Building < ApplicationRecord
   friendly_id :name, use: :slugged
 
   default_scope { order(name: :asc) }
+  scope :with_location, -> { where.not(lat: nil, lat: 0) }
+  scope :without_homes, -> { where.not(primary_type: :home) }
 
   has_and_belongs_to_many :architects, join_table: :architects_buildings, uniq: true
   has_and_belongs_to_many :posts, join_table: :buildings_posts
@@ -48,7 +50,6 @@ class Building < ApplicationRecord
   validates :name, presence: true
 
   enum primary_type: [ :building, :home, :monument, :steamer ]
-  scope :without_homes, -> { where.not(primary_type: :home) }
 
   def title
     name

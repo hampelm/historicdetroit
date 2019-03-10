@@ -302,6 +302,14 @@ table {
   }
 }
 
+.frame {
+  color: $gray-blend;
+  border: 1px solid $difference;
+  box-shadow: inset 0 0 15px $difference;
+  margin-bottom: 1em;
+  padding: 10px;
+}
+
 .screenreader-only {
   position: absolute;
   left: -10000px;
