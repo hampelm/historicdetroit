@@ -1,0 +1,16 @@
+- content_for :title, "Search"
+
+section.content
+  h1 Results for #{@query}
+
+  section.main.polaroids
+    - if @buildings.empty?
+      h2. No results found
+
+    - for building in @buildings
+      =render 'shared/polaroid', :model => building
+
+javascript:
+  var myLazyLoad = new LazyLoad({
+    elements_selector: ".lazy"
+  });

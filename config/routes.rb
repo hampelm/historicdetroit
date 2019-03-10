@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/shop', to: redirect('/about/shop', status: 302)
 
   resources :posts
+  resources :search
 
   # Postcards
   get '/postcards', action: :index, controller: 'postcards'

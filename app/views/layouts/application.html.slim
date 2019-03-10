@@ -5,7 +5,7 @@ html prefix="og: http://ogp.me/ns#"
     - if content_for?(:title)
       title
         = yield(:title)
-        |  | Historic Detroit
+        |  &mdash; Historic Detroit
       meta property="og:title" content="#{content_for(:title)} | Historic Detroit"
     - else
       title
@@ -50,6 +50,9 @@ html prefix="og: http://ogp.me/ns#"
           a[href="/about/support"] Support
         li
           a[href="/about"] About
+        li
+          form action="/search" method="get"
+            input type="text" name="query" placeholder="Search"
 
     main
       center
