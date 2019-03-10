@@ -86,7 +86,7 @@ namespace :import do
 
         # Ensure markdown headers have spacing.
         # Eg ###Foo becomes ### Foo
-        description.gsub!(/^(#*)(\w)/, '\1 \2')
+        description.gsub!(/^(#*)(.)/, '\1 \2')
 
         building = Building.new(
           name: b.css('building-name').text,
@@ -160,7 +160,7 @@ namespace :import do
 
         # Ensure markdown headers have spacing.
         # Eg ###Foo becomes ### Foo
-        description.gsub!(/^(#*)(\w)/, '\1 \2')
+        description.gsub!(/^(#*)(.)/, '\1 \2')
 
         building.assign_attributes({
           name: b.css('name').text,
@@ -438,4 +438,38 @@ namespace :import do
       post.save
     end
   end
+
+  desc 'Building descriptions'
+  task :building_descriptions, [:base_path] => :environment do |task, args|
+    base_path = args[:base_path]
+
+    # First, figure out how many pages we have.
+    doc = Nokogiri::XML(open(base_path + '1'))
+    total_pages = doc.css('pagination').attribute('total-pages').to_s.to_i
+
+    # Then loop over all of them
+    (1..total_pages).each do |page_num|
+      url = base_path + page_num.to_s
+      puts url
+      doc = Nokogiri::XML(open(url))
+      doc.css('data buildings-export entry').each do |b|
+        slug = b.css('building-name').attribute('handle').to_s
+        building = Building.find_by(slug: slug)
+
+        next unless building
+
+        puts "Running #{building.name}"
+
+        description = b.xpath("description[@mode='unformatted']").first.andand.text || ''
+
+        # Ensure markdown headers have spacing.
+        # Eg ###Foo becomes ### Foo
+        description.gsub!(/^(#*)(.)/, '\1 \2')
+
+        building.description = description
+        building.save
+      end
+    end
+  end
+
 end
