@@ -99,6 +99,8 @@ RailsAdmin.config do |config|
       field :description, :simple_mde
       field :photo
       field :address
+      field :lat
+      field :lng
       field :status
       field :style
       field :year_opened
@@ -120,6 +122,8 @@ RailsAdmin.config do |config|
       field :description, :simple_mde
       field :photo
       field :address
+      field :lat
+      field :lng
       field :status
       field :style
       field :year_opened
