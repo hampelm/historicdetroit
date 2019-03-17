@@ -1,8 +1,8 @@
 - content_for :title, "#{@building.title} Postcards"
 
 section.content
-  h1 Postcards of #{@building.title}
-  h2 =link_to('All subjects', '/postcards')
+  h1.centered Postcards of #{@building.title}
+  h2.centered =link_to('All subjects', '/postcards')
 
   section.main.polaroids
     - for model in @postcards
