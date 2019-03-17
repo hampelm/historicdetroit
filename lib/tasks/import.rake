@@ -472,4 +472,40 @@ namespace :import do
     end
   end
 
+  desc 'Retry importing architects'
+  task :building_architcts, [:base_path] => :environment do |task, args|
+    base_path = args[:base_path]
+
+    # First, figure out how many pages we have.
+    doc = Nokogiri::XML(open(base_path + '1'))
+    total_pages = doc.css('pagination').attribute('total-pages').to_s.to_i
+
+    # Then loop over all of them
+    (1..total_pages).each do |page_num|
+      url = base_path + page_num.to_s
+      puts url
+      doc = Nokogiri::XML(open(url))
+      doc.css('data buildings-export entry').each do |b|
+        slug = b.css('building-name').attribute('handle').to_s
+        building = Building.where(slug: slug).first
+        puts "Skipping #{slug}" unless building
+        next unless building
+        puts "Reacrchitecting #{slug}"
+
+        b.css('architect item').each do |architect|
+          architect_slug = architect.attribute('handle').to_s
+          architect_slug.sub! '-amp', ''
+          architect_slug = architect_fixes[architect_slug] || architect_slug
+          puts "Trying architect #{architect_slug}"
+          arch = Architect.friendly.find(architect_slug)
+          building.architects << arch if arch
+        end
+        building.architects = building.architects.distinct
+
+        saved = building.save
+        puts building.errors.full_messages unless saved
+        exit(1) unless saved
+      end
+    end
+  end
 end
