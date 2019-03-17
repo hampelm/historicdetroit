@@ -68,6 +68,17 @@ nav {
           font-size: 1rem;
         }
       }
+
+      &.extra {
+        text-transform: none;
+
+        &:after { content: " \00b7"; padding-right: 5px }
+
+        a {
+          padding: 10px 5px;
+        }
+      }
+
     }
   }
 }

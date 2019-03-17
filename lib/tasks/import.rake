@@ -499,6 +499,7 @@ namespace :import do
           puts "Trying architect #{architect_slug}"
           arch = Architect.friendly.find(architect_slug)
           building.architects << arch if arch
+          puts "Architect #{architect_slug} not found" unless arch
         end
         building.architects = building.architects.distinct
 

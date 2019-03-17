@@ -163,9 +163,14 @@ article {
     margin-bottom: 1em;
   }
 
-  p {
+  ul, ol, p {
     font-family: $serif;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
+  }
+
+  li {
+    margin-left: 2rem;
+    margin-bottom: 0.75rem;
   }
 
   a {
