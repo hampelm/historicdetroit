@@ -90,15 +90,18 @@ main {
   padding: 20px 0;
 
   > h1 {
-    text-align: center;
     line-height: 1em;
   }
   > h2 {
-    text-align: center;
     a {
       border-bottom: 1px dotted $link;
     }
   }
+
+  >h1 + h2 {
+    margin-top: -12px;
+  }
+
   > h3.edit {
     text-align: center;
     font-size: 1rem;
