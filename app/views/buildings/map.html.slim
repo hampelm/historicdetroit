@@ -36,7 +36,7 @@ javascript:
       .setHTML('<h3><a href="' + building.url + '" target="_blank">' + building.name + '</a></h3><img src="' + building.image + '" width="200">');
 
     var marker = new mapboxgl.Marker({ color: '#874a66' })
-      .setLngLat([building.lat, building.lng])
+      .setLngLat([building.lng, building.lat])
       .setPopup(popup)
       .addTo(map);
   })
