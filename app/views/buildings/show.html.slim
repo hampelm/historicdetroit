@@ -26,8 +26,9 @@ section.main
 
         - if @building.lat?
           .map.sidebarbox
-            img src="https://api.mapbox.com/styles/v1/matth/cjs13vk0m0inf1fqs1wx0qfis/static/geojson(%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B#{@building.lng}%2C#{@building.lat}%5D%7D)/#{@building.lng},#{@building.lat},11/300x175@2X?access_token=pk.eyJ1IjoibWF0dGgiLCJhIjoiY2pxaWI0azRmMHVsdDN5bDJrYnpjdGo2dSJ9.FDKb_aKILLXV4uJCi6Zyug"
-            img src="https://api.mapbox.com/styles/v1/matth/cjs13vk0m0inf1fqs1wx0qfis/static/geojson(%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B#{@building.lng}%2C#{@building.lat}%5D%7D)/#{@building.lng},#{@building.lat},16/300x175@2X?access_token=pk.eyJ1IjoibWF0dGgiLCJhIjoiY2pxaWI0azRmMHVsdDN5bDJrYnpjdGo2dSJ9.FDKb_aKILLXV4uJCi6Zyug"
+            #map
+          //  img src="https://api.mapbox.com/styles/v1/matth/cjs13vk0m0inf1fqs1wx0qfis/static/geojson(%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B#{@building.lng}%2C#{@building.lat}%5D%7D)/#{@building.lng},#{@building.lat},11/300x175@2X?access_token=pk.eyJ1IjoibWF0dGgiLCJhIjoiY2pxaWI0azRmMHVsdDN5bDJrYnpjdGo2dSJ9.FDKb_aKILLXV4uJCi6Zyug"
+          //  img src="https://api.mapbox.com/styles/v1/matth/cjs13vk0m0inf1fqs1wx0qfis/static/geojson(%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B#{@building.lng}%2C#{@building.lat}%5D%7D)/#{@building.lng},#{@building.lat},16/300x175@2X?access_token=pk.eyJ1IjoibWF0dGgiLCJhIjoiY2pxaWI0azRmMHVsdDN5bDJrYnpjdGo2dSJ9.FDKb_aKILLXV4uJCi6Zyug"
 
         - if @building.also_known_as?
           h3 AKA
@@ -75,3 +76,28 @@ section.main
             .gallery.sidebarbox
               a{href="/buildings/#{@building.slug}/postcards"}
                 == image_tag  @building.postcards.first.photo.sidebar_slim.url
+
+
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+
+javascript:
+  var building = #{raw @building.to_json};
+
+  mapboxgl.accessToken = 'pk.eyJ1IjoibWF0dGgiLCJhIjoicGFzV1ZkWSJ9.KeK3hKmM52XpUEHHx_F8NQ';
+    var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/matth/cjs13vk0m0inf1fqs1wx0qfis', // stylesheet location
+    center: [building.lat, building.lng].reverse(), // starting position [lng, lat]
+    zoom: 15 // starting zoom
+  });
+
+  var iconSize = '25';
+
+  var popup = new mapboxgl.Popup({ offset: 25 })
+    .setHTML('<h3><a href="' + building.url + '" target="_blank">' + building.name + '</a></h3><img src="' + building.image + '" width="200">');
+
+  var marker = new mapboxgl.Marker({ color: '#874a66' })
+    .setLngLat([building.lng, building.lat])
+    // .setPopup(popup)
+    .addTo(map);

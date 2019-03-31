@@ -301,8 +301,9 @@ table {
 
 @media only screen and (max-width:700px) {
   .content {
-    h1 {
-      padding: 10px;
+    h1, > h2 {
+      padding: 1rem 25px;
+      margin: 0
     }
   }
 
@@ -324,7 +325,7 @@ table {
   }
 
   aside {
-    padding: 20px 25px 0 25px;
+    padding: 0 25px 0 25px;
     width: auto;
   }
 }
