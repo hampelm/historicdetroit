@@ -1,8 +1,8 @@
 - content_for :title, "#{@subject.title} | Historic Detroit Homes"
 
 section.content
-  h1 #{@subject.title}
-  h2 =link_to('Back to all homes', '/homes')
+  h1.centered #{@subject.title}
+  h2.centered.backlink =link_to('Back to all homes', '/homes')
 
   section.main.polaroids
     - for home in @homes

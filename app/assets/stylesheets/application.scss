@@ -95,6 +95,7 @@ main {
 
   > h1 {
     line-height: 1em;
+    margin: 1.5rem auto 2rem;
   }
   > h2 {
     a {
@@ -111,8 +112,14 @@ main {
     font-size: 1rem;
   }
 
-  .byline {
+  h2.backlink,
+  h2.byline {
+    margin-top: -1.5rem;
     font-size: $reg;
+  }
+
+  h2.backlink {
+    margin-bottom: 2rem;
   }
 }
 

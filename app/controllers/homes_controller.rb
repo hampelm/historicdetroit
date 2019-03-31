@@ -4,7 +4,7 @@ class HomesController < ApplicationController
     @buildings = @subject.buildings
 
     # TODO: This query is very expensive
-    @subjects = @buildings.collect(&:subjects).flatten.uniq.without(@subject)
+    @subjects = @buildings.collect(&:subjects).flatten.uniq.without(@subject).sort_by!(&:title)
   end
 
   def subject
