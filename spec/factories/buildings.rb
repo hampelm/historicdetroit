@@ -21,6 +21,9 @@
 #  lat                   :decimal(, )
 #  lng                   :decimal(, )
 #  photo                 :string
+#  year_built            :string
+#  primary_type          :integer
+#  last_update           :datetime
 #
 
 FactoryBot.define do

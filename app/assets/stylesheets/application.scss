@@ -11,6 +11,8 @@ $gray: #999;
 $gray-blend: #797664;
 $ltgray: #ddd;
 
+.grayblend { color: $gray-blend }
+
 
 $header: rgb(37, 35, 28);
 $header2: rgb(74, 71, 62);
@@ -25,6 +27,8 @@ $reg: 16px;
 
 $sans: "news-gothic-std", Helvetica, sans-serif;
 $serif: "Georgia", serif;
+
+.sans { font-family: $sans; }
 
 *,
 html,
@@ -73,6 +77,10 @@ h6 {
 
 small {
   font-size: 1rem;
+}
+
+.small {
+  font-size: 0.8rem;
 }
 
 .centered {

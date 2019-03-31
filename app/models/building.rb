@@ -1,7 +1,6 @@
 require 'open-uri'
 require 'redcarpet' # Markdown
 require 'uri'
-
 # == Schema Information
 #
 # Table name: buildings
@@ -25,6 +24,9 @@ require 'uri'
 #  lat                   :decimal(, )
 #  lng                   :decimal(, )
 #  photo                 :string
+#  year_built            :string
+#  primary_type          :integer
+#  last_update           :datetime
 #
 
 class Building < ApplicationRecord

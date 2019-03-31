@@ -10,6 +10,9 @@ section.main
         article
           == @building.description_formatted
 
+          - if @building.last_update?
+            .update.small.sans.grayblend Last updated #{@building.last_update.strftime("%d/%m/%Y")}
+
       aside
         - if admin?
           h3.edit =link_to('Edit', "/admin/building/#{@building.id}/edit")
