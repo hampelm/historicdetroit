@@ -81,6 +81,10 @@ class Building < ApplicationRecord
     [[nil], ['Open'], ['Closed'], ['Demolished'], ['Under renovation']]
   end
 
+  def subjects_css
+    subjects.map { |s| "category-#{s.slug}" }.join(' ')
+  end
+
   private
 
   def format

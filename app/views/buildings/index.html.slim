@@ -6,9 +6,23 @@ section.content
   section.main.search
     input type="text" value="" id="building-search" placeholder="Find a place"
 
+  section.main.pills
+    nav#category.pills.centered
+      a.pill.active href="#all" data-category="all" All
+      a.pill href="#bridges" data-category="bridges" Bridges
+      a.pill href="#buildings" data-category="buildings" Buildings
+      a.pill href="#monuments" data-category="monuments" Monuments
+      a.pill href="#steamers" data-category="steamers" Steamers
+
   section.main.polaroids
-    - for building in @buildings
-      =render 'shared/polaroid', :model => building
+    - for model in @buildings
+      div class="polaroid #{model.subjects_css}"
+        - if model.photo?
+          a.lazy href=polymorphic_path(model) data-bg="url(#{model.photo.polaroid.url})"
+            h2 #{model.title}
+        -else
+          a href=polymorphic_path(model)
+            h2 #{model.title}
 
 javascript:
   document.addEventListener('DOMContentLoaded',function(){
@@ -34,6 +48,45 @@ javascript:
     }
 
     var searchBar = document.querySelector('#building-search').oninput = search
+
+    function clickPill(event) {
+      event.preventDefault();
+      var category = this.getAttribute('data-category');
+      console.log(category);
+
+      // Mark all pills as unselected
+      document.querySelectorAll('.pills a').forEach(function(elt) {
+        elt.classList.remove('active');
+      });
+
+      this.classList.add('active')
+
+      // Fade out all items
+      document.querySelectorAll('.polaroid').forEach(function(elt) {
+        elt.classList.add('fadeOut');
+      });
+
+
+      if (category === 'all') {
+        document.querySelectorAll('.polaroid').forEach(function(elt) {
+          elt.classList.remove('fadeOut');
+          elt.classList.add('fadeIn');
+        });
+        return;
+      }
+
+      // Fade in selected items
+      document.querySelectorAll('.category-' + category).forEach(function(elt) {
+        elt.classList.remove('fadeOut');
+        elt.classList.add('fadIn');
+      });
+    }
+    // Set up the nav pills
+    var pills = document.querySelectorAll('.pills a')
+    pills.forEach(function(pill) {
+      pill.addEventListener('click', clickPill);
+    })
+
   });
 
 javascript:

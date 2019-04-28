@@ -4,7 +4,6 @@
 
 section.search {
   text-align: center;
-  padding: 0px 0px 3rem 0;
 
   input {
     font-size: 1.2em;
@@ -18,6 +17,29 @@ section.search {
 
 .fadeOut {
   display: none;
+}
+
+nav.pills {
+  background: transparent;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+
+  .pill {
+    padding: 4px 10px;
+    margin: 0px 5px;
+    border-radius: 20px;
+    display: inline-block;
+
+    &:hover {
+      color: #fff;
+      background: lighten($link, 10%);
+    }
+
+    &.active {
+      color: #fff;
+      background: $link;
+    }
+  }
 }
 
 #map {
