@@ -33,7 +33,7 @@ javascript:
     el.style.height = iconSize + 'px';
     */
     var popup = new mapboxgl.Popup({ offset: 25 })
-      .setHTML('<h3><a href="' + building.url + '" target="_blank">' + building.name + '</a></h3><img src="' + building.image + '" width="200">');
+      .setHTML('<h3><a href="' + building.url + '" target="_blank">' + building.name + '</a></h3><a href="' + building.url + '" target="_blank"><img src="' + building.image + '" width="200"></a>');
 
     var marker = new mapboxgl.Marker({ color: '#874a66' })
       .setLngLat([building.lng, building.lat])
