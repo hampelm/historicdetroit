@@ -22,7 +22,7 @@ class Subject < ApplicationRecord
   has_and_belongs_to_many :buildings, join_table: :buildings_subjects
 
   default_scope { order(title: :asc) }
-  scope :filters, -> { where(use_as_filter: :true) }
+  scope :filters, -> { where(use_as_filter: :true).order(title: :asc) }
 
   def photo?
     photo.file
