@@ -9,10 +9,8 @@ section.content
   section.main.pills
     nav#category.pills.centered
       a.pill.active href="#all" data-category="all" All
-      a.pill href="#bridges" data-category="bridges" Bridges
-      a.pill href="#buildings" data-category="buildings" Buildings
-      a.pill href="#monuments" data-category="monuments" Monuments
-      a.pill href="#steamers" data-category="steamers" Steamers
+      - for subject in @subject_filters
+          a.pill href="##{subject.slug}" data-category="#{subject.slug}" #{subject.title}
 
   section.main.polaroids
     - for model in @buildings

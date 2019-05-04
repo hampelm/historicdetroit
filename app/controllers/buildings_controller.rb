@@ -1,6 +1,9 @@
 class BuildingsController < ApplicationController
   def index
     @buildings = Building.without_homes
+
+    @subject_filters = Subject.filters
+
     fresh_when(@buildings)
   end
 
