@@ -1,6 +1,6 @@
 class BuildingsController < ApplicationController
   def index
-    @buildings = Building.without_homes
+    @buildings = Building.all
 
     @subject_filters = Subject.filters
 
