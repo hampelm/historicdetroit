@@ -67,3 +67,12 @@ html prefix="og: http://ogp.me/ns#"
 
     footer
       p &copy; #{Time.current.year} Historic Detroit
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-25686625-1"></script>
+    javascript:
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-25686625-1');
