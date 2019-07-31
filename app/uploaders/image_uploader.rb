@@ -48,7 +48,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Strips out all embedded information from the image
   def strip
     manipulate! do |img|
-      img.strip!
+      img = img.strip
       img = yield(img) if block_given?
       img
     end
