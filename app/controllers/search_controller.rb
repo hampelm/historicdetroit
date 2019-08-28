@@ -1,7 +1,8 @@
 class SearchController < ApplicationController
   def index
     @query = params[:query]
-    @buildings = Building.where("description like ?", "%#{@query}%")
-    # Building.search_for(@query)
+    @buildings = Building.where("description ILIKE ?", "%#{@query}%").or(Building.where("name ILIKE ?", "%#{@query}%"))
+
+
   end
 end
