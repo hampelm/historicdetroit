@@ -26,6 +26,8 @@ class Postcard < ApplicationRecord
 
   default_scope { order(title: :asc) }
 
+  before_create :make_slug
+
   def photo
     return front if front
     back
@@ -45,5 +47,16 @@ class Postcard < ApplicationRecord
 
   def back_mobile
     back.mobile.url
+  end
+
+  # Needed to get Rails Admin to set the slug
+  def slug=(value)
+    write_attribute(:slug, value) if value.present?
+  end
+
+  private
+
+  def make_slug
+    self.slug = self.title.parameterize
   end
 end
