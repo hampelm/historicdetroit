@@ -177,6 +177,7 @@ RailsAdmin.config do |config|
 
   config.model Post do
     list do
+      sort_by :id
       scopes [:unscoped]
     end
   end
