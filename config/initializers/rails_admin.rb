@@ -174,4 +174,10 @@ RailsAdmin.config do |config|
       field :body, :simple_mde
     end
   end
+
+  config.model Post do
+    list do
+      scopes [:unscoped]
+    end
+  end
 end
