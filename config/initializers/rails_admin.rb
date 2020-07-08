@@ -178,9 +178,13 @@ RailsAdmin.config do |config|
   config.model Post do
     list do
       scopes [:unscoped]
+      field :id
+      field :name
+      field :date
       field :updated_at do
         sort_reverse false
       end
+      field :created_at
     end
   end
 end
