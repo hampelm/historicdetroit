@@ -179,7 +179,7 @@ RailsAdmin.config do |config|
     list do
       scopes [:unscoped]
       field :id
-      field :name
+      field :title
       field :date
       field :updated_at do
         sort_reverse false
