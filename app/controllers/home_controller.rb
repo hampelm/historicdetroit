@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @posts = Post.all.limit(10)
+    @posts = Post.all.future.limit(10)
   end
 end

@@ -174,17 +174,4 @@ RailsAdmin.config do |config|
       field :body, :simple_mde
     end
   end
-
-  config.model Post do
-    list do
-      scopes [:unscoped]
-      field :id
-      field :title
-      field :date
-      field :updated_at do
-        sort_reverse false
-      end
-      field :created_at
-    end
-  end
 end

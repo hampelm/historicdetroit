@@ -22,7 +22,7 @@ class Post < ApplicationRecord
 
   has_and_belongs_to_many :buildings, join_table: :buildings_posts
 
-  default_scope {
+  scope :future, -> {
     where('date <= ?', Time.now).order(date: :desc)
   }
 
