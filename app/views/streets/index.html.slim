@@ -1,0 +1,88 @@
+- content_for :title, "Streets"
+
+section.content
+  h1.centered Streets
+
+  section.main.search.hide
+    input type="text" value="" id="building-street" placeholder="Find a street"
+
+  section.main.pills
+    nav#category.pills.centered
+      - for letter in ("a".."z")
+        a.pill.active href="##{letter}" data-category="#{letter}" #{letter}
+
+  section.main
+    - for street in @streets
+      h4 #{street.name}
+      = street.description
+
+javascript:
+  document.addEventListener('DOMContentLoaded',function(){
+    var container = document.querySelector("section.polaroids");
+    function search(event) {
+      results = container.querySelectorAll(".polaroid");
+
+      // Trigger a scroll event so lazyload works on search
+      window.scrollTo(window.scrollX, window.scrollY);
+      if (CustomEvent) {
+        window.dispatchEvent(new CustomEvent('scroll'));
+      }
+
+      results.forEach(function(elt) {
+        if (elt.textContent.toLowerCase().indexOf(event.target.value) > -1) {
+          elt.classList.add('fadeIn');
+          elt.classList.remove('fadeOut');
+        } else {
+          elt.classList.add('fadeOut');
+          elt.classList.remove('fadeIn');
+        }
+      })
+    }
+
+    var searchBar = document.querySelector('#building-search').oninput = search
+    var searchBar = document.querySelector('#building-search').keyup = search
+
+    function clickPill(event) {
+      event.preventDefault();
+      var category = this.getAttribute('data-category');
+      console.log(category);
+
+      // Mark all pills as unselected
+      document.querySelectorAll('.pills a').forEach(function(elt) {
+        elt.classList.remove('active');
+      });
+
+      this.classList.add('active')
+
+      // Fade out all items
+      document.querySelectorAll('.polaroid').forEach(function(elt) {
+        elt.classList.add('fadeOut');
+      });
+
+
+      if (category === 'all') {
+        document.querySelectorAll('.polaroid').forEach(function(elt) {
+          elt.classList.remove('fadeOut');
+          elt.classList.add('fadeIn');
+        });
+        return;
+      }
+
+      // Fade in selected items
+      document.querySelectorAll('.category-' + category).forEach(function(elt) {
+        elt.classList.remove('fadeOut');
+        elt.classList.add('fadIn');
+      });
+    }
+    // Set up the nav pills
+    var pills = document.querySelectorAll('.pills a')
+    pills.forEach(function(pill) {
+      pill.addEventListener('click', clickPill);
+    })
+
+  });
+
+javascript:
+  var myLazyLoad = new LazyLoad({
+    elements_selector: ".lazy"
+  });
