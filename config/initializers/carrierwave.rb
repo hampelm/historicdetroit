@@ -3,10 +3,10 @@ CarrierWave.configure do |config|
   config.fog_provider = 'fog/google'
   config.fog_credentials = {
     provider: 'Google',
-    google_project: secrets[:google_cloud_storage_project_name],
-    google_json_key_string: secrets[:google_cloud_storage_credential_content]
+    google_project: secrets.andand[:google_cloud_storage_project_name],
+    google_json_key_string: secrets.andand[:google_cloud_storage_credential_content]
   }
-  config.fog_directory = secrets[:google_cloud_storage_bucket_name]
+  config.fog_directory = secrets.andand[:google_cloud_storage_bucket_name]
 end
 
 if Rails.env.development?
