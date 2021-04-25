@@ -23,6 +23,7 @@ RailsAdmin.config do |config|
     'Photo',
     'Post',
     'Postcard',
+    'Street',
     'Subject',
     'User'
   ]
