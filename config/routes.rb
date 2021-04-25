@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   resources :posts
   resources :search
+  resources :streets
 
   # Postcards
   get '/postcards', action: :index, controller: 'postcards'
