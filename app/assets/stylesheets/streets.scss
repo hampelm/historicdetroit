@@ -1,3 +1,23 @@
 // Place all the styles related to the streets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.letter {
+  display: flex;
+  flex-direction: row;
+
+  .cap {
+    font-size: 4rem;
+    width: 4rem;
+    font-weight: bold;
+    line-height: 1;
+    color: $emphasis;
+    text-align: center;
+  }
+
+  .street {
+    flex: 1;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+  }
+}

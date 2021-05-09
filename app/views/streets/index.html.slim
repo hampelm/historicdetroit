@@ -8,13 +8,18 @@ section.content
 
   section.main.pills
     nav#category.pills.centered
-      - for letter in ("a".."z")
+      - for letter, streets in @streets_by_first_letter
         a.pill.active href="##{letter}" data-category="#{letter}" #{letter}
 
-  section.main
-    - for street in @streets
-      h4 #{street.name}
-      = street.description
+  section.main.streets
+    - for letter, streets in @streets_by_first_letter
+      .letter
+        h4.cap #{letter}
+        .streets
+          - for street in streets
+            .street
+              h4 #{street.name}
+              = street.description
 
 javascript:
   document.addEventListener('DOMContentLoaded',function(){
