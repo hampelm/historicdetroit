@@ -18,7 +18,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'mimemagic', '0.4.3' # Smarter detection of mime types in file uploads
 gem 'pg'
 gem 'pg_search'
-gem 'puma', '~> 5.2'
+gem 'puma', '~> 5.3'
 gem 'rails', '~> 5.2.5'
 gem 'rails_admin', git: 'git://github.com/sferik/rails_admin.git', branch: 'master'
 gem 'redcarpet'
