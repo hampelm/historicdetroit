@@ -27,6 +27,8 @@ class Gallery < ApplicationRecord
 
   validates :title, presence: true
 
+  before_destroy :remove_attached_photos
+
   def photo?
     self.photos.first.andand.photo?
   end
@@ -38,5 +40,14 @@ class Gallery < ApplicationRecord
   # Needed to get Rails Admin to set the slug
   def slug=(value)
     write_attribute(:slug, value) if value.present?
+  end
+
+  private
+
+  def remove_attached_photos
+    self.photos.each do |photo|
+      photo.gallery = nil
+      photo.save
+    end
   end
 end
