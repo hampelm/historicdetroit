@@ -78,14 +78,14 @@ section.main
                 == image_tag  @building.postcards.first.photo.sidebar_slim.url
 
 
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+<script src='https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.js'></script>
+<link href='https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.css' rel='stylesheet' />
 
 javascript:
   var building = #{raw @building.to_json};
 
-  mapboxgl.accessToken = 'pk.eyJ1IjoibWF0dGgiLCJhIjoicGFzV1ZkWSJ9.KeK3hKmM52XpUEHHx_F8NQ';
-    var map = new mapboxgl.Map({
+  maplibregl.accessToken = 'pk.eyJ1IjoibWF0dGgiLCJhIjoicGFzV1ZkWSJ9.KeK3hKmM52XpUEHHx_F8NQ';
+    var map = new maplibregl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/matth/cjs13vk0m0inf1fqs1wx0qfis', // stylesheet location
     center: [building.lat, building.lng].reverse(), // starting position [lng, lat]
@@ -94,10 +94,10 @@ javascript:
 
   var iconSize = '25';
 
-  var popup = new mapboxgl.Popup({ offset: 25 })
+  var popup = new maplibregl.Popup({ offset: 25 })
     .setHTML('<h3><a href="' + building.url + '" target="_blank">' + building.name + '</a></h3><img src="' + building.image + '" width="200">');
 
-  var marker = new mapboxgl.Marker({ color: '#874a66' })
+  var marker = new maplibregl.Marker({ color: '#874a66' })
     .setLngLat([building.lng, building.lat])
     // .setPopup(popup)
     .addTo(map);
