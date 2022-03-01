@@ -13,7 +13,7 @@ gem 'devise'
 gem 'factory_bot_rails'
 gem 'faker'
 gem 'friendly_id', '~> 5.1.0'
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.12'
 gem 'jbuilder', '~> 2.5'
 gem 'mimemagic', '0.4.3' # Smarter detection of mime types in file uploads
 gem 'pg'
