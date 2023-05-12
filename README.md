@@ -11,6 +11,12 @@ We're rebuilding historicdetroit.org with Rails
 bundle install
 ```
 
+### If having trouble with PG:
+
+```
+bundle config build.pg --with-pg-config=/usr/local/bin/pg_config
+```
+
 ## Configure
 
 Optional Skylight performance monitoring: set the `SKYLIGHT_AUTHENTICATION`
