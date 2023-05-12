@@ -45,8 +45,7 @@ javascript:
       })
     }
 
-    var searchBar = document.querySelector('#building-search').oninput = search
-    var searchBar = document.querySelector('#building-search').keyup = search
+    document.querySelector('#building-search').oninput = search;
 
     function clickPill(event) {
       event.preventDefault();
