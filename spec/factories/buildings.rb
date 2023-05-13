@@ -31,14 +31,14 @@ FactoryBot.define do
     name { Faker::Company.name }
     also_known_as { Faker::Company.name }
     byline { Faker::Name.name }
-    description { Faker::Markdown.sandwich(5) }
+    description { Faker::Markdown.sandwich(sentences: 5) }
     address { Faker::Address.street_address }
     status { 'Demolished' }
     style { 'Art Deco' }
     primary_type { :building }
-    year_opened { Faker::Date.birthday(45, 65) }
-    year_closed { Faker::Date.birthday(18, 44) }
-    year_demolished { Faker::Date.birthday(18, 44) }
+    year_opened { Faker::Date.birthday(min_age: 45, max_age: 65) }
+    year_closed { Faker::Date.birthday(min_age: 18, max_age: 44) }
+    year_demolished { Faker::Date.birthday(min_age: 18, max_age: 44) }
     lat { Faker::Address.latitude }
     lng { Faker::Address.longitude }
   end
