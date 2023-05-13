@@ -26,7 +26,7 @@ FactoryBot.define do
     byline { Faker::Name.name }
     last_name_first { last + ', ' + first }
     firm { Faker::Company.name }
-    description { Faker::Markdown.sandwich(5) }
+    description { Faker::Markdown.sandwich(sentences: 5) }
     birth { Faker::Date.birthday(45, 65) }
     death { Faker::Date.birthday(18, 44) }
   end

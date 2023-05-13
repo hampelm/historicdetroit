@@ -31,7 +31,7 @@ FactoryBot.define do
     name { Faker::Company.name }
     also_known_as { Faker::Company.name }
     byline { Faker::Name.name }
-    description { Faker::Markdown.sandwich(5) }
+    description { Faker::Markdown.sandwich(sentences: 5) }
     address { Faker::Address.street_address }
     status { 'Demolished' }
     style { 'Art Deco' }
