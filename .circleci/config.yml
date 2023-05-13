@@ -10,7 +10,7 @@ jobs: # a collection of steps
           PGUSER: circleci-demo-ruby
           PGPASSWORD: sample
           RAILS_ENV: test
-      - image: circleci/postgres:14
+      - image: circleci/postgres:10
         environment: # environment variables for database
           POSTGRES_USER: historic
           POSTGRES_DB: historicdetroit_test
