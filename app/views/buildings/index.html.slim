@@ -26,7 +26,8 @@ javascript:
   document.addEventListener('DOMContentLoaded',function(){
     var container = document.querySelector("section.polaroids");
     function search(event) {
-      results = container.querySelectorAll(".polaroid");
+      const value = event.target.value.toLowerCase();
+      const results = container.querySelectorAll(".polaroid");
 
       // Trigger a scroll event so lazyload works on search
       window.scrollTo(window.scrollX, window.scrollY);
@@ -35,7 +36,7 @@ javascript:
       }
 
       results.forEach(function(elt) {
-        if (elt.textContent.toLowerCase().indexOf(event.target.value) > -1) {
+        if (elt.textContent.toLowerCase().indexOf(value) > -1) {
           elt.classList.add('fadeIn');
           elt.classList.remove('fadeOut');
         } else {
