@@ -15,6 +15,7 @@ development:
   database: historicdetroit
   pool: 5
   username: historic
+  host: localhost
 
 test:
   adapter: postgresql
