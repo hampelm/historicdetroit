@@ -3,10 +3,11 @@ ruby File.read(File.join(File.dirname(__FILE__), '.ruby-version')).strip
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'acts_as_list'
-gem 'acts-as-taggable-on', '~> 6.0'
+gem 'acts-as-taggable-on'
 gem 'andand'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'cocoon', '~> 1.2.11'
+gem 'coffee-rails'
 gem "fog-google", '~> 1.8'
 gem 'carrierwave'
 gem 'devise'
@@ -19,8 +20,8 @@ gem 'mimemagic', '0.4.3' # Smarter detection of mime types in file uploads
 gem 'pg'
 gem 'pg_search'
 gem 'puma', '~> 5.2'
-gem 'rails', '~> 5.2.5'
-gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git', ref: 'e1ec821ecb58b2b4d1cfcbe84f09b72c9f9d6c14'
+gem 'rails', '~> 7.0.8'
+gem 'rails_admin'
 gem 'redcarpet'
 gem 'sass-rails', '~> 5.0'
 gem 'simplemde-rails'
@@ -41,11 +42,11 @@ end
 
 group :development do
   gem 'annotate'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen'
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'web-console', '>= 3.3.0'
+  gem 'spring-watcher-listen'
+  gem 'web-console'
 end
 
 group :test do
