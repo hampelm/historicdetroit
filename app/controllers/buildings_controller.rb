@@ -1,6 +1,6 @@
 class BuildingsController < ApplicationController
   def index
-    @buildings = Building.includes(:subjects).all
+    @buildings = Building.all
 
     @subject_filters = Subject.filters
 
@@ -8,7 +8,7 @@ class BuildingsController < ApplicationController
   end
 
   def show
-    @building = Building.includes(:subjects, :architects, { galleries: :photos }, :postcards).friendly.find(params[:id])
+    @building = Building.friendly.find(params[:id])
     fresh_when(@building)
   end
 
