@@ -14,7 +14,7 @@ class PostcardsController < ApplicationController
   end
 
   def show
-    @postcard = Postcard.find(params[:id])
-    @subjects = @postcard.subjects
+    @postcard = Postcard.includes(buildings: :postcards).find(params[:id])
+    @subjects = @postcard.subjects.includes(:postcards)
   end
 end
