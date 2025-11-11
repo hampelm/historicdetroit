@@ -9,7 +9,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'cocoon', '~> 1.2.11'
 gem 'coffee-rails'
 gem "fog-google", '~> 1.8'
-gem 'carrierwave'
+gem 'carrierwave', '3.0.7'
 gem 'devise'
 gem 'factory_bot_rails'
 gem 'faker'
