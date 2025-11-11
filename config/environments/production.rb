@@ -88,23 +88,6 @@ Rails.application.configure do
   logger.formatter = config.log_formatter
   config.logger    = ActiveSupport::TaggedLogging.new(logger)
 
-  # Ensure full exception backtraces are logged
-  config.after_initialize do
-    ActiveSupport::Notifications.subscribe "process_action.action_controller" do |name, start, finish, id, payload|
-      if payload[:exception]
-        exception_class, exception_message = payload[:exception]
-        if payload[:exception_object]
-          Rails.logger.error "=" * 80
-          Rails.logger.error "Exception: #{exception_class}"
-          Rails.logger.error "Message: #{exception_message}"
-          Rails.logger.error "Backtrace:"
-          Rails.logger.error payload[:exception_object].backtrace.join("\n")
-          Rails.logger.error "=" * 80
-        end
-      end
-    end
-  end
-
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
