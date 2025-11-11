@@ -15,12 +15,8 @@ section.content
   section.main.polaroids
     - for model in @buildings
       div class="polaroid #{model.subjects_css}"
-        - if model.photo?
-          a.lazy href=polymorphic_path(model) data-bg="url(#{model.photo.polaroid.url})"
-            h2 #{model.title}
-        -else
-          a href=polymorphic_path(model)
-            h2 #{model.title}
+        a href=polymorphic_path(model)
+          h2 #{model.title}
 
 javascript:
   document.addEventListener('DOMContentLoaded',function(){
