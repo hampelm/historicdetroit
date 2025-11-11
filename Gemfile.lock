@@ -438,6 +438,8 @@ GEM
     temple (0.10.4)
     term-ansicolor (1.11.3)
       tins (~> 1)
+    terser (1.2.6)
+      execjs (>= 0.3.0, < 3)
     thor (1.4.0)
     tilt (2.6.1)
     timeout (0.4.4)
@@ -452,8 +454,6 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
-    uglifier (4.2.1)
-      execjs (>= 0.3.0, < 3)
     uri (1.1.1)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -514,8 +514,8 @@ DEPENDENCIES
   spring-commands-rspec
   spring-watcher-listen
   stackprof
+  terser
   tzinfo-data
-  uglifier (>= 1.3.0)
   web-console
 
 RUBY VERSION
