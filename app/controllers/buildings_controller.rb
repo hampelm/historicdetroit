@@ -1,6 +1,6 @@
 class BuildingsController < ApplicationController
   def index
-    @buildings = Building.includes(:subjects).all
+    @buildings = Building.includes(:subjects).limit(100).order(updated_at: :desc)
 
     @subject_filters = Subject.filters
 
