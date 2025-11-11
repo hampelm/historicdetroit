@@ -31,7 +31,7 @@ gem 'terser'
 
 # Profiling
 gem 'flamegraph'
-gem 'rack-mini-profiler', require: false
+gem 'rack-mini-profiler'
 gem 'stackprof'
    
 group :development, :test do
