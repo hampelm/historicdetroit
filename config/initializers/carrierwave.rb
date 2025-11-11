@@ -25,3 +25,6 @@ else
     config.storage = :fog
   end
 end
+
+# Suppress verbose Google Cloud Storage API debug logs
+Google::Apis.logger.level = Logger::WARN
