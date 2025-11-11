@@ -27,13 +27,13 @@ gem 'sass-rails', '~> 5.0'
 gem 'simplemde-rails'
 gem 'skylight'
 gem 'slim-rails'
-gem 'uglifier', '>= 1.3.0'
-# secret_key_base
+gem 'terser'
+
 # Profiling
 gem 'flamegraph'
 gem 'rack-mini-profiler', require: false
 gem 'stackprof'
-
+   
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'coveralls', require: false
