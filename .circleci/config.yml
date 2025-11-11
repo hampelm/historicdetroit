@@ -2,7 +2,7 @@ version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
-      - image: cimg/ruby:3.4.7-node # primary container image
+      - image: cimg/ruby:3.2.9-browsers # primary container image
         environment: # environment variables for primary container
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
