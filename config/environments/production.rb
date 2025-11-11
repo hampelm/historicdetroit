@@ -92,4 +92,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.read_encrypted_secrets = true
+
+  # Enable verbose query logs to show source location of SQL queries
+  config.active_record.verbose_query_logs = true
 end
