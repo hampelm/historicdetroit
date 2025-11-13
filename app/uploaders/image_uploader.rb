@@ -15,6 +15,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   version :thumbnail do
     process resize_to_fill(100, 100, combine_options: {thumbnail: '100x100^', gravity: 'Center', extent: '100x100', quality: 60 })
+    # Stripping disabled because it crashes carrierwave for some reason
     # process :strip
   end
 
