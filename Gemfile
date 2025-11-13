@@ -9,7 +9,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'cocoon', '~> 1.2.11'
 gem 'coffee-rails'
 gem "fog-google", '~> 1.8'
-gem 'carrierwave'
+# Carrierwave is pinned because of this bug:
+# github.com/carrierwaveuploader/carrierwave/issues/2776
+gem 'carrierwave', '3.0.7'
 gem 'devise'
 gem 'factory_bot_rails'
 gem 'faker'
