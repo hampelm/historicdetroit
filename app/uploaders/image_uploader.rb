@@ -14,34 +14,34 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :thumbnail do
-    process resize_to_fill(100, 100, combine_options: {thumbnail: '100x100^', gravity: 'center', extent: '100x100', quality: 60 })
-    process :strip
+    process resize_to_fill(100, 100, combine_options: {thumbnail: '100x100^', gravity: 'Center', extent: '100x100', quality: 60 })
+    # process :strip
   end
 
   version :polaroid do
-    resize_to_fill(218, 200, combine_options: {thumbnail: '218x200^', gravity: 'center', extent: '218x200'})
-    process :strip
+    resize_to_fill(218, 200, combine_options: {thumbnail: '218x200^', gravity: 'Center', extent: '218x200'})
+    # process :strip
   end
 
   version :full do
     #variant(combine_options: {gravity: 'center', size: '1200x>'})
     resize_to_fit(1200, 1200)#, combine_options: {gravity: 'center', size: '1200x>'})
-    process :strip
+    # process :strip
   end
 
   version :mobile do
     resize_to_fit(600, 600)#, combine_options: {gravity: 'center', size: '600x>'})
-    process :strip
+    # process :strip
   end
 
   version :sidebar do
     resize_to_fit(600, 1200)#, combine_options: {thumbnail: 'x600^', gravity: 'center', extent: '600'})
-    process :strip
+    # process :strip
   end
 
   version :sidebar_slim do
     resize_to_fill(600, 250) #, combine_options: { thumbnail: '600x250^', gravity: 'center' })
-    process :strip
+    # process :strip
   end
 
 
