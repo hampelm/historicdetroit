@@ -81,8 +81,12 @@ class Building < ApplicationRecord
     [[nil], ['Open'], ['Closed'], ['Demolished'], ['Under renovation']]
   end
 
+  def still_exists?
+    year_demolished.blank? && status != 'Demolished'
+  end
+
   def subjects_css
-    subjects.map { |s| "category-#{s.slug}" }.join(' ')
+    subjects.map { |s| "category-#{s.slug}" }.join(' ') + ' ' + "status-#{status.to_s.parameterize}"
   end
 
   private
