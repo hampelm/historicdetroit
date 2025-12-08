@@ -79,6 +79,13 @@ javascript:
         elt.classList.remove('fadeOut');
         elt.classList.add('fadIn');
       });
+      
+      // Trigger a scroll event so lazyload works on search
+      window.scrollTo(window.scrollX, window.scrollY);
+      if (CustomEvent) {
+        window.dispatchEvent(new CustomEvent('scroll'));
+      }
+
     }
     // Set up the nav pills
     var pills = document.querySelectorAll('.pills a')
