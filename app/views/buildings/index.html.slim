@@ -29,7 +29,7 @@ section.content
         li
           = link_to "All", url_for(request.query_parameters.merge(status: nil)), class:("#{'active' if params[:status].blank?}")
         li
-          = link_to "Exists", url_for(request.query_parameters.merge(status: "open")), class:("#{'active' if params[:status] == 'open'}")
+          = link_to "Existing", url_for(request.query_parameters.merge(status: "open")), class:("#{'active' if params[:status] == 'open'}")
         li
           = link_to "Demolished", url_for(request.query_parameters.merge(status: "demolished")), class:("#{'active' if params[:status] == 'demolished'}")
 
