@@ -17,7 +17,7 @@ section.content
             - if architect.photo?
               = image_tag architect.photo.thumbnail.url,  height: 50, width: 50
           td =link_to(architect.last_name_first, architect)
-          td =architect.buildings.count
+          td =architect.buildings.size
           td =architect.birth
           td =architect.death
 
