@@ -1,6 +1,6 @@
 class ArchitectsController < ApplicationController
   def index
-    @architects = Architect.all.sort_by { |a| a.buildings.count }.reverse
+    @architects = Architect.all.includes(:buildings).sort_by { |a| a.buildings.size }.reverse
   end
 
   def show
