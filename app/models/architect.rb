@@ -51,6 +51,6 @@ class Architect < ApplicationRecord # :nodoc:
       autolink: true,
       space_after_headers: true
     )
-    self.description_formatted = markdown.render(description)
+    self.description_formatted = markdown.render(description || '')
   end
 end
