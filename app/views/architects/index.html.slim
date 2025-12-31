@@ -2,18 +2,45 @@ section.content
 
   h1 Architects
 
-  table
+  table#architects
     thead
       tr
-        th colspan=2 Architect
+        th 
+        th Architect
+        th Buildings on HD
         th Birth
         th Death
     tbody
-    - for architect in @architects
-      tr
-        td.photo
-          - if architect.photo?
-            = image_tag architect.photo.thumbnail.url,  height: 50, width: 50
-        td =link_to(architect.title, architect)
-        td =architect.birth
-        td =architect.death
+      - for architect in @architects
+        tr
+          td.photo
+            - if architect.photo?
+              = image_tag architect.photo.thumbnail.url,  height: 50, width: 50
+          td =link_to(architect.last_name_first, architect)
+          td =architect.buildings.count
+          td =architect.birth
+          td =architect.death
+
+javascript:
+  // Source - https://stackoverflow.com/a
+  // Posted by Nick Grealy, modified by community. See post 'Timeline' for change history
+  // Retrieved 2025-12-31, License - CC BY-SA 4.0
+  // Modified to work with HD -MH 12/31/2025
+
+  const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+  const comparer = (idx, asc) => (a, b) => ((v1, v2) => 
+      v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+      )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+  
+  // Table sorting
+  document.querySelectorAll('#architects th').forEach(th => th.addEventListener('click', (() => {
+      const table = th.closest('table');
+      const tbody = table.querySelector('tbody');
+      Array.from(tbody.querySelectorAll('tr'))
+          .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+          .forEach(function(tr) {
+            tbody.appendChild(tr);
+          });
+  })));

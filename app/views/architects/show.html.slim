@@ -10,15 +10,24 @@ section.main
       .articles
         article
           == @architect.description_formatted
+          
+      
 
       aside
         - if @architect.photo?
           == image_tag @architect.photo.sidebar.url
 
-        - unless @buildings.empty?
 
-          h4 Buildings
-          ul
-          - for building in @buildings
-            li
-              = link_to(building.title, building)
+    - unless @buildings.empty?
+      h2 Buildings
+
+      section.main.polaroids
+        - for model in @buildings
+          div class="polaroid #{model.subjects_css}"
+            - if model.photo?
+              a.lazy href=polymorphic_path(model) data-bg="url(#{model.photo.polaroid.url})"
+                h2 #{model.title}
+            -else
+              a href=polymorphic_path(model)
+                h2 #{model.title}
+
