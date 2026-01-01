@@ -33,7 +33,7 @@ class GalleriesController < ApplicationController
     @gallery = Gallery.friendly.find(params[:id])
     @buildings = Building.select(:id, :name).all
 
-    @gallery.update_attributes(gallery_params)
+    @gallery.update(gallery_params)
     if @gallery.save
       redirect_to @gallery
     else
