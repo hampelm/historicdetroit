@@ -1,9 +1,24 @@
-section.main
+section.main.home
+  section.content
+    .page
+      .articles.new
+        h2 New on Historic Detroit
+        
+        section.main.polaroids
+          - for model in @new
+            div class="polaroid"
+              - if model.photo?
+                a.lazy href=polymorphic_path(model) data-bg="url(#{model.photo.polaroid.url})"
+                  h2 #{model.title}
+                  h3 Added #{model.created_at.strftime("%B %d, %Y")}
+              -else
+                a href=polymorphic_path(model)
+                  h2 #{model.title}
+                  h3 Added #{model.created_at.strftime("%B %d, %Y")}
+
   section.content
     .page
       .articles
-        h1 Welcome to Historic Detroit
-
         - for post in @posts
           article
             h2 =post.title
@@ -32,3 +47,7 @@ section.main
           p
             | We'd love to share your photos and memories. <a href='/about/how-to-contribute'>Click here for more info.</a>
 
+javascript:
+  var myLazyLoad = new LazyLoad({
+    elements_selector: ".lazy"
+  });

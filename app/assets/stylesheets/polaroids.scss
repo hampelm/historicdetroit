@@ -37,6 +37,17 @@
     color: $link;
     border-bottom: 1px dotted $link;
   }
+  
+  h3 {
+    font-size: 0.8em;
+    font-weight: 400;
+    margin: 0;
+    padding: 0px 2px 2px 2px;
+    
+    width: 100%;
+    
+    background-color: #fff;
+  }
 }
 
 .polaroid.status-demolished {
