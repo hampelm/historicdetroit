@@ -1,3 +1,42 @@
 // Place all the styles related to the Architects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#architects {
+  thead th.sortable {
+    cursor: pointer;
+    user-select: none;
+
+    // Default state: show both arrows (up and down) in gray
+    &::after {
+      content: " ⇅";
+      color: $ltgray;
+      font-size: 14px;
+      margin-left: 4px;
+    }
+
+    &:hover::after {
+      color: $gray;
+    }
+
+    // When sorted ascending, show up arrow
+    &.sorted-asc {
+      font-weight: bold;
+      
+      &::after {
+        content: " ↑";
+        color: $text;
+      }
+    }
+
+    // When sorted descending, show down arrow
+    &.sorted-desc {
+      font-weight: bold;
+      
+      &::after {
+        content: " ↓";
+        color: $text;
+      }
+    }
+  }
+}
