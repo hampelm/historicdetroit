@@ -5,12 +5,39 @@ section.content
 
   section.main.search
     input type="text" value="" id="building-search" placeholder="Find a place"
+    
+  section.main.filters    
+    .filter 
+      h2 Building type 
+      ul.type-filters
+        li
+          = link_to "Buildings", url_for(request.query_parameters.merge(subject: nil)), class:("#{'active' if params[:subject].blank?}")
+        li
+          = link_to "Homes", url_for(request.query_parameters.merge(subject: 'homes')), class:("#{'active' if params[:subject] == 'homes'}")
+        li
+          = link_to "Hotels", url_for(request.query_parameters.merge(subject: 'hotels')), class:("#{'active' if params[:subject] == 'hotels'}")
+        li
+          = link_to "Maritime", url_for(request.query_parameters.merge(subject: 'maritime')), class:("#{'active' if params[:subject] == 'maritime'}")
+        li
+          = link_to "Monuments", url_for(request.query_parameters.merge(subject: 'monuments')), class:("#{'active' if params[:subject] == 'monuments'}")
+        li
+          = link_to "Schools", url_for(request.query_parameters.merge(subject: 'schools')), class:("#{'active' if params[:subject] == 'schools'}")
+        li
+          select onchange="window.location = this.value"
+            option value= url_for(request.query_parameters.merge(subject: nil)) selected=(params[:subject].blank?) More...
+            - @subject_filters.each do |subject_opt|
+              - next if ['buildings', 'hotels', 'maritime'].include? subject_opt.slug
+              option value= url_for(request.query_parameters.merge(subject: subject_opt.slug)) selected=(params[:subject] == subject_opt.slug) = subject_opt.title
 
-  section.main.pills
-    nav#category.pills.centered
-      a.pill.active href="#all" data-category="all" All
-      - for subject in @subject_filters
-          a.pill href="##{subject.slug}" data-category="#{subject.slug}" #{subject.title}
+    .filter
+      h2 Status 
+      ul.status-filters
+        li
+          = link_to "All", url_for(request.query_parameters.merge(status: nil)), class:("#{'active' if params[:status].blank?}")
+        li
+          = link_to "Existing", url_for(request.query_parameters.merge(status: "open")), class:("#{'active' if params[:status] == 'open'}")
+        li
+          = link_to "Demolished", url_for(request.query_parameters.merge(status: "demolished")), class:("#{'active' if params[:status] == 'demolished'}")
 
   section.main.polaroids
     - for model in @buildings
