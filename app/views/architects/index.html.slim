@@ -6,8 +6,8 @@ section.content
     thead
       tr
         th 
-        th Architect
-        th Buildings on HD
+        th.sortable Architect
+        th.sortable.sorted-desc Buildings on HD
         th Birth
         th Death
     tbody
@@ -35,12 +35,33 @@ javascript:
 
   
   // Table sorting
-  document.querySelectorAll('#architects th').forEach(th => th.addEventListener('click', (() => {
+  document.querySelectorAll('#architects th').forEach(th => th.addEventListener('click', function() {
       const table = th.closest('table');
       const tbody = table.querySelector('tbody');
+      const thIndex = Array.from(th.parentNode.children).indexOf(th);
+      
+      // Check if this column was already sorted
+      const wasSortedAsc = th.classList.contains('sorted-asc');
+      const wasSortedDesc = th.classList.contains('sorted-desc');
+      
+      // Remove sorted classes from all headers
+      table.querySelectorAll('th').forEach(header => {
+        header.classList.remove('sorted-asc', 'sorted-desc');
+      });
+      
+      // Determine sort direction
+      let isAsc = true;
+      if (wasSortedAsc) {
+        isAsc = false;
+        th.classList.add('sorted-desc');
+      } else {
+        th.classList.add('sorted-asc');
+      }
+      
+      // Sort the rows
       Array.from(tbody.querySelectorAll('tr'))
-          .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+          .sort(comparer(thIndex, isAsc))
           .forEach(function(tr) {
             tbody.appendChild(tr);
           });
-  })));
+  }));
