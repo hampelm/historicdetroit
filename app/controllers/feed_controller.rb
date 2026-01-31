@@ -14,7 +14,7 @@ class FeedController < ApplicationController
     end
 
     # Fetch recent published galleries
-    galleries = Gallery.where(published: true)
+    galleries = Gallery.unscoped.where(published: true)
                        .order(created_at: :desc)
                        .limit(30)
                        .map do |gallery|
@@ -30,7 +30,7 @@ class FeedController < ApplicationController
     end
 
     # Fetch recent buildings
-    buildings = Building.order(created_at: :desc)
+    buildings = Building.unscoped.order(created_at: :desc)
                        .limit(30)
                        .map do |building|
       {
