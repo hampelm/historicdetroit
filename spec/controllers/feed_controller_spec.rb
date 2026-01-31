@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe FeedController, type: :controller do
+  render_views
+  
   describe 'GET #index' do
     context 'RSS feed generation' do
       before do
