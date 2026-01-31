@@ -21,6 +21,10 @@ Rails.application.routes.draw do
   get '/shop', to: redirect('/about/shop', status: 302)
 
   resources :posts
+  
+  # RSS Feed
+  get '/feed', to: 'feed#index', defaults: { format: 'rss' }
+  
   resources :search
   resources :streets
 
