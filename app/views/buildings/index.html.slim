@@ -15,7 +15,13 @@ section.content
         li
           = link_to "Homes", url_for(request.query_parameters.merge(subject: 'homes')), class:("#{'active' if params[:subject] == 'homes'}")
         li
+          = link_to "Hotels", url_for(request.query_parameters.merge(subject: 'hotels')), class:("#{'active' if params[:subject] == 'hotels'}")
+        li
           = link_to "Maritime", url_for(request.query_parameters.merge(subject: 'maritime')), class:("#{'active' if params[:subject] == 'maritime'}")
+        li
+          = link_to "Monuments", url_for(request.query_parameters.merge(subject: 'monuments')), class:("#{'active' if params[:subject] == 'monuments'}")
+        li
+          = link_to "Schools", url_for(request.query_parameters.merge(subject: 'schools')), class:("#{'active' if params[:subject] == 'schools'}")
         li
           select onchange="window.location = this.value"
             option value= url_for(request.query_parameters.merge(subject: nil)) selected=(params[:subject].blank?) More...
