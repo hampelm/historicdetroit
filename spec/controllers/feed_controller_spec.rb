@@ -122,6 +122,84 @@ RSpec.describe FeedController, type: :controller do
         # Recent post should appear before old post
         expect(recent_index).to be < old_index
       end
+
+      it 'truncates building descriptions to first paragraph only' do
+        # Create a building with multi-paragraph description
+        building = create(:building, 
+          name: 'Test Building with Long Description',
+          description: "First paragraph here.\n\nSecond paragraph here.\n\nThird paragraph here."
+        )
+
+        get :index, format: :rss
+        xml_doc = Nokogiri::XML(response.body)
+
+        # Find the building item
+        building_item = xml_doc.xpath('//item').find do |item|
+          item.at_xpath('title').text == 'Test Building with Long Description'
+        end
+
+        expect(building_item).to be_present
+        description = building_item.at_xpath('description').text
+
+        # Should contain first paragraph
+        expect(description).to include('First paragraph here')
+        
+        # Should NOT contain second and third paragraphs
+        expect(description).not_to include('Second paragraph here')
+        expect(description).not_to include('Third paragraph here')
+      end
+
+      it 'adds read more indicator to building descriptions' do
+        building = create(:building, 
+          name: 'Test Building',
+          description: "First paragraph.\n\nSecond paragraph."
+        )
+
+        get :index, format: :rss
+        xml_doc = Nokogiri::XML(response.body)
+
+        building_item = xml_doc.xpath('//item').find do |item|
+          item.at_xpath('title').text == 'Test Building'
+        end
+
+        description = building_item.at_xpath('description').text
+
+        # Should include "Read more..." link
+        expect(description).to include('Read more...')
+        expect(description).to include('href=')
+      end
+
+      it 'shows full content for posts and galleries' do
+        # Create post with multi-paragraph content
+        post = create(:post, 
+          title: 'Test Post',
+          body: "First paragraph.\n\nSecond paragraph.\n\nThird paragraph.",
+          date: 1.day.ago
+        )
+        
+        gallery = create(:gallery,
+          title: 'Test Gallery',
+          description: 'Full gallery description with multiple sentences. This should all appear in the feed.',
+          published: true
+        )
+
+        get :index, format: :rss
+        xml_doc = Nokogiri::XML(response.body)
+
+        # Check post shows full content
+        post_item = xml_doc.xpath('//item').find do |item|
+          item.at_xpath('title').text == 'Test Post'
+        end
+        post_description = post_item.at_xpath('description').text
+        expect(post_description).to include('Third paragraph')
+
+        # Check gallery shows full description
+        gallery_item = xml_doc.xpath('//item').find do |item|
+          item.at_xpath('title').text == 'Test Gallery'
+        end
+        gallery_description = gallery_item.at_xpath('description').text
+        expect(gallery_description).to include('This should all appear in the feed')
+      end
     end
 
     context 'routing' do
