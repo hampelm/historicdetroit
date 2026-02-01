@@ -18,7 +18,23 @@ xml.rss version: "2.0" do
         end
         
         if item[:description].present?
-          description_html += item[:description]
+          # For buildings, show only the first paragraph
+          if item[:type] == 'building'
+            # Parse HTML and extract first paragraph
+            doc = Nokogiri::HTML.fragment(item[:description])
+            first_paragraph = doc.css('p').first
+            
+            if first_paragraph
+              description_html += first_paragraph.to_html
+              description_html += "<p><em><a href=\"#{item[:url]}\">Read more...</a></em></p>"
+            else
+              # Fallback if no paragraph tags found
+              description_html += item[:description]
+            end
+          else
+            # For posts and galleries, show full content
+            description_html += item[:description]
+          end
         end
         
         xml.description { xml.cdata!(description_html) }
