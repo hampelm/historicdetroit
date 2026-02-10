@@ -19,7 +19,9 @@ section.main
           h2 Recently Added
           .polaroids.sidebar
             - for item in @recent_items
-              = render 'shared/polaroid', :model => item, :lazy => false
+              .recent-item
+                = render 'shared/polaroid', :model => item, :lazy => false
+                span.date-label #{recent_label(item)} #{effective_date(item).strftime('%b %Y')}
 
         .sidebarbox
           = link_to('https://substack.com/@historicdetroit')

@@ -6,14 +6,27 @@
   .polaroids.sidebar {
     display: block;
     
-    .polaroid {
-      margin: 10px 0;
-      height: 200px;
-      display: block;
+    .recent-item {
+      margin-bottom: 15px;
       
-      h2 {
-        font-size: 0.85em;
-        margin: 0;
+      .polaroid {
+        margin: 10px 0 5px 0;
+        height: 200px;
+        display: block;
+        
+        h2 {
+          font-size: 0.85em;
+          margin: 0;
+        }
+      }
+      
+      .date-label {
+        display: block;
+        font-size: 0.75em;
+        color: #797664;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top: -5px;
       }
     }
   }
