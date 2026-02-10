@@ -12,7 +12,12 @@ Rails.application.routes.draw do
   get '/building/:slug', to: redirect('/buildings/%{slug}')
   get '/map', action: :map, controller: 'buildings'
 
-  resources :galleries
+  resources :galleries do
+    collection do
+      get :bulk_upload
+    end
+    resources :photos, only: [:create]
+  end
   get 'galleries/index'
   get 'galleries/show'
 
