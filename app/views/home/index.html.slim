@@ -15,11 +15,17 @@ section.main
             == post.body_formatted
 
       aside.home
+        .sidebarbox.recently-added
+          h2 Recently Added
+          .polaroids.sidebar
+            - for item in @recent_items
+              = render 'shared/polaroid', :model => item, :lazy => false
+
         .sidebarbox
           = link_to('https://substack.com/@historicdetroit')
             = image_tag "substack1.jpg"
             h2 The Historic Detroit Substack
-            p The official Substack of HistoricDetroit.org, chronicling the stories behind the bricks of the Motor City's historic skyline. 
+            p The official Substack of HistoricDetroit.org, chronicling the stories behind the bricks of the Motor City's historic skyline.
 
         .sidebarbox.postcards
           = link_to('/postcards')
@@ -31,4 +37,3 @@ section.main
           h2 You can help tell Detroit's history
           p
             | We'd love to share your photos and memories. <a href='/about/how-to-contribute'>Click here for more info.</a>
-
