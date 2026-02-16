@@ -1,0 +1,49 @@
+- content_for :title, "Bulk Upload Photos"
+
+= render 'shared/admin_nav'
+
+section.content
+  h1.centered Bulk Upload Photos
+
+  .bulk-upload-container
+    .bulk-upload-controls
+      .gallery-selector
+        label for="gallery-select" Select Gallery:
+        select#gallery-select name="gallery_id"
+          option value="" Select a gallery...
+          - @galleries.each do |gallery|
+            option value="#{gallery.id}" data-upload-url="#{gallery_photos_path(gallery)}"
+              = gallery.title
+
+    .drop-zone#drop-zone
+      .drop-zone-content
+        p.drop-icon 📷
+        p Drag & drop images here
+        p.drop-subtext or click to select files
+        input#file-input type="file" multiple="multiple" accept="image/jpeg,image/png,image/gif" style="display: none"
+
+    .preview-area#preview-area style="display: none"
+      h2 Photos to Upload
+      p.preview-instructions Drag to reorder. Edit metadata if needed.
+      
+      ul#photo-list.photo-list
+
+      .upload-actions
+        button#start-upload.btn-upload type="button" disabled="disabled"
+          | Start Upload
+        button#clear-all.btn-clear type="button"
+          | Clear All
+
+    .upload-progress#upload-progress style="display: none"
+      h2 Upload Progress
+      .progress-bar-container
+        .progress-bar#progress-bar
+      p#progress-text 0 of 0 complete
+
+    .upload-results#upload-results style="display: none"
+      h2 Upload Complete
+      p#results-summary
+      .results-details#results-details
+
+javascript:
+  window.csrfToken = "#{form_authenticity_token}";
