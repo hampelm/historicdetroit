@@ -4,26 +4,13 @@
 (function() {
   'use strict';
 
-  // Only run on bulk upload page
-  if (!document.getElementById('drop-zone')) return;
-
   var photos = [];
   var uploadInProgress = false;
 
-  // DOM Elements
-  var dropZone = document.getElementById('drop-zone');
-  var fileInput = document.getElementById('file-input');
-  var previewArea = document.getElementById('preview-area');
-  var photoList = document.getElementById('photo-list');
-  var gallerySelect = document.getElementById('gallery-select');
-  var startUploadBtn = document.getElementById('start-upload');
-  var clearAllBtn = document.getElementById('clear-all');
-  var uploadProgress = document.getElementById('upload-progress');
-  var progressBar = document.getElementById('progress-bar');
-  var progressText = document.getElementById('progress-text');
-  var uploadResults = document.getElementById('upload-results');
-  var resultsSummary = document.getElementById('results-summary');
-  var resultsDetails = document.getElementById('results-details');
+  // DOM Elements (initialized in init())
+  var dropZone, fileInput, previewArea, photoList, gallerySelect;
+  var startUploadBtn, clearAllBtn, uploadProgress, progressBar, progressText;
+  var uploadResults, resultsSummary, resultsDetails;
 
   // Initialize drag and drop
   function initDragDrop() {
@@ -223,6 +210,7 @@
     var result = {};
     var offset = start;
     var end = start + length;
+    var textDecoder = new TextDecoder('utf-8');
 
     try {
       while (offset < end - 5) {
@@ -233,10 +221,9 @@
           var dataLength = (data[offset + 3] << 8) | data[offset + 4];
           
           if (recordType === 2) { // Application Record
-            var value = '';
-            for (var i = 0; i < dataLength; i++) {
-              value += String.fromCharCode(data[offset + 5 + i]);
-            }
+            // Use TextDecoder to properly handle UTF-8 encoded text
+            var bytes = data.slice(offset + 5, offset + 5 + dataLength);
+            var value = textDecoder.decode(bytes);
             
             // IPTC tags we care about:
             // 5 = Object Name (Title)
@@ -570,6 +557,25 @@
 
   // Initialize
   function init() {
+    // Get DOM elements (must happen after DOM is ready)
+    dropZone = document.getElementById('drop-zone');
+    
+    // Only run on bulk upload page
+    if (!dropZone) return;
+    
+    fileInput = document.getElementById('file-input');
+    previewArea = document.getElementById('preview-area');
+    photoList = document.getElementById('photo-list');
+    gallerySelect = document.getElementById('gallery-select');
+    startUploadBtn = document.getElementById('start-upload');
+    clearAllBtn = document.getElementById('clear-all');
+    uploadProgress = document.getElementById('upload-progress');
+    progressBar = document.getElementById('progress-bar');
+    progressText = document.getElementById('progress-text');
+    uploadResults = document.getElementById('upload-results');
+    resultsSummary = document.getElementById('results-summary');
+    resultsDetails = document.getElementById('results-details');
+
     initDragDrop();
 
     gallerySelect.addEventListener('change', updateUploadButton);

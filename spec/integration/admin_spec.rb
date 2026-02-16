@@ -11,7 +11,7 @@ RSpec.feature 'Admin section', type: :feature do
     expect(page).to have_content 'You need to sign in or sign up'
   end
 
-  scenario 'regular users cannot log in to the admin section' do
+  scenario 'regular users cannot see the admin section' do
     sign_in @user
     visit '/admin'
     expect(page).to have_content 'Every building in Detroit has a story'

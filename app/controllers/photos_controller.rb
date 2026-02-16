@@ -37,7 +37,7 @@ class PhotosController < ApplicationController
   end
 
   def set_gallery
-    @gallery = Gallery.find(params[:gallery_id])
+    @gallery = Gallery.friendly.find(params[:gallery_id])
   end
 
   def photo_params
