@@ -87,172 +87,42 @@
     reader.readAsDataURL(photoData.file);
   }
 
-  // Extract IPTC metadata from image
-  // IPTC data is embedded in JPEG files - we need to parse the binary data
+  // Helper to extract string value from XMP field (handles language alternatives)
+  function getXmpString(value) {
+    if (!value) return '';
+    if (typeof value === 'string') return value;
+    if (Array.isArray(value)) return value[0] || '';
+    if (typeof value === 'object') return value.value || value['x-default'] || Object.values(value)[0] || '';
+    return String(value);
+  }
+
+  // Extract XMP metadata from image using exifr library
   function extractIPTC(photoData) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      var arrayBuffer = e.target.result;
-      var iptcData = parseIPTC(arrayBuffer);
-      
-      if (iptcData) {
-        // if (iptcData.title) photoData.title = iptcData.title;
-        photoData.title = '';
-        if (iptcData.caption) photoData.caption = iptcData.title;
-        if (iptcData.byline) photoData.byline = iptcData.caption;
-      }
-
-      // Fallback to filename if no title
-      // if (!photoData.title) {
-      //   photoData.title = photoData.file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
-      // }
-
+    // Check if exifr is available
+    if (typeof exifr === 'undefined') {
+      console.log('exifr library not loaded, skipping metadata extraction');
       updatePhotoItem(photoData);
-    };
-    reader.readAsArrayBuffer(photoData.file);
-  }
-
-  // Parse IPTC data from ArrayBuffer
-  // IPTC-IIM is stored in APP13 marker (0xFFED) in JPEG files
-  function parseIPTC(arrayBuffer) {
-    var dataView = new DataView(arrayBuffer);
-    var offset = 2; // Skip SOI marker
-    var length = dataView.byteLength;
-    var iptcData = {};
-
-    try {
-      while (offset < length) {
-        if (dataView.getUint8(offset) !== 0xFF) break;
-        
-        var marker = dataView.getUint8(offset + 1);
-        
-        // APP13 marker contains IPTC data
-        if (marker === 0xED) {
-          var segmentLength = dataView.getUint16(offset + 2);
-          var segmentData = new Uint8Array(arrayBuffer, offset + 4, segmentLength - 2);
-          
-          // Look for Photoshop 3.0 header
-          var photoshopHeader = 'Photoshop 3.0';
-          var headerFound = false;
-          for (var i = 0; i < segmentData.length - photoshopHeader.length; i++) {
-            var match = true;
-            for (var j = 0; j < photoshopHeader.length; j++) {
-              if (segmentData[i + j] !== photoshopHeader.charCodeAt(j)) {
-                match = false;
-                break;
-              }
-            }
-            if (match) {
-              headerFound = true;
-              iptcData = parseIPTCSegment(segmentData, i + photoshopHeader.length + 1);
-              break;
-            }
-          }
-          break;
-        }
-        
-        // Skip to next marker
-        if (marker === 0xD8 || marker === 0xD9) {
-          offset += 2;
-        } else {
-          var segLen = dataView.getUint16(offset + 2);
-          offset += 2 + segLen;
-        }
-      }
-    } catch (e) {
-      console.log('IPTC parsing error:', e);
+      return;
     }
 
-    return iptcData;
-  }
-
-  // Parse IPTC segment data
-  function parseIPTCSegment(data, startOffset) {
-    var result = {};
-    var offset = startOffset;
-
-    try {
-      while (offset < data.length - 5) {
-        // Look for 8BIM resource block
-        if (data[offset] === 0x38 && data[offset + 1] === 0x42 && 
-            data[offset + 2] === 0x49 && data[offset + 3] === 0x4D) {
-          
-          var resourceId = (data[offset + 4] << 8) | data[offset + 5];
-          
-          // IPTC-NAA record (resource ID 0x0404)
-          if (resourceId === 0x0404) {
-            // Skip resource header
-            var nameLen = data[offset + 6];
-            var paddedNameLen = nameLen + (nameLen % 2 === 0 ? 2 : 1);
-            var resourceSize = (data[offset + 6 + paddedNameLen] << 24) | 
-                              (data[offset + 7 + paddedNameLen] << 16) | 
-                              (data[offset + 8 + paddedNameLen] << 8) | 
-                              data[offset + 9 + paddedNameLen];
-            
-            var iptcStart = offset + 10 + paddedNameLen;
-            result = parseIPTCRecords(data, iptcStart, resourceSize);
-            break;
-          }
-          
-          offset += 12;
-        } else {
-          offset++;
+    exifr.parse(photoData.file, { xmp: true }).then(function(output) {
+      console.log('XMP output:', output);  // Debug to see all available fields
+      if (output) {
+        photoData.title = '';
+        // XMP Title → Caption field
+        if (output.title) photoData.caption = getXmpString(output.title);
+        // XMP Description → Byline field (or use Creator as fallback)
+        if (output.description) {
+          photoData.byline = getXmpString(output.description);
+        } else if (output.creator) {
+          photoData.byline = getXmpString(output.creator);
         }
       }
-    } catch (e) {
-      console.log('IPTC segment parsing error:', e);
-    }
-
-    return result;
-  }
-
-  // Parse individual IPTC records
-  function parseIPTCRecords(data, start, length) {
-    var result = {};
-    var offset = start;
-    var end = start + length;
-    var textDecoder = new TextDecoder('utf-8');
-
-    try {
-      while (offset < end - 5) {
-        // IPTC tag marker
-        if (data[offset] === 0x1C) {
-          var recordType = data[offset + 1];
-          var datasetTag = data[offset + 2];
-          var dataLength = (data[offset + 3] << 8) | data[offset + 4];
-          
-          if (recordType === 2) { // Application Record
-            // Use TextDecoder to properly handle UTF-8 encoded text
-            var bytes = data.slice(offset + 5, offset + 5 + dataLength);
-            var value = textDecoder.decode(bytes);
-            
-            // IPTC tags we care about:
-            // 5 = Object Name (Title)
-            // 120 = Caption/Abstract (Description)
-            // 80 = By-line (Author)
-            switch (datasetTag) {
-              case 5:   // Object Name / Title
-                result.title = value;
-                break;
-              case 120: // Caption/Abstract / Description
-                result.caption = value;
-                break;
-              case 80:  // By-line
-                result.byline = value;
-                break;
-            }
-          }
-          
-          offset += 5 + dataLength;
-        } else {
-          offset++;
-        }
-      }
-    } catch (e) {
-      console.log('IPTC records parsing error:', e);
-    }
-
-    return result;
+      updatePhotoItem(photoData);
+    }).catch(function(err) {
+      console.log('XMP extraction error:', err);
+      updatePhotoItem(photoData);
+    });
   }
 
   // Update the preview area
