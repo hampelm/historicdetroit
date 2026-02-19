@@ -96,15 +96,16 @@
       var iptcData = parseIPTC(arrayBuffer);
       
       if (iptcData) {
-        if (iptcData.title) photoData.title = iptcData.title;
-        if (iptcData.caption) photoData.caption = iptcData.caption;
-        if (iptcData.byline) photoData.byline = iptcData.byline;
+        // if (iptcData.title) photoData.title = iptcData.title;
+        photoData.title = '';
+        if (iptcData.caption) photoData.caption = iptcData.title;
+        if (iptcData.byline) photoData.byline = iptcData.caption;
       }
 
       // Fallback to filename if no title
-      if (!photoData.title) {
-        photoData.title = photoData.file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
-      }
+      // if (!photoData.title) {
+      //   photoData.title = photoData.file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+      // }
 
       updatePhotoItem(photoData);
     };
