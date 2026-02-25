@@ -167,21 +167,26 @@
       '<div class="photo-metadata">' +
         '<div class="field-group">' +
           '<label>Title:</label>' +
-          '<input type="text" class="photo-title" value="' + escapeHtml(photo.title) + '" placeholder="Enter title">' +
+          '<input type="text" class="photo-title" placeholder="Enter title">' +
         '</div>' +
         '<div class="field-group">' +
           '<label>Caption:</label>' +
-          '<textarea class="photo-caption" placeholder="Enter caption">' + escapeHtml(photo.caption) + '</textarea>' +
+          '<textarea class="photo-caption" placeholder="Enter caption"></textarea>' +
         '</div>' +
         '<div class="field-group">' +
           '<label>Byline:</label>' +
-          '<input type="text" class="photo-byline" value="' + escapeHtml(photo.byline) + '" placeholder="Enter byline">' +
+          '<input type="text" class="photo-byline" placeholder="Enter byline">' +
         '</div>' +
       '</div>' +
       '<div class="photo-status">' +
         '<span class="status-badge">' + getStatusLabel(photo.status) + '</span>' +
         '<button type="button" class="btn-remove" title="Remove">✕</button>' +
       '</div>';
+
+    // Set values directly (not via innerHTML) to avoid HTML encoding issues
+    li.querySelector('.photo-title').value = photo.title;
+    li.querySelector('.photo-caption').value = photo.caption;
+    li.querySelector('.photo-byline').value = photo.byline;
 
     // Event listeners for input changes
     var titleInput = li.querySelector('.photo-title');
