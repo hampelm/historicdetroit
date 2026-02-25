@@ -3,8 +3,15 @@ class HomesController < ApplicationController
     @subject = Subject.friendly.find('homes')
     @buildings = @subject.buildings
 
-    # TODO: This query is very expensive
-    @subjects = @buildings.collect(&:subjects).flatten.uniq.without(@subject).sort_by!(&:title)
+    # Single query using subquery to avoid DISTINCT + ORDER BY conflict
+    @subjects = Subject.where(
+      id: Subject.unscoped
+                 .joins(:buildings)
+                 .where(buildings: { id: @buildings.select(:id) })
+                 .where.not(title: ['Homes', 'Buildings'])
+                 .select(:id)
+                 .distinct
+    )
   end
 
   def subject

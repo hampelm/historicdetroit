@@ -1,0 +1,20 @@
+.admin-nav {
+  ul {
+    padding: 1em 0;
+    text-align: center;
+    
+    font-family: $sans;
+    font-weight: 700;
+
+    li {
+      display: inline-block;
+      margin-right: 1em;
+      list-style: none;
+      
+      a {
+        color: $link;
+        text-decoration: none;
+      }
+    }
+  }
+}

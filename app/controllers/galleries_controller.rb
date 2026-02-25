@@ -1,4 +1,6 @@
 class GalleriesController < ApplicationController
+  before_action :require_admin!, only: [:bulk_upload]
+
   def index
     @galleries = Gallery.all
   end
@@ -33,7 +35,7 @@ class GalleriesController < ApplicationController
     @gallery = Gallery.friendly.find(params[:id])
     @buildings = Building.select(:id, :name).all
 
-    @gallery.update_attributes(gallery_params)
+    @gallery.update(gallery_params)
     if @gallery.save
       redirect_to @gallery
     else
@@ -41,7 +43,17 @@ class GalleriesController < ApplicationController
     end
   end
 
+  def bulk_upload
+    @galleries = Gallery.all
+  end
+
   private
+
+  def require_admin!
+    unless admin?
+      redirect_to root_path, alert: 'You must be an admin to access this page.'
+    end
+  end
 
   def gallery_params
     params.require(:gallery).permit(

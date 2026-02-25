@@ -1,7 +1,12 @@
+- lazy = local_assigns.fetch(:lazy, true)
 .polaroid
   - if model.photo?
-    a.lazy href=polymorphic_path(model) data-bg="url(#{model.photo.polaroid.url})"
-      h2 #{model.title}
+    - if lazy
+      a.lazy href=polymorphic_path(model) data-bg="url(#{model.photo.polaroid.url})"
+        h2 #{model.title}
+    - else
+      a href=polymorphic_path(model) style="background-image: url(#{model.photo.polaroid.url})"
+        h2 #{model.title}
   -else
     a href=polymorphic_path(model)
       h2 #{model.title}

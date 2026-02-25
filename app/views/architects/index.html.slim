@@ -2,18 +2,66 @@ section.content
 
   h1 Architects
 
-  table
+  table#architects
     thead
       tr
-        th colspan=2 Architect
+        th 
+        th.sortable Architect
+        th.sortable.sorted-desc Buildings on HD
         th Birth
         th Death
     tbody
-    - for architect in @architects
-      tr
-        td.photo
-          - if architect.photo?
-            = image_tag architect.photo.thumbnail.url,  height: 50, width: 50
-        td =link_to(architect.title, architect)
-        td =architect.birth
-        td =architect.death
+      - for architect in @architects
+        tr
+          td.photo
+            - if architect.photo?
+              = image_tag architect.photo.thumbnail.url,  height: 50, width: 50
+          td =link_to(architect.last_name_first, architect)
+          td =architect.buildings.size
+          td =architect.birth
+          td =architect.death
+
+javascript:
+  // Source - https://stackoverflow.com/a
+  // Posted by Nick Grealy, modified by community. See post 'Timeline' for change history
+  // Retrieved 2025-12-31, License - CC BY-SA 4.0
+  // Modified to work with HD -MH 12/31/2025
+
+  const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+  const comparer = (idx, asc) => (a, b) => ((v1, v2) => 
+      v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+      )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+  
+  // Table sorting
+  document.querySelectorAll('#architects th').forEach(th => th.addEventListener('click', function() {
+      const table = th.closest('table');
+      const tbody = table.querySelector('tbody');
+      const thIndex = Array.from(th.parentNode.children).indexOf(th);
+      
+      // Check if this column was already sorted
+      const wasSortedAsc = th.classList.contains('sorted-asc');
+      const wasSortedDesc = th.classList.contains('sorted-desc');
+      
+      // Remove sorted classes from all headers
+      table.querySelectorAll('th').forEach(header => {
+        header.classList.remove('sorted-asc', 'sorted-desc');
+      });
+      
+      // Determine sort direction
+      let isAsc = true;
+      if (wasSortedAsc) {
+        isAsc = false;
+        th.classList.add('sorted-desc');
+      } else {
+        th.classList.add('sorted-asc');
+      }
+      
+      // Sort the rows
+      Array.from(tbody.querySelectorAll('tr'))
+          .sort(comparer(thIndex, isAsc))
+          .forEach(function(tr) {
+            tbody.appendChild(tr);
+          });
+  }));
