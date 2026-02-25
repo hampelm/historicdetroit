@@ -7,6 +7,16 @@ section.content
     input type="text" value="" id="building-search" placeholder="Find a place"
     
   section.main.filters    
+    .filter
+      h2 Status 
+      ul.status-filters
+        li
+          = link_to "All", url_for(request.query_parameters.merge(status: nil)), class:("#{'active' if params[:status].blank?}")
+        li
+          = link_to "Existing", url_for(request.query_parameters.merge(status: "open")), class:("#{'active' if params[:status] == 'open'}")
+        li
+          = link_to "Demolished", url_for(request.query_parameters.merge(status: "demolished")), class:("#{'active' if params[:status] == 'demolished'}")
+
     .filter 
       h2 Building type 
       ul.type-filters
@@ -29,15 +39,6 @@ section.content
               - next if ['buildings', 'hotels', 'maritime'].include? subject_opt.slug
               option value= url_for(request.query_parameters.merge(subject: subject_opt.slug)) selected=(params[:subject] == subject_opt.slug) = subject_opt.title
 
-    .filter
-      h2 Status 
-      ul.status-filters
-        li
-          = link_to "All", url_for(request.query_parameters.merge(status: nil)), class:("#{'active' if params[:status].blank?}")
-        li
-          = link_to "Existing", url_for(request.query_parameters.merge(status: "open")), class:("#{'active' if params[:status] == 'open'}")
-        li
-          = link_to "Demolished", url_for(request.query_parameters.merge(status: "demolished")), class:("#{'active' if params[:status] == 'demolished'}")
 
   section.main.polaroids
     - for model in @buildings

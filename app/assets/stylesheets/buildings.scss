@@ -88,14 +88,17 @@ nav.pills {
         margin: 0 4px 4px 0;
         
         a {
-          padding: 0 5px 4px 0;
+          padding: 4px 12px;
           display: inline-block;
+          border-radius: 24px;
           
           &:hover {
+            background: lighten($link, 40%);
           }
           
           &.active {
-            font-weight: 600;
+            color: #fff;
+            background: $link;
           }
         }
       }
