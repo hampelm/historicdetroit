@@ -25,7 +25,7 @@ section.content
         li
           = link_to "Homes", url_for(request.query_parameters.merge(subject: 'homes')), class:("#{'active' if params[:subject] == 'homes'}")
         li
-          = link_to "Hotels", url_for(request.query_parameters.merge(subject: 'Hotels')), class:("#{'active' if params[:subject] == 'hotels'}")
+          = link_to "Hotels", url_for(request.query_parameters.merge(subject: 'Hotels')), class:("#{'active' if params[:subject] == 'Hotels'}")
         li
           = link_to "Maritime", url_for(request.query_parameters.merge(subject: 'maritime')), class:("#{'active' if params[:subject] == 'maritime'}")
         li
