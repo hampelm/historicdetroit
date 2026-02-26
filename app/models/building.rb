@@ -42,6 +42,9 @@ class Building < ApplicationRecord
   default_scope { order(name: :asc) }
   scope :with_location, -> { where.not(lat: nil, lat: 0) }
   scope :without_homes, -> { where.not(primary_type: :home) }
+  
+  scope :exists, -> { where("year_demolished IS NULL AND status != 'Demolished'") }
+  scope :demolished, -> { where("(year_demolished IS NOT NULL AND year_demolished != '') OR status = 'Demolished'") }
 
   has_and_belongs_to_many :architects, join_table: :architects_buildings, uniq: true
   has_and_belongs_to_many :posts, join_table: :buildings_posts

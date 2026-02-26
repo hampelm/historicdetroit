@@ -1,6 +1,31 @@
 class BuildingsController < ApplicationController
   def index
-    @buildings = Building.without_homes.includes(:subjects).all
+    @buildings = Building.includes(:subjects).all
+    
+    @buildings = @buildings.without_homes unless params[:subject] == 'homes'
+
+    # Support filtering on parameters
+    # Filter by subject
+    if params[:subject].present?
+      @buildings = @buildings.where(subjects: { slug: params[:subject] })
+    end
+
+    # Filter by demolition status
+    if params[:status].present?
+      if params[:status] == 'exists'
+        @buildings = @buildings.exists
+      elsif params[:status] == 'demolished'
+        @buildings = @buildings.demolished
+      end
+    end
+    
+    # Filter by year built range
+    if params[:year_built_from].present?
+      @buildings = @buildings.where("year_built >= ?", params[:year_built_from])
+    end
+    if params[:year_built_to].present?
+      @buildings = @buildings.where("year_built <= ?", params[:year_built_to])
+    end
 
     @subject_filters = Subject.filters
 
@@ -24,5 +49,9 @@ class BuildingsController < ApplicationController
         lng: building.lng
       }
     end
+  end
+  
+  def building_params
+    params.permit(:status, :subject, :exists, :year_built_from, :year_built_to)
   end
 end
