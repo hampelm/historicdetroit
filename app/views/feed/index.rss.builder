@@ -8,7 +8,9 @@ xml.rss version: "2.0" do
 
     @items.each do |item|
       xml.item do
-        xml.title item[:title]
+        title = item[:title]
+        title += " (#{item[:photo_count]} photos)" if item[:type] == 'gallery'
+        xml.title title
         
         # Build description with photo if available
         description_html = ""
@@ -17,6 +19,10 @@ xml.rss version: "2.0" do
           description_html += "<p><img src=\"#{photo_url}\" alt=\"#{item[:title]}\" style=\"max-width: 600px;\"/></p>"
         end
         
+        if item[:type] == 'gallery' && item[:photo_count] > 0
+          description_html += "<p><a href=\"#{item[:url]}\">See #{item[:photo_count]} photos</a></p>"
+        end
+
         if item[:description].present?
           # For buildings, show only the first paragraph
           if item[:type] == 'building'

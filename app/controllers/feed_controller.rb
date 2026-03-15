@@ -25,6 +25,7 @@ class FeedController < ApplicationController
         url: gallery_url(gallery),
         timestamp: gallery.created_at,
         photo: gallery.photo? ? gallery.photo.url : nil,
+        photo_count: gallery.photos.count,
         item: gallery
       }
     end
