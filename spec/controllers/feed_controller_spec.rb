@@ -195,7 +195,7 @@ RSpec.describe FeedController, type: :controller do
 
         # Check gallery shows full description
         gallery_item = xml_doc.xpath('//item').find do |item|
-          item.at_xpath('title').text == 'Test Gallery'
+          item.at_xpath('title').text.start_with?('Test Gallery')
         end
         gallery_description = gallery_item.at_xpath('description').text
         expect(gallery_description).to include('This should all appear in the feed')
