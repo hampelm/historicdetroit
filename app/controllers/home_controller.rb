@@ -5,18 +5,18 @@ class HomeController < ApplicationController
     # Fetch recent published galleries
     galleries = Gallery.unscoped.where(published: true)
                        .order(created_at: :desc)
-                       .limit(3)
+                       .limit(5)
     
     # Fetch recent buildings (consider both created_at and last_update)
     buildings = Building.unscoped
                        .order(Arel.sql('GREATEST(COALESCE(last_update, created_at), created_at) DESC'))
-                       .limit(3)
+                       .limit(5)
     
     # Combine and sort by effective date (most recent of created_at or last_update), take top 3
     @recent_items = (galleries + buildings)
                     .sort_by { |item| effective_date(item) }
                     .reverse
-                    .take(3)
+                    .take(5)
   end
 
   private
