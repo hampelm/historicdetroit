@@ -68,7 +68,7 @@ section.main
                   a{href=url_for(gallery)}
                     == image_tag gallery.photo.sidebar_slim.url
 
-        - if @building.postcards.exists? && @building.postcards.first.photo? && @building.postcards.first.photo.sidebar_slim.url
+        - if @building.postcards.exists? && @building.postcards.first.photo && @building.postcards.first.photo.sidebar_slim.url
           h3.standout Postcards
           .galleries
             .gallery.sidebarbox

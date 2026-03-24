@@ -3,7 +3,7 @@ module ImageHelper
   # http://www.imagemagick.org/script/command-line-processing.php#geometry
 
   def photo?
-    photo && photo.attached?
+    photo.attached?
   end
 
   def thumbnail
