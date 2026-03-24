@@ -73,9 +73,9 @@ section.main
           .galleries
             .gallery.sidebarbox
               a{href="/buildings/#{@building.slug}/postcards"}
-                -- if @building.postcards.first.photo && @building.postcards.first.photo.sidebar_slim.url
+                - if @building.postcards.first.photo && @building.postcards.first.photo.sidebar_slim.url
                     == image_tag  @building.postcards.first.photo.sidebar_slim.url
-                -- else 
+                - else 
                     #{@building.postcards.count} postcards
 
 
