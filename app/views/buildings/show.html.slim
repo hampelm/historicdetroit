@@ -76,7 +76,7 @@ section.main
                 - if @building.postcards.first.photo && @building.postcards.first.photo.sidebar_slim.url
                     == image_tag  @building.postcards.first.photo.sidebar_slim.url
                 - else 
-                    #{@building.postcards.count} postcards
+                    p. See all postcards
 
 
 <script src='https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.js'></script>
