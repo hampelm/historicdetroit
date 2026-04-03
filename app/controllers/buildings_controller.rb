@@ -34,6 +34,11 @@ class BuildingsController < ApplicationController
 
   def show
     @building = Building.includes(:subjects, :architects, { galleries: :photos }, :postcards).friendly.find(params[:id])
+    
+    if admin?
+      @unpublished_galleries = @building.galleries.where(published: false)
+    end
+
     fresh_when(@building)
   end
 
