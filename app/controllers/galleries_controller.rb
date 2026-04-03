@@ -7,6 +7,10 @@ class GalleriesController < ApplicationController
 
   def show
     @gallery = Gallery.friendly.find(params[:id])
+    
+    if admin?
+      @gallery = Gallery.unscoped.friendly.find(params[:id])
+    end
   end
 
   def new
