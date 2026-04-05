@@ -2,7 +2,7 @@ class GalleriesController < ApplicationController
   before_action :require_admin!, only: [:bulk_upload]
 
   def index
-    @galleries = Gallery.all
+    @galleries = Gallery.published
   end
 
   def show

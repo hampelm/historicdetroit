@@ -19,6 +19,7 @@ class Gallery < ApplicationRecord
   attr_accessor :tag_list
 
   default_scope { order(title: :asc) }
+  scope :published, -> { where(published: [true, nil]).order(title: :asc) }
 
   has_many :photos, -> { order(position: :asc) }, inverse_of: :gallery
   accepts_nested_attributes_for :photos, reject_if: :all_blank, allow_destroy: true
