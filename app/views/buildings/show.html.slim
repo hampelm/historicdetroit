@@ -62,11 +62,12 @@ section.main
           h3.standout Galleries
           .galleries
             - for gallery in @building.galleries
-              .gallery.sidebarbox
-                h4 #{link_to(gallery.title, polymorphic_path(gallery))}
-                - if gallery.photo?
-                  a{href=url_for(gallery)}
-                    == image_tag gallery.photo.sidebar_slim.url
+              - next if !gallery.published? && !admin?
+                .gallery.sidebarbox
+                  h4 #{link_to(gallery.title, polymorphic_path(gallery))}
+                  - if gallery.photo?
+                    a{href=url_for(gallery)}
+                      == image_tag gallery.photo.sidebar_slim.url
                     
         - if admin? && @unpublished_galleries.present?
           h3.standout Unpublished Galleries
