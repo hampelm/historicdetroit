@@ -62,7 +62,7 @@ section.main
           h3.standout Galleries
           .galleries
             - for gallery in @building.galleries
-              - next if !gallery.published? && !admin?
+              - next if gallery.published == false && !admin?
                 .gallery.sidebarbox
                   h4 #{link_to(gallery.title, polymorphic_path(gallery))}
                   - if gallery.photo?
