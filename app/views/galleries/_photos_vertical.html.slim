@@ -1,0 +1,10 @@
+.photos.photos-vertical
+  - for photo in gallery.photos
+    .photo data-photo-position=photo.position id="p#{photo.position}"
+      picture
+        source srcset=photo.photo.url media="(min-width: 501px)"
+        source srcset=photo.photo.mobile.url media="(max-width: 500px)"
+        img data-src=photo.photo.url class='lazy' alt=photo.caption
+
+      p.caption =photo.caption
+      p.byline =photo.byline

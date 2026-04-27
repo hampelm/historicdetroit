@@ -1,0 +1,16 @@
+.photos.photos-collage data-target-height="200" data-gap="8"
+  - for photo in gallery.photos
+    .collage-photo data-photo-position=photo.position data-photo-url=photo.photo.url data-photo-caption=photo.caption data-photo-byline=photo.byline data-aspect-ratio=photo.aspect_ratio
+      img src=photo.photo.full.url alt=photo.caption loading="lazy"
+
+/ Lightbox overlay
+#gallery-lightbox.lightbox
+  .lightbox-backdrop
+  .lightbox-content
+    button.lightbox-close type="button" aria-label="Close" &times;
+    button.lightbox-prev type="button" aria-label="Previous photo" &#8249;
+    .lightbox-image-container
+      img.lightbox-image src="" alt=""
+      .lightbox-caption
+      .lightbox-byline
+    button.lightbox-next type="button" aria-label="Next photo" &#8250;

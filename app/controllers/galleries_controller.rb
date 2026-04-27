@@ -64,6 +64,7 @@ class GalleriesController < ApplicationController
       :title,
       :description,
       :building_id,
+      :view_type,
       photos_attributes: %i[id _destroy title caption byline
                             gallery_id photo position]
     )
