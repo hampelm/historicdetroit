@@ -12,6 +12,10 @@
     div
       = f.collection_select(:building_id, @buildings, :id, :name, prompt: true)
 
+    div
+      = f.label :view_type, "View Type"
+    div
+      = f.select :view_type, Gallery.view_types.keys.map { |k| [k.titleize, k] }, {}
 
     h3 Photos
 

@@ -18,6 +18,8 @@ class Gallery < ApplicationRecord
   acts_as_taggable
   attr_accessor :tag_list
 
+  enum view_type: { vertical: 0, collage: 1, carousel: 2 }
+
   default_scope { order(title: :asc) }
   scope :published, -> { where(published: [true, nil]).order(title: :asc) }
 

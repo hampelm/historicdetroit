@@ -1,0 +1,20 @@
+.photos.photos-carousel
+  / Main photo display
+  .carousel-main
+    button.carousel-prev type="button" aria-label="Previous photo" &#8249;
+    .carousel-image-container
+      - first_photo = gallery.photos.first
+      - if first_photo
+        img.carousel-main-image src=first_photo.photo.url alt=first_photo.caption data-position=first_photo.position
+    button.carousel-next type="button" aria-label="Next photo" &#8250;
+  .carousel-caption
+    - if first_photo
+      p.caption =first_photo.caption
+      p.byline =first_photo.byline
+
+  / Thumbnail strip
+  .carousel-thumbnails
+    .carousel-thumbnails-scroll
+      - for photo in gallery.photos
+        .carousel-thumb data-photo-position=photo.position data-photo-url=photo.photo.url data-photo-caption=photo.caption data-photo-byline=photo.byline class=(photo == gallery.photos.first ? 'active' : '')
+          img src=photo.photo.thumbnail.url alt=photo.caption loading="lazy"

@@ -10,17 +10,14 @@ section.main
     - if admin?
       h3.edit =link_to('Edit', edit_gallery_path(@gallery))
 
-    .page
-      .photos
-        - for photo in @gallery.photos
-          .photo
-            picture
-              source srcset=photo.photo.url media="(min-width: 501px)"
-              source srcset=photo.photo.url media="(max-width: 501px)"
-              img data-src=photo.photo.url class='lazy'
-
-            p.caption =photo.caption
-            p.byline =photo.byline
+    .page data-gallery-view=@gallery.view_type
+      - case @gallery.view_type
+      - when 'vertical'
+        == render 'photos_vertical', gallery: @gallery
+      - when 'collage'
+        == render 'photos_collage', gallery: @gallery
+      - when 'carousel'
+        == render 'photos_carousel', gallery: @gallery
 
 javascript:
   var myLazyLoad = new LazyLoad({
