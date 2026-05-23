@@ -7,7 +7,12 @@ class BuildingsController < ApplicationController
     # Support filtering on parameters
     # Filter by subject
     if params[:subject].present?
-      @buildings = @buildings.where(subjects: { slug: params[:subject] })
+      if params[:subject] == 'all'
+        Rails.logger.info "Loading all buildings with subjects"
+        @buildings = Building.includes(:subjects).all
+      else
+        @buildings = @buildings.where(subjects: { slug: params[:subject] })
+      end
     end
 
     # Filter by demolition status
