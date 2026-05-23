@@ -21,6 +21,8 @@ section.content
       h2 Building type 
       ul.type-filters
         li
+          = link_to "All", url_for(request.query_parameters.merge(subject: 'all')), class:("#{'active' if params[:subject] == 'all'}")
+        li
           = link_to "Buildings", url_for(request.query_parameters.merge(subject: nil)), class:("#{'active' if params[:subject].blank?}")
         li
           = link_to "Homes", url_for(request.query_parameters.merge(subject: 'homes')), class:("#{'active' if params[:subject] == 'homes'}")
