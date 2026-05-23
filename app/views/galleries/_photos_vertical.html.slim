@@ -8,3 +8,6 @@
 
       p.caption =photo.caption
       p.byline =photo.byline
+      
+      - if admin?
+        p.byline =link_to('Edit', "/admin/photo/#{photo.id}/edit")
