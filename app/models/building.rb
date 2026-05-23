@@ -59,6 +59,10 @@ class Building < ApplicationRecord
   def title
     name
   end
+  
+  def head_title
+    name + (also_known_as.present? ? " (#{also_known_as})" : '')
+  end
 
   def location?
     !(lat.zero? && lng.zero?)
