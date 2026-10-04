@@ -53,6 +53,7 @@ class Building < ApplicationRecord
   has_many :galleries
   before_save :format
   validates :name, presence: true
+  validate :coordinates_must_be_plausible
 
   enum primary_type: [ :building, :home, :monument, :steamer ]
 
@@ -62,6 +63,28 @@ class Building < ApplicationRecord
   
   def head_title
     name + (also_known_as.present? ? " (#{also_known_as})" : '')
+  end
+
+  def coordinates_must_be_plausible
+    return if lat.nil? && lng.nil?
+
+    if lat.nil? || lng.nil?
+      errors.add(:base, "Both latitude and longitude are needed to place this building on the map, but only one is filled in. You can copy both from Google Maps: right-click the building and click the numbers at the top of the menu (for example 42.3314, -83.0458). The first number is latitude, the second is longitude.")
+      return
+    end
+
+    in_range = true
+    unless lat.between?(-90, 90)
+      in_range = false
+      errors.add(:base, "Latitude must be a number between -90 and 90, but it is #{lat.to_s('F')}. Latitude is how far north the building is; anywhere in Detroit it's about 42.3. A value this large usually means the decimal point is missing, e.g. 423314 instead of 42.3314.")
+    end
+    unless lng.between?(-180, 180)
+      in_range = false
+      errors.add(:base, "Longitude must be a number between -180 and 180, but it is #{lng.to_s('F')}. Longitude is how far east or west the building is; anywhere in Detroit it's about -83.0 (note the minus sign). A value this large usually means the decimal point is missing, e.g. -830458 instead of -83.0458.")
+    end
+    if in_range && lat.negative? && lng.positive?
+      errors.add(:base, "Latitude and longitude look swapped (latitude #{lat.to_s('F')}, longitude #{lng.to_s('F')}). In Detroit, latitude is positive (about 42.3) and longitude is negative (about -83.0).")
+    end
   end
 
   def location?
