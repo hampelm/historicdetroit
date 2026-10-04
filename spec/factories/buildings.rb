@@ -39,7 +39,8 @@ FactoryBot.define do
     year_opened { Faker::Date.birthday(min_age: 45, max_age: 65) }
     year_closed { Faker::Date.birthday(min_age: 18, max_age: 44) }
     year_demolished { Faker::Date.birthday(min_age: 18, max_age: 44) }
-    lat { Faker::Address.latitude }
-    lng { Faker::Address.longitude }
+    # Somewhere in Detroit, so coordinate validations pass
+    lat { Faker::Number.within(range: 42.26..42.45) }
+    lng { Faker::Number.within(range: -83.28..-82.91) }
   end
 end
