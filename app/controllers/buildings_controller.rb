@@ -56,7 +56,8 @@ class BuildingsController < ApplicationController
         image: building.photo.andand.polaroid.andand.url,
         thumb: building.photo.andand.thumbnail.andand.url,
         lat: building.lat,
-        lng: building.lng
+        lng: building.lng,
+        admin_url: "#{request.base_url}/admin/building/#{building.id}/edit"
       }
     end
   end
