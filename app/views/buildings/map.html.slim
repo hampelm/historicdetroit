@@ -7,17 +7,17 @@ section.content
   .frame
     #map
 
-<script src='https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.js'></script>
-<link href='https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.css' rel='stylesheet' />
-<script src="https://unpkg.com/pmtiles@2.11.0/dist/index.js"></script>
+<link href='https://unpkg.com/maplibre-gl@6.12.0/dist/maplibre-gl.css' rel='stylesheet' />
 
-javascript:
+javascript type="module":
+  import * as maplibregl from 'https://cdn.jsdelivr.net/npm/maplibre-gl@6.12.0/+esm';
+  import { Protocol } from 'https://cdn.jsdelivr.net/npm/pmtiles@4.5.0/+esm';
+
   var buildings = #{raw @buildings.to_json};
-  
-  let protocol = new pmtiles.Protocol();
-  maplibregl.addProtocol("pmtiles",protocol.tile);
 
-  maplibregl.accessToken = 'pk.eyJ1IjoibWF0dGgiLCJhIjoicGFzV1ZkWSJ9.KeK3hKmM52XpUEHHx_F8NQ';
+  let protocol = new Protocol();
+  maplibregl.addProtocol("pmtiles", protocol.tile);
+
     var map = new maplibregl.Map({
     container: 'map', // container id
     style: {
