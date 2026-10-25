@@ -2,7 +2,7 @@
 .polaroid
   - if model.photo?
     - if lazy
-      a.lazy href=polymorphic_path(model) data-bg="url(#{model.photo.polaroid.url})"
+      a.lazy href=polymorphic_path(model) data-src=model.photo.polaroid.url
         h2 #{model.title}
     - else
       a href=polymorphic_path(model) style="background-image: url(#{model.photo.polaroid.url})"
