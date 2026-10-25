@@ -55,7 +55,7 @@ class Building < ApplicationRecord
   validates :name, presence: true
   validate :coordinates_must_be_plausible
 
-  enum primary_type: [ :building, :home, :monument, :steamer ]
+  enum :primary_type, [ :building, :home, :monument, :steamer ]
 
   def title
     name

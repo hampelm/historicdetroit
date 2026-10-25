@@ -2,7 +2,6 @@ CarrierWave.configure do |config|
   secrets = Rails.application.credentials[Rails.env.to_sym]
 
   if secrets
-    config.fog_provider = 'fog/google'
     config.fog_credentials = {
       provider: 'Google',
       google_project: secrets[:google_cloud_storage_project_name],
