@@ -20,6 +20,6 @@ RSpec.feature 'Admin section', type: :feature do
   scenario 'admin users can log in to the admin section' do
     sign_in @admin
     visit '/admin'
-    expect(page).to have_content 'Admin Site'
+    expect(page).to have_content 'Site Administration'
   end
 end

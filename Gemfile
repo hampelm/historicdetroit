@@ -15,14 +15,14 @@ gem 'carrierwave', '3.0.7'
 gem 'devise'
 gem 'factory_bot_rails'
 gem 'faker'
-gem 'friendly_id', '~> 5.1.0'
+gem 'friendly_id', '~> 5.5'
 gem 'image_processing', '~> 1.2'
 gem 'jbuilder', '~> 2.5'
 gem 'mimemagic', '0.4.3' # Smarter detection of mime types in file uploads
 gem 'pg'
 gem 'pg_search'
-gem 'puma', '~> 5.2'
-gem 'rails', '~> 7.0.8'
+gem 'puma', '>= 6.0'
+gem 'rails', '~> 8.1.4'
 gem 'rails_admin'
 gem 'redcarpet'
 gem 'sass-rails', '~> 5.0'
@@ -43,7 +43,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'annotate'
+  gem 'annotaterb'
   gem 'listen'
   gem 'spring'
   gem 'spring-commands-rspec'
@@ -52,7 +52,7 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '~> 2.15'
+  gem 'capybara', '~> 3.40'
   gem 'rspec_junit_formatter'
 end
 

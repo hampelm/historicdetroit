@@ -45,7 +45,7 @@ xml.rss version: "2.0" do
         
         xml.description { xml.cdata!(description_html) }
         
-        xml.pubDate item[:timestamp].to_s(:rfc822)
+        xml.pubDate item[:timestamp].to_fs(:rfc822)
         xml.link item[:url]
         xml.guid item[:url], isPermaLink: "true"
         
