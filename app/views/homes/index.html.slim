@@ -7,7 +7,7 @@ section.main.content
     - for subject in @subjects
       .polaroid
         - if subject.photo?
-          a.lazy href="/homes/#{subject.slug}" data-bg="url(#{subject.photo.polaroid.url})"
+          a.lazy href="/homes/#{subject.slug}" data-src=subject.photo.polaroid.url
             h2 #{subject.title}
         -else
           a href="/homes/#{subject.slug}"
